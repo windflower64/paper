@@ -1,0 +1,21 @@
+__include__: [
+  './s_rep3_qcsr_w025_ft6_lr02_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP3_1_QCSR_SN_W008_FT6_LR02/seed0
+epochs: 6
+checkpoint_freq: 5
+
+# REP3.1 changes only the cross-scale comparison rule.  Teacher/student
+# responses are independently normalized inside each SAM-selected region,
+# then compared by bounded spatial correlation.  All query matching, regions,
+# detach paths, stages, learning rates, and batch settings remain REP3-identical.
+# The transfer weight is calibrated so its initial S8/S16 gradient does not
+# exceed REP3's original raw-Huber transfer pressure.
+DFINECriterion:
+  qcsr_teacher_weight: 0.25
+  qcsr_transfer_weight: 0.08
+  qcsr_boundary_radius: 2
+  qcsr_incoherence_floor: 0.25
+  qcsr_transfer_mode: shape_correlation
+  qcsr_shape_eps: 0.0001

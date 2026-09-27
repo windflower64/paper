@@ -1,0 +1,11 @@
+__include__: ['../phase_m/c_only_gq1_b8a4_20e_testdev_local.yml']
+
+# Q-Rank1 strict paired arm.  Every data, optimization and evaluation setting
+# is inherited from the completed C-only control; only the zero-initialized
+# decoder query-rank score bias is enabled.
+output_dir: E:/two_paper/outputs/Q_RANK1_C_GQ1_B8A4_20E_TESTDEV/seed0
+
+DFINETransformer:
+  hrqs_enabled: False
+  sqfr_enabled: False
+  qrank_enabled: True

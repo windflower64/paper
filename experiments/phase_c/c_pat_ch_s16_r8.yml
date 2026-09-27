@@ -1,0 +1,11 @@
+__include__: ['../phase_s/visible_60e_base.yml']
+
+# C-PAT1 is a direct module-transfer screen, not a redesign of PAT_ch.
+# Stage index 2 is the S16 output of HGNetv2-B0.  n_div=8 means that
+# 1/8 of the channels receive 3x3 spatial convolution while 7/8 retain
+# their values and receive the original mean/std Gaussian-SE modulation.
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/30_channel/C_PAT1_PAT_CH_S16_R8/seed0
+
+HGNetv2:
+  pat_stage: 2
+  pat_n_div: 8

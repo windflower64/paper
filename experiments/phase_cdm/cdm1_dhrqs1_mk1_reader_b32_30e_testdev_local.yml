@@ -1,0 +1,40 @@
+__include__: ['../phase_m/m_sdtec1r2_ablation_k1_reader_b32_30e_testdev_local.yml']
+
+# CDM1 accuracy-teacher experiment:
+#   C-GQ1 visible representation
+# + D-HRQS1 high-resolution query admission
+# + M1-K1 coordinate-free thermal evidence.
+#
+# The mature visible D checkpoint, thermal stream and M1 reader are merged by
+# tools/prepare_cdm1_dhrqs_mk1_init.py.  Only SDTEC is trainable.  HRQS and all
+# BatchNorm statistics remain frozen so a zero fusion residual exactly retains
+# the D-HRQS1 visible starting point.
+output_dir: E:/two_paper/outputs/CDM1_DHRQS1_MK1_READER_B32_30E_TESTDEV/seed0
+epochs: 30
+checkpoint_freq: 5
+
+HGNetv2:
+  return_idx: [1, 2, 3]
+
+DFINE:
+  rgbt_enabled: True
+  rgbt_thermal_dropout: 0.15
+  rgbt_train_sdtec_only: True
+  rgbt_lock_norm_stats: True
+
+DFINETransformer:
+  sdtec_enabled: True
+  sdtec_num_tokens: 1
+  sdtec_coupler_mode: independent
+  hrqs_enabled: True
+  hrqs_source_channels: 256
+  hrqs_anchor_size: 0.025
+  hrqs_num_queries: 50
+
+train_dataloader:
+  total_batch_size: 32
+  persistent_workers: True
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0

@@ -1,0 +1,18 @@
+__include__: ['./qcer_rgbt_common.yml']
+
+output_dir: E:/two_paper/outputs/STQL_QCER_B4_SAM_QCER_B16A2_20E_TESTDEV/seed0
+
+HGNetv2:
+  return_idx: [1, 2, 3]
+
+DFINE:
+  stql_enabled: True
+
+DFINECriterion:
+  stql_weight: 0.1
+  stql_supervision: sam
+
+train_dataloader:
+  dataset:
+    sam_mask_root: E:/two_paper/reports/104_sam3_role_control/masks_train
+

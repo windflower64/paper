@@ -1,0 +1,67 @@
+__include__: ['./m_control_gq1_sameaug_b16_60e_local.yml']
+
+# Same-protocol C-only arm for the final C / C+D / C+D+M comparison.
+# It uses the same visible images, initialization source, augmentation,
+# learning rates, seed, 20-epoch horizon and effective batch 32 as the two
+# already completed paired arms.  Only D-HRQS1 and the RGB-T/M path are absent.
+output_dir: E:/two_paper/outputs/C_ONLY_GQ1_B8A4_20E_TESTDEV/seed0
+epochs: 20
+checkpoint_freq: 2
+gradient_accumulation_steps: 4
+skip_model_profile: True
+
+DFINE:
+  rgbt_enabled: False
+  rgbt_sd2_enabled: False
+  rgbt_freeze_thermal_stream: False
+
+HGNetv2:
+  return_idx: [2, 3]
+
+DFINETransformer:
+  hrqs_enabled: False
+
+optimizer:
+  type: AdamW
+  foreach: False
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.0001
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.0001
+      weight_decay: 0.0
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.0
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 500
+
+train_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  persistent_workers: False
+
+val_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  dataset:
+    type: CocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/test
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_test.json
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+
+scaler:
+  type: GradScaler
+  enabled: True
+  init_scale: 128.0
+

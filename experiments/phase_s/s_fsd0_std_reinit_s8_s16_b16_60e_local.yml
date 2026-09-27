@@ -1,0 +1,36 @@
+__include__:
+  - './visible_60e_base_local.yml'
+
+# 配对控制：算子仍是A00标准3x3 depthwise stride-2，但该层和FSD一样
+# 无法从COCO检测器checkpoint继承参数，用于分离“重初始化代价”。
+output_dir: E:/two_paper/runs/26_fsd_down/S_FSD0_STD_REINIT_S8_S16_B16_60E/seed0
+
+HGNetv2:
+  fsd_stage: -1
+  reinit_downsample_stage: 2
+
+epochs: 60
+checkpoint_freq: 12
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.00005
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.00005
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.0001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 16
+
+val_dataloader:
+  total_batch_size: 16

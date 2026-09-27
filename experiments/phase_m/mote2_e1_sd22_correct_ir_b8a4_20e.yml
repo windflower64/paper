@@ -1,0 +1,9 @@
+__include__: ["./mote2_common_b8a4_20e.yml"]
+output_dir: E:/two_paper/outputs/M_OTE2_C_S_PAIR_20E_TESTDEV/E1/seed0
+
+DFINE:
+  rgbt_sd2_enabled: True
+  rgbt_sd2_variant: token
+  rgbt_sd2_thermal_contrastive: True
+  rgbt_sd2_final_residual_scale: 0.5
+  mote_enabled: False

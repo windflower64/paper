@@ -1,0 +1,37 @@
+__include__:
+  - './visible_60e_base_local.yml'
+
+# FSD0：按论文公式直接替换HGNetv2的S8->S16下采样。
+# 正式启动必须同时使用：-t E:/two_paper/weights/dfine_n_coco.pth
+output_dir: E:/two_paper/runs/26_fsd_down/S_FSD0_DIRECT_S8_S16_B16_60E/seed0
+
+HGNetv2:
+  fsd_stage: 2
+  reinit_downsample_stage: -1
+
+epochs: 60
+checkpoint_freq: 12
+
+# batch32协议按线性规则缩放到batch16；FSD与STD-REINIT完全一致。
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.00005
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.00005
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.0001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 16
+
+val_dataloader:
+  total_batch_size: 16

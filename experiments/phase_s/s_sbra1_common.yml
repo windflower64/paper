@@ -1,0 +1,9 @@
+__include__: ['./s_sgc1_common.yml']
+DFINE:
+  sgc_enabled: False
+  sbra_enabled: True
+  sbra_width: 64
+  sbra_supervision: sam
+  sbra_aux_weight: 0.1
+HGNetv2:
+  return_idx: [2, 3]

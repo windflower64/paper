@@ -1,0 +1,19 @@
+__include__: ['../phase_m/m_control_gq1_sameaug_b32_60e_local.yml']
+
+# D-HRQS1 的严格并行控制：除关闭 HRQS 外，初始化、增强、batch、
+# 训练轮数、随机种子和 test-as-development 验证协议均与实验组一致。
+output_dir: E:/two_paper/outputs/D_CONTROL_GQ1_B32_60E_TESTDEV/seed0
+epochs: 60
+checkpoint_freq: 6
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0
+  dataset:
+    type: CocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/test
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_test.json
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}

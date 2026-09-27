@@ -1,0 +1,17 @@
+__include__: [
+  './visible_60e_base.yml',
+]
+
+# Local Windows paths for frozen S-DIAG3 evaluation. This file does not alter
+# the A00 architecture, checkpoint, transforms, or metric protocol.
+output_dir: E:/two_paper/outputs/dfine_n_visible_640x512_full_seed0
+
+train_dataloader:
+  dataset:
+    img_folder: E:/two_paper/data/antiuav6k_common/images/train
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_train.json
+
+val_dataloader:
+  dataset:
+    img_folder: E:/two_paper/data/antiuav6k_common/images/val
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_val.json

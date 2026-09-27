@@ -1,0 +1,6 @@
+__include__: ["./mote2_common_b8a4_20e.yml"]
+output_dir: E:/two_paper/outputs/M_OTE2_C_S_PAIR_20E_TESTDEV/E0/seed0
+
+DFINE:
+  rgbt_sd2_enabled: False
+  mote_enabled: False

@@ -1,0 +1,70 @@
+__include__: ['../phase_s/visible_60e_base_local.yml']
+
+# M-SDTEC1: RGB remains the only geometric anchor.  Thermal S32 features are
+# reduced to a coordinate-free evidence set and are read by RGB object queries.
+output_dir: E:/two_paper/outputs/M_SDTEC1_GQ1_B16_60E/seed0
+epochs: 60
+checkpoint_freq: 6
+
+DFINE:
+  rgbt_enabled: True
+  rgbt_thermal_dropout: 0.15
+
+HGNetv2:
+  pat_stage: -1
+  pat_sf_stage: 3
+  pat_sf_n_div: 4
+  pat_sf_variant: global_query
+
+DFINETransformer:
+  sdtec_enabled: True
+  sdtec_thermal_channels: 128
+  sdtec_num_tokens: 8
+  sdtec_num_heads: 4
+  sdtec_slot_iterations: 2
+
+DFINECriterion:
+  sdtec_presence_weight: 0.20
+  sdtec_diversity_weight: 0.02
+  sdtec_fallback_weight: 0.10
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 2
+  dataset:
+    type: RGBTCocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/train
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_train.json
+    infrared_folder: F:/data/Anti-UAV/Anti_UAV_6K/train/infrared/images
+    infrared_label_folder: F:/data/Anti-UAV/Anti_UAV_6K/train/infrared/labels
+    transforms:
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: stop_epoch
+        epoch: 200
+        ops: [RandomPhotometricDistort]
+  collate_fn:
+    base_size: 640
+    base_size_repeat: ~
+    stop_epoch: 200
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 0
+  dataset:
+    type: RGBTCocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/val
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_val.json
+    infrared_folder: F:/data/Anti-UAV/Anti_UAV_6K/val/infrared/images
+    infrared_label_folder: F:/data/Anti-UAV/Anti_UAV_6K/val/infrared/labels
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+

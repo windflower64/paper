@@ -1,0 +1,11 @@
+__include__: [
+  './visible_60e_base.yml',
+]
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_SAFE_BLUR_S8_S16/seed0
+
+# HGNetv2 stage index 2 is the S8 -> S16 entrance.  A fixed 3x3 binomial
+# low-pass filter is inserted before the original pretrained depthwise
+# stride-2 downsample; no trainable parameter or supervision is added.
+HGNetv2:
+  blur_stage: 2

@@ -1,0 +1,50 @@
+__include__: ['./c_plus_m_sd22_half_sgc0_b8a4_20e.yml']
+
+# Shared initialization for A2/A4: C+M half, no SGC loss, SQER2 present but
+# bypassed during epochs 0-1. This allows the paired branches to resume the
+# exact same model, EMA, optimizer, scheduler and scaler state.
+output_dir: E:/two_paper/outputs/C_M_SAM_ATTRIBUTION/A2_A4_COMMON_WARMUP_SGC0_B8A4_2E_RETRY1/seed0
+epochs: 2
+
+HGNetv2:
+  return_idx: [1, 2, 3]
+
+DFINE:
+  sgc_enabled: False
+  sgc_aux_weight: 0.0
+  sqer_enabled: True
+  sqer_bypass: True
+  sqer_evidence_only: True
+  sqer_topk: 64
+  sqer_roi_size: 16
+  sqer_roi_expand: 2.0
+  sqer_min_roi_width_px: 32.0
+  sqer_min_roi_height_px: 32.0
+
+DFINECriterion:
+  sqer_shape_weight: 0.0
+  sqer_supervision: sam
+
+optimizer:
+  type: AdamW
+  foreach: False
+  params:
+    -
+      params: '^sqer.*$'
+      lr: 0.0002
+    -
+      params: '^sd2_conditioner.*$'
+      lr: 0.0002
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.0001
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.0001
+      weight_decay: 0.0
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.0
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001

@@ -1,0 +1,12 @@
+__include__: ['./m_sd22_thermal_contrast_cdm_b8a4_20e_testdev_local.yml']
+
+# Missing factorial cell: C-GQ1 + M-SD2.2, with D-HRQS1 removed.
+# Every other setting is inherited from the completed C+D+M run so this can
+# be compared directly with C-only, C+D and C+D+M.
+output_dir: E:/two_paper/outputs/C_PLUS_M_SD22_B8A4_20E_TESTDEV/seed0
+
+HGNetv2:
+  return_idx: [2, 3]
+
+DFINETransformer:
+  hrqs_enabled: False

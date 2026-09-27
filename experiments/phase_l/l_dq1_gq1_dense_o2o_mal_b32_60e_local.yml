@@ -1,0 +1,53 @@
+__include__: ['../phase_s/visible_60e_base_local.yml']
+
+# L-DQ1: frozen GQ1 detector + DEIM Dense O2O (Mosaic/MixUp) + MAL.
+# Batch 32 matches the original GQ1 training protocol. The batch-16 config is
+# retained as a fallback. All other optimizer, architecture, initialization,
+# activation, BN and 60-epoch settings remain identical to the GQ1 carrier.
+output_dir: E:/two_paper/outputs/L_DQ1_GQ1_DENSE_O2O_MAL_B32_60E/seed0
+
+HGNetv2:
+  pat_stage: -1
+  pat_sf_stage: 3
+  pat_sf_n_div: 4
+  pat_sf_variant: global_query
+
+train_dataloader:
+  total_batch_size: 32
+  num_workers: 4
+  dataset:
+    transforms:
+      ops:
+        - {type: DenseO2OMosaic, output_size: 320, rotation_range: 10, translation_range: [0.1, 0.1], scaling_range: [0.5, 1.5], probability: 1.0, fill_value: 0, use_cache: False, max_cached_images: 50, random_pop: True}
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomZoomOut, fill: 0}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: DropDenseO2OMetadata}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: stop_epoch
+        epoch: [4, 29, 50]
+        ops: [DenseO2OMosaic, RandomPhotometricDistort, RandomZoomOut, RandomIoUCrop]
+      mosaic_prob: 0.5
+  collate_fn:
+    type: DenseO2OCollateFunction
+    base_size: 640
+    base_size_repeat: ~
+    stop_epoch: 50
+    ema_restart_decay: 0.9999
+    mixup_prob: 0.5
+    mixup_epochs: [4, 29]
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 0
+
+DFINECriterion:
+  weight_dict: {loss_mal: 1, loss_bbox: 5, loss_giou: 2, loss_fgl: 0.15, loss_ddf: 1.5}
+  losses: [mal, boxes, local]
+  gamma: 1.5

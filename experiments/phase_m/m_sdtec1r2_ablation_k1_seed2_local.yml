@@ -1,0 +1,4 @@
+__include__: ['./m_sdtec1r2_ablation_k1_reader_b32_30e_testdev_local.yml']
+
+output_dir: E:/two_paper/outputs/M_SDTEC1R2_ABLATION_K1_TESTDEV/seed2
+

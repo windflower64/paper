@@ -1,0 +1,8 @@
+__include__: ['./s_sqmi1_aux_c_gq1_b16a2_12e_testdev_local.yml']
+
+# Formal S-QMI1 arm.  The sole change from AUX is that reliable student masks
+# may apply a bounded correction to the first 64 initial reference boxes.
+output_dir: E:/two_paper/outputs/S_SQMI1_INIT_C_GQ1_B16A2_12E_TESTDEV/seed0
+
+DFINETransformer:
+  sqmi_apply_initialization: True

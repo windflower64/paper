@@ -1,0 +1,12 @@
+__include__: ['./m_sdtec1_gq1_b16_60e_local.yml']
+
+# RTX 4080 preflight: one complete AMP forward/backward/AdamW step at batch32
+# peaked at 11.98 GiB allocated and 12.98 GiB reserved on a 15.99 GiB card.
+output_dir: E:/two_paper/outputs/M_SDTEC1_GQ1_B32_60E/seed0
+
+train_dataloader:
+  total_batch_size: 32
+
+val_dataloader:
+  total_batch_size: 32
+

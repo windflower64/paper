@@ -1,0 +1,27 @@
+__include__: ['../phase_m/c_plus_m_sd22_b8a4_20e_testdev_local.yml']
+
+# Mature RGB initialization, identical M, no new online SAM or auxiliary loss.
+epochs: 10
+checkpoint_freq: 1
+gradient_accumulation_steps: 1
+skip_model_profile: True
+tuning: ~
+resume: ~
+HGNetv2:
+  pretrained: False
+  return_idx: [2, 3]
+DFINE:
+  sgc_enabled: False
+  rgbt_lock_norm_stats: True
+  rgbt_sd2_final_residual_scale: 0.5
+train_dataloader:
+  total_batch_size: 32
+val_dataloader:
+  total_batch_size: 8
+lr_scheduler:
+  type: MultiStepLR
+  milestones: [500]
+  gamma: 0.1
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 100

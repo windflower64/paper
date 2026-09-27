@@ -1,0 +1,30 @@
+__include__: [
+  './s_rep1_1_jointinit_cocotune_progressive_w025_b32_60e_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_SABR1_JOINTINIT_COCOTUNE_W025_B32_60E/seed0
+
+# Scale-allocated body/boundary regularization. The detector path is unchanged:
+# S8 predicts a widened SAM contour; S16 predicts soft foreground occupancy.
+HGNetv2:
+  spar_enabled: False
+  sabr_enabled: True
+  sabr_hidden_channels: 32
+  spar_gradient_mode: progressive
+  spar_gradient_ramp_start: 5
+  spar_gradient_ramp_end: 10
+  spar_gradient_max_scale: 1.0
+
+DFINECriterion:
+  spar_aux_weight: 0.0
+  sabr_aux_weight: 0.25
+  sabr_body_weight: 0.5
+  sabr_boundary_weight: 0.5
+  sabr_l1_weight: 1.0
+  sabr_dice_weight: 2.0
+  sabr_boundary_radius_fraction: 0.25
+  sabr_boundary_radius_min: 1
+  sabr_boundary_radius_max: 3
+  sabr_decay_start: 30
+  sabr_decay_end: 45
+

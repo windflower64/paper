@@ -1,0 +1,11 @@
+__include__: ['./m_sd21_token_cdm_b8a4_20e_testdev_local.yml']
+
+output_dir: E:/two_paper/outputs/M_SD23_ZERO_ANCHOR_CDM_B8A4_20E_TESTDEV/seed0
+
+# M-SD2.3 replaces subtracting two large nonlinear responses with an exact
+# zero-anchored interaction.  All interaction terms vanish for empty thermal
+# tokens, the RGB reader/generator are bias-free, and RGB dependence enters
+# only through thermal-conditioned products and distance differences.
+DFINE:
+  rgbt_sd2_thermal_contrastive: False
+  rgbt_sd2_zero_anchored: True

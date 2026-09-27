@@ -1,0 +1,23 @@
+__include__: ['../phase_s/sam_rgb_retention_10e.yml']
+epochs: 20
+checkpoint_freq: 5
+tuning: ~
+resume: ~
+DFINE:
+  rgbt_sd2_enabled: False
+  rgbt_thermal_forward_chunk_size: 0
+lr_scheduler:
+  type: MultiStepLR
+  milestones: [15]
+  gamma: 0.5
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 100
+train_dataloader:
+  dataset:
+    infrared_label_folder: E:/two_paper/data/antiuav6k_ir_raw_verified/train/labels
+val_dataloader:
+  dataset:
+    infrared_label_folder: E:/two_paper/data/antiuav6k_ir_raw_verified/test/labels
+# No Mosaic/crop; original single-target frames use exact two-side centers.
+# Both arms share synchronous flip/resize and mature C+SAM RGB initialization.

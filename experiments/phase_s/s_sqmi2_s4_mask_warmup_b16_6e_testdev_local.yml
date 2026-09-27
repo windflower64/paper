@@ -1,0 +1,57 @@
+__include__: ['../phase_m/c_only_gq1_b8a4_20e_testdev_local.yml']
+
+# S-QMI2 stage A: learn a higher-resolution S4 query mask while preserving the
+# mature C detector exactly.  This is a quality preflight, not detection tuning.
+output_dir: E:/two_paper/outputs/S_SQMI2_S4_MASK_WARMUP_B16_6E_TESTDEV/seed0
+epochs: 6
+checkpoint_freq: 1
+gradient_accumulation_steps: 1
+
+DFINE:
+  rgbt_enabled: False
+  rgbt_sd2_enabled: False
+  rgbt_freeze_thermal_stream: False
+  sqmi_train_only: True
+  sqmi_train_gate: False
+
+HGNetv2:
+  return_idx: [2, 3]
+  sqmi_source_stage: 0
+
+DFINETransformer:
+  hrqs_enabled: False
+  sqmi_enabled: True
+  sqmi_source_channels: 64
+  sqmi_mask_dim: 32
+  sqmi_topk: 64
+  sqmi_max_mix: 0.25
+  sqmi_max_box_delta: 0.25
+  sqmi_gate_bias: -4.0
+  sqmi_apply_initialization: False
+
+DFINECriterion:
+  sqmi_aux_weight: 0.25
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^decoder\.sqmi\..*$'
+  lr: 0.001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 100
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 0
+  persistent_workers: False
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 0

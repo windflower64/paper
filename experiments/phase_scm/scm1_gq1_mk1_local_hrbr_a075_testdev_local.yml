@@ -1,0 +1,8 @@
+__include__: ['../phase_m/m_sdtec1r2_ablation_k1_reader_b32_30e_testdev_local.yml']
+
+# SCM1：冻结已经训练完成的 C-GQ1 + M1-K1 检测器，只训练 S-HRBR 局部框校准头。
+# HRBR 由独立训练器读取可见光骨干的 S4/S8/S16，不读取红外坐标，也不修改类别分数。
+# val_dataloader 继承 M 系列统一协议，使用项目原 test 划分；该划分已参与模型选择，
+# 因此只能称为“原test开发验证集”，不能再称为未调参最终测试集。
+output_dir: E:/two_paper/outputs/SCM1_GQ1_MK1_LOCAL_HRBR_A075_SEED0
+

@@ -1,0 +1,16 @@
+__include__: ['./x_sqer2_sgc0_common_warmup_b8a4_2e.yml']
+
+# A4: only the SQER2 shape teacher is activated after the shared 2-epoch warmup.
+output_dir: E:/two_paper/outputs/C_M_SAM_ATTRIBUTION/A4_CM_SQER2_SAM_B8A4_20E/seed0
+epochs: 20
+resume: E:/two_paper/outputs/C_M_SAM_ATTRIBUTION/A2_A4_COMMON_WARMUP_SGC0_B8A4_2E_RETRY1/seed0/last.pth
+
+DFINE:
+  sgc_enabled: False
+  sgc_aux_weight: 0.0
+  sqer_enabled: True
+  sqer_bypass: False
+
+DFINECriterion:
+  sqer_shape_weight: 0.05
+  sqer_supervision: sam

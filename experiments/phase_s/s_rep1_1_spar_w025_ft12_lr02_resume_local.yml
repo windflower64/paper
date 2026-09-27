@@ -1,0 +1,6 @@
+__include__: [
+  './s_rep1_1_spar_w025_ft6_lr02_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_SPAR_W025_FT12_LR02/seed0
+epochs: 12

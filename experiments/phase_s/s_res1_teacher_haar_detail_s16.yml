@@ -1,0 +1,17 @@
+__include__:
+  - '../../experiments/phase_s/visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_RES1_HAAR_DETAIL_S16/teacher_seed0
+
+# S2 single-variable test.  The reconstruction teacher and its hard
+# deficiency target are retained, but the multiplicative DGFE executor is
+# replaced by an identity-preserving pre-downsample Haar detail residual.
+HGNetv2:
+  srtod_stage: 2
+  srtod_threshold: 0.0156862
+  srtod_enhancer: haar_detail
+  srtod_detail_groups: 16
+  srtod_detail_init_scale: 0.0
+
+DFINECriterion:
+  srtod_reconstruction_weight: 1.0

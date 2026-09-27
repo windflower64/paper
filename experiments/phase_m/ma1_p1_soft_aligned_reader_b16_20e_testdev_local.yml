@@ -1,0 +1,12 @@
+__include__: ['./ma1_p1_soft_aligned_reader_b32_20e_testdev_local.yml']
+
+# batch=32在RTX 4080上可完成前向，但检测损失阶段显存溢出。
+# 正式P1按既定降级规则使用batch=16；验证无反向图，仍保持batch=32。
+output_dir: E:/two_paper/outputs/MA1_P1_SOFT_ALIGNED_B16_20E_TESTDEV/seed0
+
+train_dataloader:
+  total_batch_size: 16
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0

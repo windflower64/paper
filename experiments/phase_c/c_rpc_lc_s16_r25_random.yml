@@ -1,0 +1,14 @@
+__include__: ['./visible_recovery_24e.yml']
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/30_channel/C_RPC_LC_S16_R25/RANDOM/index_seed0/train_seed0
+
+HGNetv2:
+  rpc_stage: 2
+  rpc_hidden_channels: 32
+  rpc_init_scale: 0.0
+
+channel_prune:
+  stage: s16
+  ratio: 0.25
+  method: random
+  index_seed: 0

@@ -1,0 +1,14 @@
+__include__: ['./ma1_p1_soft_aligned_reader_b16_20e_testdev_local.yml']
+
+# Windows稳定版：首轮训练成功，但训练进程内的COCO汇总曾发生主机内存分配失败。
+# 独立进程验证同一权重正常，故关闭训练DataLoader子进程并从严格起点重跑。
+output_dir: E:/two_paper/outputs/MA1_P1_SOFT_ALIGNED_B16_20E_TESTDEV_R1/seed0
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 0
+  persistent_workers: False
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0

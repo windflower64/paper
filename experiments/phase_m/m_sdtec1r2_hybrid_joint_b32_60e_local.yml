@@ -1,0 +1,62 @@
+__include__: ['./m_sdtec1r2_hybrid_reader_b32_30e_local.yml']
+
+# M-SDTEC1-R2, stage 2 candidate: use only after the frozen-reader stage shows
+# causal thermal gain.  Mature modality streams receive gentle fine-tuning;
+# SDTEC keeps the reader-stage rates.  Start this as a fresh tuning run from the
+# selected reader checkpoint rather than resuming its zero-LR optimizer.
+output_dir: E:/two_paper/outputs/M_SDTEC1R2_HYBRID_JOINT_B32_60E/seed0
+epochs: 60
+checkpoint_freq: 6
+
+DFINE:
+  rgbt_train_sdtec_only: False
+
+DFINETransformer:
+  sdtec_warmup_epochs: 0
+  sdtec_ramp_epochs: 1
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^decoder\.sdtec_couplers\.\d+\.residual_scale$'
+      lr: 0.002
+      weight_decay: 0.0
+    -
+      params: '^decoder\.sdtec_(?!.*residual_scale).*$'
+      lr: 0.0001
+    -
+      params: '^thermal_backbone\.(?!.*(?:norm|bn)).*$'
+      lr: 0.00001
+    -
+      params: '^thermal_backbone\.(?=.*(?:norm|bn)).*$'
+      lr: 0.00001
+      weight_decay: 0.0
+    -
+      params: '^thermal_encoder\.(?!.*(?:norm|bn|bias)).*$'
+      lr: 0.00002
+    -
+      params: '^thermal_encoder\.(?=.*(?:norm|bn|bias)).*$'
+      lr: 0.00002
+      weight_decay: 0.0
+    -
+      params: '^backbone\.(?!.*(?:norm|bn)).*$'
+      lr: 0.000002
+    -
+      params: '^backbone\.(?=.*(?:norm|bn)).*$'
+      lr: 0.000002
+      weight_decay: 0.0
+    -
+      params: '^(?:encoder\.|decoder\.(?!sdtec_))(?!.*(?:norm|bn|bias)).*$'
+      lr: 0.000005
+    -
+      params: '^(?:encoder\.|decoder\.(?!sdtec_))(?=.*(?:norm|bn|bias)).*$'
+      lr: 0.000005
+      weight_decay: 0.0
+  lr: 0.0001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 100

@@ -1,0 +1,12 @@
+__include__: ['./m_sdtec1r2_ablation_k1_reader_b32_30e_testdev_local.yml']
+
+# M-Lite0: preserve the final K=1 coordinate-free thermal evidence contract,
+# but replace three independent query couplers with one shared coupler.  With
+# one evidence token the Q/K attention selection is algebraically redundant;
+# the shared implementation uses one direct token projection and retains a
+# separate bounded residual strength for each decoder layer.
+output_dir: E:/two_paper/outputs/M_LITE0_SHARED_K1_READER_B32_30E_TESTDEV/seed0
+
+DFINETransformer:
+  sdtec_num_tokens: 1
+  sdtec_coupler_mode: shared_k1

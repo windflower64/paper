@@ -1,0 +1,8 @@
+__include__: [
+  './dfine_n_visible_640x512_full.yml',
+]
+
+# Stage-1 protocol: preserve the original optimization recipe but cap the
+# search at 80 epochs. Model selection uses validation metrics only.
+epochs: 80
+

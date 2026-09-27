@@ -1,0 +1,15 @@
+__include__: ['../phase_m/c_only_gq1_b8a4_20e_testdev_local.yml']
+output_dir: E:/two_paper/outputs/S_MFAM1_C_SAM_B8A4_20E_TESTDEV/seed0
+DFINE:
+  mfam_enabled: True
+  mfam_width: 32
+  mfam_supervision: sam
+  mfam_aux_weight: 1.0
+HGNetv2:
+  return_idx: [1, 2, 3]
+train_dataloader:
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+val_dataloader:
+  dataset:
+    sam_mask_root: ~

@@ -1,0 +1,23 @@
+__include__: [
+  './s_rep1_1_a00ft6_lr02_control_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_SBRD1_SAM_BOUNDARY_RETENTION_FT6_LR02/seed0
+
+# SBRD is a training-only constraint. It keeps the detector architecture and
+# ordinary S8->S16 downsampling unchanged, and adds no learnable parameters.
+HGNetv2:
+  sbrd_enabled: True
+
+DFINECriterion:
+  sbrd_aux_weight: 1.0
+  sbrd_boundary_radius: 1
+  sbrd_mask_shift_fraction: 0.0
+
+train_dataloader:
+  total_batch_size: 16
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 16

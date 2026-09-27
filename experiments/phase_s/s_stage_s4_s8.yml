@@ -1,0 +1,10 @@
+__include__: [
+  './visible_60e_base.yml',
+]
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_STAGE_S4_S8/seed0
+
+HGNetv2:
+  lad_stage: 1
+  lad_groups: 8
+

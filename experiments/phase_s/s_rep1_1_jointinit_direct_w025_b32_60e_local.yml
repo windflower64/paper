@@ -1,0 +1,31 @@
+__include__: [
+  './s_rep1_spar_sam_feature_regularization_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_JOINTINIT_DIRECT_W025_B32_60E/seed0
+epochs: 60
+checkpoint_freq: 10
+
+scaler:
+  type: GradScaler
+  enabled: True
+  init_scale: 1024.0
+
+# Direct ablation: the randomly initialized SPAR head influences the backbone
+# from epoch 0 with the same constant weight used by REP1.1 fine-tuning.
+HGNetv2:
+  spar_gradient_mode: full
+  spar_gradient_max_scale: 1.0
+
+DFINECriterion:
+  spar_aux_weight: 0.25
+  spar_l1_weight: 1.0
+  spar_dice_weight: 2.0
+  spar_decay_start: -1
+  spar_decay_end: -1
+
+train_dataloader:
+  total_batch_size: 32
+
+val_dataloader:
+  total_batch_size: 32

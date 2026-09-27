@@ -1,0 +1,19 @@
+__include__: [
+  './visible_60e_base.yml',
+]
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_PDBR1_POSDIR_BOUNDARY_S8_S16/seed0
+
+# S5 diagnostics identify HGNetv2 stage index 2 (S8 -> S16) as the causal
+# high-IoU localization bottleneck.  The official depthwise downsample remains
+# intact; PDBR adds a narrow, position- and direction-aware phase residual.
+HGNetv2:
+  pdbr_stage: 2
+  pdbr_detail_channels: 16
+  pdbr_max_scale: 0.5
+  pdbr_init_scale: 0.05
+
+DFINECriterion:
+  pdbr_boundary_aux_weight: 0.10
+  pdbr_boundary_dice_weight: 1.0
+  pdbr_boundary_sigma: 0.75

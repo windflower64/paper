@@ -1,0 +1,60 @@
+__include__: ['./cdm1_dhrqs1_mk1_reader_b32_30e_testdev_local.yml']
+
+# CDM2 / M2：受保护的红外分类校准。
+# C-GQ1与D-HRQS1负责查询和边框；无坐标红外只在最后一层校准类别分数。
+# 第一阶段保护末尾50个HRQS小目标查询，且不解冻任何成熟检测参数。
+output_dir: E:/two_paper/outputs/CDM2_M2_LOGIT_CALIBRATION_B32_20E_TESTDEV/seed0
+epochs: 20
+checkpoint_freq: 2
+
+DFINE:
+  rgbt_thermal_dropout: 0.15
+  rgbt_train_sdtec_only: True
+  rgbt_lock_norm_stats: True
+
+DFINETransformer:
+  sdtec_enabled: True
+  sdtec_num_tokens: 8
+  sdtec_num_heads: 4
+  sdtec_slot_iterations: 2
+  sdtec_use_reliability: True
+  sdtec_fusion_mode: coordinate_free
+  sdtec_coupler_mode: logit_calibration
+  sdtec_max_logit_delta: 0.25
+  sdtec_protect_hrqs_queries: True
+  sdtec_train_mismatch: True
+  sdtec_warmup_epochs: 1
+  sdtec_ramp_epochs: 3
+
+DFINECriterion:
+  # 不再把“红外存在”误当作“红外有用”。可用性由检测损失和配对反事实学习。
+  sdtec_presence_weight: 0.0
+  sdtec_diversity_weight: 0.01
+  sdtec_fallback_weight: 0.0
+  sdtec_pair_rank_weight: 0.05
+  sdtec_pair_rank_margin: 0.02
+  sdtec_mismatch_suppression_weight: 0.02
+  sdtec_delta_l2_weight: 0.005
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      # 零初始化的最终校准投影先打开，其他M2参数再通过它接收检测梯度。
+      params: '^decoder\.sdtec_logit_calibrator\.delta_head\.2\..*$'
+      lr: 0.001
+      weight_decay: 0.0
+    -
+      params: '^decoder\.sdtec_(?!logit_calibrator\.delta_head\.2\.).*$'
+      lr: 0.0002
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 32
+  persistent_workers: True
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0

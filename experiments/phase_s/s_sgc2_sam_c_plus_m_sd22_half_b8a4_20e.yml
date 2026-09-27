@@ -1,0 +1,7 @@
+__include__: ['./s_sgc2_sam_c_plus_m_sd22_b8a4_20e.yml']
+
+# 单变量对照：仅将M最终残差固定减半，训练与验证一致。
+output_dir: E:/two_paper/outputs/C_PLUS_M_SD22_HALF_SGC2_SAM_DECAY9_14_B8A4_20E_TESTDEV/seed0
+
+DFINE:
+  rgbt_sd2_final_residual_scale: 0.5

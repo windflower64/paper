@@ -1,0 +1,6 @@
+__include__: ['./qcer_rgbt_common.yml']
+
+output_dir: E:/two_paper/outputs/STQL_QCER_B5_UNIFORM_QCER_B16A2_20E_TESTDEV/seed0
+
+DFINE:
+  qcer_uniform_attention: True

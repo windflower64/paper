@@ -1,0 +1,19 @@
+__include__: ['./m_control_gq1_sameaug_b16_60e_local.yml']
+
+# Unified M-series development protocol from 2026-08-25 onward:
+# the original Anti-UAV-6K test split is intentionally used for checkpoint
+# selection.  It must be reported as test-as-development, not as an untouched
+# final test set.
+output_dir: E:/two_paper/reports/60_multimodal/M_TESTDEV_SELECTION/RGB_GQ1_BASELINE
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0
+  dataset:
+    type: CocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/test
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_test.json
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}

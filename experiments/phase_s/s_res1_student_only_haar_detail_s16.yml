@@ -1,0 +1,15 @@
+__include__:
+  - '../../experiments/phase_s/visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_RES1_HAAR_DETAIL_S16/student_only_seed0
+
+HGNetv2:
+  srtod_stage: 2
+  srtod_student_only: true
+  srtod_student_hidden_channels: 32
+  srtod_enhancer: haar_detail
+  srtod_detail_groups: 16
+  srtod_detail_init_scale: 0.0
+
+DFINECriterion:
+  srtod_reconstruction_weight: 0.0

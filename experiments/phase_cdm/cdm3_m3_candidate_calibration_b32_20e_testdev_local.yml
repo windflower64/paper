@@ -1,0 +1,62 @@
+__include__: ['./cdm2_m2_logit_calibration_b32_20e_testdev_local.yml']
+
+# CDM3 / M3：目标监督的红外候选证据校准。
+# 红外位置只用于红外分支内部挑出目标候选；跨模态接口丢弃坐标，
+# 只把候选内容和置信度交给RGB查询，且仍不修改预测框。
+output_dir: E:/two_paper/outputs/CDM3_M3_CANDIDATE_CALIBRATION_B32_20E_TESTDEV/seed0
+epochs: 20
+checkpoint_freq: 2
+
+DFINE:
+  rgbt_thermal_dropout: 0.15
+  rgbt_train_sdtec_only: True
+  rgbt_lock_norm_stats: True
+
+DFINETransformer:
+  sdtec_enabled: True
+  sdtec_num_tokens: 8
+  sdtec_num_heads: 4
+  # 红外候选分数参与门控网络输入，但不直接与校准量硬相乘。
+  # 独立红外检测头使用焦点损失，其logit适合排序而不是当成绝对概率。
+  sdtec_use_reliability: False
+  sdtec_fusion_mode: coordinate_free
+  sdtec_coupler_mode: candidate_logit_calibration
+  sdtec_max_logit_delta: 0.15
+  sdtec_protect_hrqs_queries: True
+  sdtec_train_mismatch: True
+  sdtec_warmup_epochs: 1
+  sdtec_ramp_epochs: 3
+
+DFINECriterion:
+  # 候选目标性来自冻结的红外单模态检测头，不再训练近常量presence。
+  # 去掉M2中会奖励“支路归零”的错配抑制和改变量平方约束，只保留
+  # 主检测监督与正确配对优于错配的直接排序约束。
+  sdtec_presence_weight: 0.0
+  sdtec_diversity_weight: 0.0
+  sdtec_fallback_weight: 0.0
+  sdtec_pair_rank_weight: 0.1
+  sdtec_pair_rank_margin: 0.01
+  sdtec_mismatch_suppression_weight: 0.0
+  sdtec_delta_l2_weight: 0.0
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^decoder\.sdtec_logit_calibrator\.delta_head\.2\..*$'
+      lr: 0.001
+      weight_decay: 0.0
+    -
+      params: '^decoder\.sdtec_(?!logit_calibrator\.delta_head\.2\.).*$'
+      lr: 0.0002
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 32
+  persistent_workers: True
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0

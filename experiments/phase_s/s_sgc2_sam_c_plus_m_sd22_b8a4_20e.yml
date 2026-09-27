@@ -1,0 +1,23 @@
+__include__: ['../phase_m/c_plus_m_sd22_b8a4_20e_testdev_local.yml']
+
+# 联合实验：C-GQ1 + M-SD2.2 + SGC2-SAM。
+# SGC2只在训练期监督融合前的RGB S8；M-SD2.2仍只处理S16/S32上的红外条件。
+output_dir: E:/two_paper/outputs/C_PLUS_M_SD22_SGC2_SAM_DECAY9_14_B8A4_20E_TESTDEV/seed0
+
+HGNetv2:
+  return_idx: [1, 2, 3]
+
+DFINE:
+  sgc_enabled: True
+  sgc_supervision: sam
+  sgc_aux_weight: 10.0
+  sgc_decay_start: 9
+  sgc_decay_end: 14
+
+train_dataloader:
+  dataset:
+    sam_mask_root: E:/two_paper/reports/104_sam3_role_control/masks_train
+
+val_dataloader:
+  dataset:
+    sam_mask_root: ~

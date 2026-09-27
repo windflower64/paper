@@ -1,0 +1,22 @@
+__include__: [
+  './s_rep1_1_jointinit_direct_w025_b32_60e_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_JOINTINIT_PROGRESSIVE_W025_B32_60E/seed0
+
+# The head learns from epoch 0, but its gradient into the detector is blocked
+# for epochs 0-4, opened linearly over epochs 5-9, and fully open from epoch 10.
+HGNetv2:
+  spar_gradient_mode: progressive
+  spar_gradient_ramp_start: 5
+  spar_gradient_ramp_end: 10
+  spar_gradient_max_scale: 0.25
+
+# Preserve the proven REP1.1 target, then withdraw it before the final pure
+# detection convergence phase: full through epoch 30, cosine to zero at 45.
+DFINECriterion:
+  spar_aux_weight: 0.25
+  spar_l1_weight: 1.0
+  spar_dice_weight: 2.0
+  spar_decay_start: 30
+  spar_decay_end: 45

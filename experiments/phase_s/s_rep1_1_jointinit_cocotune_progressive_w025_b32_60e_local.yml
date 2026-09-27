@@ -1,0 +1,12 @@
+__include__: [
+  './s_rep1_1_jointinit_progressive_w025_b32_60e_local.yml',
+]
+
+# Correct protocol: train.py must additionally receive
+# -t E:/two_paper/weights/dfine_n_coco.pth.
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_JOINTINIT_COCOTUNE_GMAX100_PROGRESSIVE_W025_B32_60E/seed0
+
+# Recalibrated after loading the complete COCO detector.  At epoch10 the
+# projected full-strength ratio is about 0.0157, safely below the 0.10 gate.
+HGNetv2:
+  spar_gradient_max_scale: 1.0

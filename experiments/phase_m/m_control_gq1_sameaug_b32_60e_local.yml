@@ -1,0 +1,10 @@
+__include__: ['./m_control_gq1_sameaug_b16_60e_local.yml']
+
+output_dir: E:/two_paper/outputs/M_CONTROL_GQ1_SAMEAUG_B32_60E/seed0
+
+train_dataloader:
+  total_batch_size: 32
+
+val_dataloader:
+  total_batch_size: 32
+

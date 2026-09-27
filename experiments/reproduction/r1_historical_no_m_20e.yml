@@ -1,0 +1,7 @@
+# R1：历史 R0 配置，仅关闭 SD2.2 M 条件器；其余数据、SGC2、优化器和初始化保持不变。
+__include__: ['E:/two_paper/outputs/C_PLUS_M_SD22_HALF_SGC2_SAM_DECAY9_14_B8A4_20E_TESTDEV/seed0/artifacts/experiments/phase_s/s_sgc2_sam_c_plus_m_sd22_half_b8a4_20e.yml']
+
+output_dir: E:/two_paper/outputs/REPRO_R1_HISTORICAL_NO_M_SGC2_20E_TESTDEV/seed0
+
+DFINE:
+  rgbt_sd2_enabled: False

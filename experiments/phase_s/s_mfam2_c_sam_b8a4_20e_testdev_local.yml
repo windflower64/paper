@@ -1,0 +1,4 @@
+__include__: ['./s_mfam1_c_sam_b8a4_20e_testdev_local.yml']
+output_dir: E:/two_paper/outputs/S_MFAM2_C_SAM_B8A4_20E_TESTDEV/seed0
+DFINE:
+  mfam_variant: support_shape

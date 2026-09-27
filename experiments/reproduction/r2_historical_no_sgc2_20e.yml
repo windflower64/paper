@@ -1,0 +1,7 @@
+# R2：历史 R0 配置，仅将 SGC2 辅助损失权重置零；保留相同掩码读取和其余模型路径。
+__include__: ['E:/two_paper/outputs/C_PLUS_M_SD22_HALF_SGC2_SAM_DECAY9_14_B8A4_20E_TESTDEV/seed0/artifacts/experiments/phase_s/s_sgc2_sam_c_plus_m_sd22_half_b8a4_20e.yml']
+
+output_dir: E:/two_paper/outputs/REPRO_R2_HISTORICAL_NO_SGC2_20E_TESTDEV/seed0
+
+DFINE:
+  sgc_aux_weight: 0.0

@@ -1,0 +1,14 @@
+__include__: [
+  './s_rep1_1_spar_w025_ft6_lr02_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_2_SPAR_W025_MASKRES_FT6_LR02/seed0
+epochs: 6
+
+# The only change from REP1.1: upsample the SPAR prediction to the transformed
+# SAM mask resolution before L1+Dice, matching the public FALCON code path.
+DFINECriterion:
+  spar_aux_weight: 0.25
+  spar_l1_weight: 1.0
+  spar_dice_weight: 2.0
+  spar_loss_resolution: mask

@@ -1,0 +1,39 @@
+__include__:
+  - './visible_60e_base_local.yml'
+
+# TFLR1：保留A00标准S8→S16下采样，只用S8方向高频修正最终预测框。
+output_dir: E:/two_paper/runs/27_tflr/S_TFLR1_JOINT_LOCALIZATION_B16_60E/seed0
+
+DFINE:
+  tflr_enabled: True
+  tflr_in_channels: 512
+  tflr_edge_channels: 16
+  tflr_hidden_dim: 64
+  tflr_samples_per_side: 3
+  tflr_max_logit_delta: 0.25
+
+epochs: 60
+checkpoint_freq: 12
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.00005
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.00005
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.0001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 16
+
+val_dataloader:
+  total_batch_size: 16

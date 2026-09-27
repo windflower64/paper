@@ -1,0 +1,12 @@
+__include__: [
+  './s_rep1_1_jointinit_cocotune_progressive_w025_b32_60e_local.yml',
+]
+
+# Causal control: preserve each accepted SAM instance's transformed position
+# and extent, but replace its contour with its own enclosing solid rectangle.
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_JOINTINIT_COCOTUNE_BOXMASK_W025_B32_60E/seed0
+
+DFINECriterion:
+  spar_target_mode: box
+  spar_mask_shift_fraction: 0.0
+

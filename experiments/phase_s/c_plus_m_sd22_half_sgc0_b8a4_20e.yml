@@ -1,0 +1,7 @@
+__include__: ['./s_sgc2_sam_c_plus_m_sd22_half_b8a4_20e.yml']
+
+# 严格去监督对照：保留相同掩码读取和计算流程，仅SAM损失权重为0。
+output_dir: E:/two_paper/outputs/C_PLUS_M_SD22_HALF_SGC0_B8A4_20E_TESTDEV/seed0
+
+DFINE:
+  sgc_aux_weight: 0.0

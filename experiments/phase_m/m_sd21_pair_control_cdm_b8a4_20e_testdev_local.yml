@@ -1,0 +1,6 @@
+__include__: ['./m_sd21_pair_base_b8a4_20e_testdev_local.yml']
+
+output_dir: E:/two_paper/outputs/M_SD21_PAIR_CONTROL_CDM_B8A4_20E_TESTDEV/seed0
+
+DFINE:
+  rgbt_sd2_enabled: False

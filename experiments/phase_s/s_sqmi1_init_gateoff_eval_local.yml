@@ -1,0 +1,9 @@
+__include__: ['./s_sqmi1_init_c_gq1_b16a2_12e_testdev_local.yml']
+
+# Same trained S-QMI1 checkpoint, but disable only the inference-time mask-box
+# intervention.  Used for causal validation, never for training.
+output_dir: E:/two_paper/reports/145_sqmi1_result/gateoff_eval
+
+DFINETransformer:
+  sqmi_apply_initialization: False
+

@@ -1,0 +1,53 @@
+__include__: ['./common_v1.yml']
+
+DFINE:
+  rgbt_enabled: True
+  rgbt_thermal_dropout: 0.0
+  rgbt_thermal_intervention: normal
+  rgbt_train_sdtec_only: False
+  rgbt_lock_norm_stats: True
+  rgbt_freeze_thermal_stream: True
+  rgbt_thermal_forward_chunk_size: 4
+  rgbt_checkpoint_decoder_training: False
+  qcer_enabled: True
+
+DFINECriterion:
+  qcer_objectness_weight: 0.1
+
+train_dataloader:
+  dataset:
+    type: RGBTCocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/train
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_train.json
+    infrared_folder: F:/data/Anti-UAV/Anti_UAV_6K/train/infrared/images
+    infrared_label_folder: E:/two_paper/data/antiuav6k_ir_raw_verified/train/labels
+    transforms:
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: stop_epoch
+        epoch: 200
+        ops: [RandomPhotometricDistort]
+  collate_fn:
+    base_size: 640
+    base_size_repeat: ~
+    stop_epoch: 200
+
+val_dataloader:
+  dataset:
+    type: RGBTCocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/test
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_test.json
+    infrared_folder: F:/data/Anti-UAV/Anti_UAV_6K/test/infrared/images
+    infrared_label_folder: E:/two_paper/data/antiuav6k_ir_raw_verified/test/labels
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+

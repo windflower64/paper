@@ -1,0 +1,15 @@
+__include__:
+  - './visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_DEF2_DIRECT_NO_TEACHER_S16/seed0
+
+# Causal control for the teacher-student narrative.  The deployed structure is
+# identical to S-DEF1, but it is trained directly from detection loss without
+# RH reconstruction or deficiency-map distillation.
+HGNetv2:
+  srtod_stage: 2
+  srtod_student_only: true
+  srtod_student_hidden_channels: 32
+
+DFINECriterion:
+  srtod_reconstruction_weight: 0.0

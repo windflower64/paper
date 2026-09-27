@@ -1,0 +1,14 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+# Strict paired control for REP1.1-JointInit multiseed closure.  JointInit had
+# to use an AMP initial scale of 1024 because its auxiliary head overflowed at
+# 65536 on the first batch.  Use the same scaler here so the paired runs differ
+# only by the training-only SAM contour regularizer.
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_JOINTINIT_PAIRED_A00/seed0
+
+scaler:
+  type: GradScaler
+  enabled: True
+  init_scale: 1024.0

@@ -1,0 +1,13 @@
+__include__: ["./m_layout_recovery_r2_warmup.yml"]
+
+# Matched R2 control: same M-OTE2 and common initialization, no SAM losses.
+output_dir: E:/two_paper/outputs/M_R2_SAM_FACTORIAL_20E_TESTDEV/no_s_warmup
+
+DFINE:
+  sgc_enabled: False
+  sgc_aux_weight: 0.0
+  sqer_enabled: True
+  sqer_bypass: True
+
+DFINECriterion:
+  sqer_shape_weight: 0.0

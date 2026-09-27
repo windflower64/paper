@@ -1,0 +1,7 @@
+__include__: [
+  './s_rep1_1_jointinit_cocotune_progressive_w025_b32_60e_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_JOINTINIT_COCOTUNE_GMAX100_PILOT2/seed0
+epochs: 2
+checkpoint_freq: 1

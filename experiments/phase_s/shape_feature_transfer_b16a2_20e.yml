@@ -1,0 +1,26 @@
+__include__: ['../phase_m/c_plus_m_sd22_b8a4_20e_testdev_local.yml']
+
+epochs: 20
+checkpoint_freq: 5
+gradient_accumulation_steps: 2
+skip_model_profile: True
+
+HGNetv2:
+  return_idx: [2, 3]
+  pretrained: False
+
+DFINE:
+  rgbt_sd2_final_residual_scale: 0.5
+  sgc_enabled: False
+
+train_dataloader:
+  total_batch_size: 16
+  dataset:
+    type: ShapeFeatureRGBT
+    teacher_root: E:/two_paper/reports/153_shape_feature_transfer/teacher
+    sam_mask_root: E:/two_paper/reports/104_sam3_role_control/masks_train
+
+val_dataloader:
+  total_batch_size: 16
+  dataset:
+    sam_mask_root: ~

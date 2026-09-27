@@ -1,0 +1,7 @@
+__include__: ['mbudet_rgb_reference_20e.yml']
+epochs: 30
+checkpoint_freq: 5
+lr_scheduler:
+  type: MultiStepLR
+  milestones: [20, 26]
+  gamma: 0.5

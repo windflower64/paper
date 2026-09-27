@@ -1,0 +1,8 @@
+__include__: ['../phase_c/c_pat_gq_s32_r4.yml']
+
+# Directional counterfactual. Run only if R-FDR1 is positive.
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/40_boundary/R_FDR_REV_GQ1/seed0
+
+DFINECriterion:
+  fgl_edge_weight_mode: shape_reverse
+  ddf_edge_reliability_mode: none

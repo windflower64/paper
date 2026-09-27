@@ -1,0 +1,12 @@
+__include__:
+  - './visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_BTRD1_ACT_TRANS_S8_S16/seed0
+
+# S3-BTRD1: replace only the HGNetv2 Stage3 entrance (S8 -> S16) with
+# RAFDE's complete Boundary Transitional Region-enhanced Downsampling path.
+# Keep GQ1/AUX/LAD/DEF/Haar and every other stage disabled so this remains a
+# single-variable transfer experiment.
+HGNetv2:
+  btrd_stage: 2
+

@@ -1,0 +1,24 @@
+__include__: ["../phase_s/sqer2_common_warmup_b8a4_2e.yml"]
+
+output_dir: E:/two_paper/outputs/M_LAYOUT_RECOVERY_20E_TESTDEV/R1_SD22/warmup
+epochs: 2
+tuning: E:/two_paper/outputs/M_LAYOUT_RECOVERY_20E_TESTDEV/common_init.pth
+resume: ~
+recovery_data_seed: 3407
+
+DFINE:
+  rgbt_thermal_forward_chunk_size: 2
+
+train_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  persistent_workers: False
+  dataset:
+    infrared_label_folder: E:/two_paper/data/antiuav6k_ir_raw_verified/train/labels
+
+val_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  persistent_workers: False
+  dataset:
+    infrared_label_folder: E:/two_paper/data/antiuav6k_ir_raw_verified/test/labels

@@ -1,0 +1,7 @@
+__include__: [
+  './s_sabr1_jointinit_cocotune_w025_b32_60e_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_SABR1_JOINTINIT_COCOTUNE_PILOT2/seed0
+epochs: 2
+checkpoint_freq: 1

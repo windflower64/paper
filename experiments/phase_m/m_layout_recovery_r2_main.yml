@@ -1,0 +1,14 @@
+__include__: ["./m_layout_recovery_r2_warmup.yml"]
+
+output_dir: E:/two_paper/outputs/M_LAYOUT_RECOVERY_20E_TESTDEV/R2_OTE2_LAYOUT/seed0
+epochs: 20
+tuning: ~
+resume: E:/two_paper/outputs/M_LAYOUT_RECOVERY_20E_TESTDEV/R2_OTE2_LAYOUT/warmup/last.pth
+
+DFINE:
+  sqer_bypass: False
+
+DFINECriterion:
+  sqer_shape_weight: 0.05
+  sqer_supervision: sam
+

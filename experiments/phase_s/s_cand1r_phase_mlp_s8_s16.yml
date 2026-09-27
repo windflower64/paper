@@ -1,0 +1,17 @@
+__include__:
+  - './visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_CAND1R_PHASE_MLP_S8_S16/seed0
+
+# S-CAND1R: keep PixelUnshuffle, Targetness q and the validated phase-weight
+# path. Every original channel's four phases pass directly through a nonlinear
+# 4->4 MLP before weighted compression. There is no identity bypass.
+HGNetv2:
+  lad_stage: 2
+  lad_groups: 8
+  lad_target_gate: True
+  lad_candidate_mode: polyphase_direct_mlp
+
+DFINECriterion:
+  spatial_aux_weight: 0.10
+  spatial_aux_dice_weight: 1.0

@@ -1,0 +1,42 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+output_dir: E:/two_paper/runs/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/seed0
+
+# TNDP2 is a training-only representation constraint.  The detector forward
+# path is unchanged and the reconstruction head is removed by deploy().
+HGNetv2:
+  tndp_stage: 2
+  tndp_target_max: 3.0
+
+DFINECriterion:
+  tndp_detail_weight: 0.10
+  tndp_neighborhood_radius: 1
+
+# The historical batch32 full protocol uses 1e-4/2e-4.  Scale both learning
+# rates linearly for the user-requested batch16 run.
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.00005
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.00005
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.0001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 16
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 16

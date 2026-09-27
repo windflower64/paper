@@ -1,0 +1,9 @@
+__include__: ['./s_sgc2_sam_c_plus_m_sd22_half_b8a4_20e.yml']
+
+# 三臂共用协议：原S8 SAM不变，仅改变S4补充监督。
+output_dir: E:/two_paper/outputs/SGC_SCALE_NONE_B16A2_20E_TESTDEV/seed0
+gradient_accumulation_steps: 2
+DFINE:
+  sgc_s4_rescue: none
+train_dataloader:
+  total_batch_size: 16

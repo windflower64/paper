@@ -1,0 +1,11 @@
+__include__: [
+  './s_rep1_1_spar_w025_ft6_lr02_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_RESTART30_SPAR_W025_LR02/seed0
+epochs: 30
+checkpoint_freq: 5
+
+# This is a fresh, uninterrupted REP1.1 run from the common A00 best weight.
+# It deliberately preserves REP1.1's batch, learning rates, SAM loss, and
+# auxiliary weight; launch it with -t (tuning), never -r (resume).

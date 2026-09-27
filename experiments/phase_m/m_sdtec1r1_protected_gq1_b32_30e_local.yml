@@ -1,0 +1,60 @@
+__include__: ['./m_sdtec1_gq1_b32_60e_local.yml']
+
+# R1 repairs the invalid M1-A continuation protocol.  The converged RGB GQ1
+# receives a 10-20x smaller learning rate, while thermal/SDTEC parameters learn
+# normally and the zero-initialized residual scales receive a dedicated rate.
+output_dir: E:/two_paper/outputs/M_SDTEC1R1_PROTECTED_GQ1_B32_30E/seed0
+epochs: 30
+checkpoint_freq: 5
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^decoder\.sdtec_couplers\.\d+\.residual_scale$'
+      lr: 0.005
+      weight_decay: 0.0
+    -
+      params: '^decoder\.sdtec_(?!.*residual_scale).*$'
+      lr: 0.0002
+    -
+      params: '^thermal_backbone\.(?!.*(?:norm|bn)).*$'
+      lr: 0.0001
+    -
+      params: '^thermal_backbone\.(?=.*(?:norm|bn)).*$'
+      lr: 0.0001
+      weight_decay: 0.0
+    -
+      params: '^thermal_encoder\.(?!.*(?:norm|bn|bias)).*$'
+      lr: 0.0002
+    -
+      params: '^thermal_encoder\.(?=.*(?:norm|bn|bias)).*$'
+      lr: 0.0002
+      weight_decay: 0.0
+    -
+      params: '^backbone\.(?!.*(?:norm|bn)).*$'
+      lr: 0.000005
+    -
+      params: '^backbone\.(?=.*(?:norm|bn)).*$'
+      lr: 0.000005
+      weight_decay: 0.0
+    -
+      params: '^(?:encoder\.|decoder\.(?!sdtec_))(?!.*(?:norm|bn|bias)).*$'
+      lr: 0.00001
+    -
+      params: '^(?:encoder\.|decoder\.(?!sdtec_))(?=.*(?:norm|bn|bias)).*$'
+      lr: 0.00001
+      weight_decay: 0.0
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 200
+
+DFINECriterion:
+  sdtec_presence_weight: 0.05
+  sdtec_diversity_weight: 0.10
+  sdtec_fallback_weight: 0.10
+

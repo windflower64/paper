@@ -1,0 +1,101 @@
+__include__: ['../phase_d/d_hrqs1_gq1_b32_60e_testdev_local.yml']
+
+# Strict paired protocol for M-SD2.1.  Both arms use the same RGB-T loader,
+# frozen pretrained thermal extractor, C/D learning rates, seed, physical
+# batch and gradient accumulation.  Only the conditioner differs.
+epochs: 20
+checkpoint_freq: 2
+gradient_accumulation_steps: 4
+skip_model_profile: True
+
+DFINE:
+  rgbt_enabled: True
+  rgbt_thermal_dropout: 0.0
+  rgbt_thermal_intervention: normal
+  rgbt_train_sdtec_only: False
+  rgbt_lock_norm_stats: False
+  rgbt_freeze_thermal_stream: True
+  # Keep physical batch 8 for the trainable RGB path; only the frozen thermal
+  # extractor is evaluated in sub-batches to reduce Windows/WDDM peak memory.
+  rgbt_thermal_forward_chunk_size: 2
+  # Decoder checkpointing was tested but produced non-finite gradients in the
+  # current PyTorch/D-FINE combination, so it is explicitly disabled.
+  rgbt_checkpoint_decoder_training: False
+
+DFINETransformer:
+  sdtec_enabled: False
+  hrqs_enabled: True
+  hrqs_source_channels: 256
+  hrqs_anchor_size: 0.025
+  hrqs_num_queries: 50
+
+# Exact C/D rates resolved from D-HRQS1: backbone 1e-4 and the remaining
+# encoder/decoder parameters 2e-4.  This fixes the four-times-LR confound in
+# the first M-SD2 run.
+optimizer:
+  type: AdamW
+  foreach: False
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.0001
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.0001
+      weight_decay: 0.0
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.0
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 500
+
+train_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  persistent_workers: False
+  dataset:
+    type: RGBTCocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/train
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_train.json
+    infrared_folder: F:/data/Anti-UAV/Anti_UAV_6K/train/infrared/images
+    infrared_label_folder: F:/data/Anti-UAV/Anti_UAV_6K/train/infrared/labels
+    transforms:
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: stop_epoch
+        epoch: 200
+        ops: [RandomPhotometricDistort]
+  collate_fn:
+    base_size: 640
+    base_size_repeat: ~
+    stop_epoch: 200
+
+val_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  dataset:
+    type: RGBTCocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/test
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_test.json
+    infrared_folder: F:/data/Anti-UAV/Anti_UAV_6K/test/infrared/images
+    infrared_label_folder: F:/data/Anti-UAV/Anti_UAV_6K/test/infrared/labels
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+
+scaler:
+  type: GradScaler
+  enabled: True
+  init_scale: 128.0

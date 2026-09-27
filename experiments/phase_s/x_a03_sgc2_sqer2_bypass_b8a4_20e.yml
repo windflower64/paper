@@ -1,0 +1,14 @@
+__include__: ['./sqer2_common_warmup_b8a4_2e.yml']
+
+# A3: SGC2-SAM remains active; the SQER2 branch stays bypassed throughout.
+output_dir: E:/two_paper/outputs/C_M_SAM_ATTRIBUTION/A3_CM_SGC2_SQER2_BYPASS_B8A4_20E/seed0
+epochs: 20
+resume: E:/two_paper/outputs/SQER2_COMMON_WARMUP_B8A4_2E/seed0/last.pth
+
+DFINE:
+  sgc_enabled: True
+  sqer_enabled: True
+  sqer_bypass: True
+
+DFINECriterion:
+  sqer_shape_weight: 0.0

@@ -1,0 +1,83 @@
+__include__: ['../phase_cdm/cdm2_m2_logit_calibration_b32_20e_testdev_local.yml']
+
+# M-A1/P1：RGB查询锚定的软对齐红外局部读取。
+# 只在最终类别分数上加入有界红外校准，不修改RGB查询、预测框和HRQS查询。
+# 初始校准层严格为零，因此初始化功能与成熟的C+D模型完全相同。
+output_dir: E:/two_paper/outputs/MA1_P1_SOFT_ALIGNED_B32_20E_TESTDEV/seed0
+epochs: 20
+checkpoint_freq: 2
+
+DFINE:
+  rgbt_enabled: True
+  rgbt_thermal_dropout: 0.15
+  rgbt_train_sdtec_only: True
+  rgbt_lock_norm_stats: True
+
+DFINETransformer:
+  sdtec_enabled: True
+  sdtec_num_heads: 4
+  sdtec_fusion_mode: soft_aligned
+  sdtec_coupler_mode: soft_aligned_logit
+  # 由训练集可见框中心到红外框中心拟合；测试集不得参与参数拟合。
+  sdtec_alignment_affine_init:
+    - 1.0397572683538168
+    - -0.019141644184931993
+    - 0.023188391074411355
+    - 0.7258331874053
+    - -0.06328872863530725
+    - 0.19154927281480938
+  sdtec_alignment_affine_delta_scale: 0.05
+  sdtec_alignment_search_radius: 0.10
+  sdtec_alignment_levels: 2
+  sdtec_alignment_points: 4
+  sdtec_max_logit_delta: 0.15
+  sdtec_protect_hrqs_queries: True
+  sdtec_train_mismatch: False
+  sdtec_warmup_epochs: 1
+  sdtec_ramp_epochs: 3
+
+DFINECriterion:
+  # P1先只回答“正确位置附近的红外内容是否改善检测”，不混入旧M2正则。
+  sdtec_presence_weight: 0.0
+  sdtec_diversity_weight: 0.0
+  sdtec_fallback_weight: 0.0
+  sdtec_pair_rank_weight: 0.0
+  sdtec_mismatch_suppression_weight: 0.0
+  sdtec_delta_l2_weight: 0.0
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      # 零初始化出口先打开，随后检测梯度才能进入软对齐读取器。
+      params: '^decoder\.sdtec_aligned_calibrator\.delta_head\.2\.weight$'
+      lr: 0.001
+      weight_decay: 0.0
+    -
+      params: '^decoder\.sdtec_(?!aligned_calibrator\.delta_head\.2\.weight$).*$'
+      lr: 0.0002
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 200
+
+train_dataloader:
+  total_batch_size: 32
+  persistent_workers: True
+  dataset:
+    transforms:
+      ops:
+        # 暂不使用随机翻转：静态跨模态仿射先验属于原始坐标系。
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: default
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0

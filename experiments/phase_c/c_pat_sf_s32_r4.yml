@@ -1,0 +1,13 @@
+__include__: ['../phase_s/visible_60e_base.yml']
+
+# C-PAT-SF1 faithfully transfers PartialNet's strongest partial-attention
+# variant.  The official method restricts PAT_sf to the final stage because
+# self-attention scales quadratically with spatial size.  In HGNetv2-B0,
+# stage index 3 is S32 and its LightConv spatial mixer has 128 channels:
+# 32 channels use local Conv3x3 and 96 use four-head RPE self-attention.
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/30_channel/C_PAT_SF1_S32_R4/seed0
+
+HGNetv2:
+  pat_stage: -1
+  pat_sf_stage: 3
+  pat_sf_n_div: 4

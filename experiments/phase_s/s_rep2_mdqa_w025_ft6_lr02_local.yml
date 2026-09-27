@@ -1,0 +1,52 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP2_MDQA_W025_FT6_LR02/seed0
+epochs: 6
+checkpoint_freq: 5
+
+# Real post-stage S8 feature (HGNetv2-B0 stage index 1), tapped only while
+# training. The ordinary returned S16/S32 detector features are unchanged.
+HGNetv2:
+  mdqa_source_stage: 1
+
+# Minimal Mask-DINO-style auxiliary head: the final matched detector query is
+# projected into the same 64-D space as the S8 pixel feature.
+DFINETransformer:
+  mdqa_enabled: True
+  mdqa_source_channels: 256
+  mdqa_mask_dim: 64
+
+DFINECriterion:
+  mdqa_aux_weight: 0.25
+  mdqa_focal_weight: 1.0
+  mdqa_dice_weight: 1.0
+  mdqa_focal_alpha: 0.25
+  mdqa_focal_gamma: 2.0
+
+# Same gentle A00 fine-tuning protocol used by the validated REP1.1 pair.
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.00002
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.00002
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.00004
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 16
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 16

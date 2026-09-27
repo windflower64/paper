@@ -1,0 +1,19 @@
+__include__: ['../phase_m/c_only_gq1_b8a4_20e_testdev_local.yml']
+
+# N-SQFR1：不增加查询，只让64个成熟高分查询回看RGB S8目标邻域并修正最终框。
+# 与C-only保持相同初始化、增强、20轮、seed0、有效batch32和test-as-development协议。
+output_dir: E:/two_paper/outputs/N_SQFR1_C_GQ1_B8A4_20E_TESTDEV/seed0
+
+HGNetv2:
+  return_idx: [1, 2, 3]
+
+DFINETransformer:
+  hrqs_enabled: False
+  sqfr_enabled: True
+  sqfr_source_channels: 256
+  sqfr_hidden_dim: 64
+  sqfr_num_heads: 4
+  sqfr_roi_size: 5
+  sqfr_topk: 64
+  sqfr_context_scale: 1.5
+  sqfr_max_logit_delta: 0.25

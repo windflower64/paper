@@ -1,0 +1,14 @@
+__include__: ['../phase_m/c_only_gq1_b8a4_20e_testdev_local.yml']
+DFINE:
+  mfam_enabled: False
+  sgc_enabled: True
+  sgc_aux_weight: 10.0
+HGNetv2:
+  pretrained: False
+  return_idx: [1, 2, 3]
+train_dataloader:
+  dataset:
+    sam_mask_root: E:/two_paper/reports/104_sam3_role_control/masks_train
+val_dataloader:
+  dataset:
+    sam_mask_root: ~

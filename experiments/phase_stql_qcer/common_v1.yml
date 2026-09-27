@@ -1,0 +1,69 @@
+__include__: ['../phase_m/c_only_gq1_b8a4_20e_testdev_local.yml']
+
+# STQL/QCER v1.1 common 3200-screening protocol.  This file deliberately
+# changes the learning-rate scale from the historical C-only experiment; B0
+# is therefore the authoritative same-budget control for B1-B5.
+epochs: 20
+checkpoint_freq: 2
+gradient_accumulation_steps: 2
+skip_model_profile: True
+
+DFINE:
+  rgbt_lock_norm_stats: True
+  stql_enabled: False
+  stql_s8_channels: 256
+  stql_qcer_dim: 128
+  qcer_enabled: False
+  # HybridEncoder.hidden_dim is 128 in the local D-FINE-N configuration.
+  qcer_thermal_channels: [128, 128]
+  qcer_topk: 64
+  qcer_temperature: 0.1
+  qcer_uniform_attention: False
+  qcer_bypass: False
+  rgbt_sd2_enabled: False
+
+DFINETransformer:
+  sdtec_enabled: False
+  hrqs_enabled: False
+
+DFINECriterion:
+  stql_weight: 0.0
+  stql_supervision: sam
+  stql_total_epochs: 20
+  qcer_objectness_weight: 0.0
+
+optimizer:
+  type: AdamW
+  foreach: False
+  params:
+    -
+      params: '^(?=.*(?:stql|qcer)).*$'
+      lr: 0.0002
+    -
+      params: '^(?=.*backbone)(?!.*(?:norm|bn)).*$'
+      lr: 0.00001
+    -
+      params: '^(?=.*backbone)(?=.*(?:norm|bn)).*$'
+      lr: 0.00001
+      weight_decay: 0.0
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      lr: 0.00002
+      weight_decay: 0.0
+  lr: 0.00002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 0
+  persistent_workers: False
+
+val_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+
+scaler:
+  type: GradScaler
+  enabled: True
+  init_scale: 128.0

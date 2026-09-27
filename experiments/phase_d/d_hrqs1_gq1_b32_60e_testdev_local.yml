@@ -1,0 +1,35 @@
+__include__: ['../phase_m/m_control_gq1_sameaug_b32_60e_local.yml']
+
+# D-HRQS1 isolates the third detector-side module on top of C-GQ1.  It keeps
+# the mature S16/S32 HybridEncoder and decoder memory unchanged, while exposing
+# the existing S8 backbone map only as an additional source of initial queries.
+output_dir: E:/two_paper/outputs/D_HRQS1_GQ1_B32_60E_TESTDEV/seed0
+epochs: 60
+checkpoint_freq: 6
+
+HGNetv2:
+  return_idx: [1, 2, 3]
+
+DFINETransformer:
+  hrqs_enabled: True
+  hrqs_source_channels: 256
+  hrqs_anchor_size: 0.025
+  hrqs_num_queries: 50
+
+train_dataloader:
+  total_batch_size: 32
+  persistent_workers: True
+
+# Per the frozen project convention, original test is used as development
+# validation.  It is not described as an untouched final test set.
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0
+  dataset:
+    type: CocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/test
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_test.json
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}

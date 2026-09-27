@@ -1,0 +1,120 @@
+__include__: ['../phase_d/d_hrqs1_gq1_b32_60e_testdev_local.yml']
+
+# M-SD2 jointly trains C-GQ1, D-HRQS1 and coordinate-free thermal channel
+# conditioning from the same task-training start.  Thermal spatial coordinates
+# never cross the modality interface; no pair-ranking or mismatch loss is used.
+output_dir: E:/two_paper/outputs/M_SD2_JOINT_CDM_B32_30E_TESTDEV/seed0
+epochs: 30
+checkpoint_freq: 3
+gradient_accumulation_steps: 4
+# Avoid a second deep-copied GPU model during startup on Windows/WDDM.
+skip_model_profile: True
+
+DFINE:
+  rgbt_enabled: True
+  rgbt_thermal_dropout: 0.0
+  rgbt_train_sdtec_only: False
+  rgbt_lock_norm_stats: False
+  rgbt_sd2_enabled: True
+  rgbt_sd2_hidden_dim: 128
+  rgbt_sd2_num_levels: 2
+  rgbt_sd2_bottleneck_dim: 64
+  rgbt_sd2_max_rms_ratio: 0.03
+  rgbt_freeze_thermal_stream: True
+
+DFINETransformer:
+  sdtec_enabled: False
+  hrqs_enabled: True
+  hrqs_source_channels: 256
+  hrqs_anchor_size: 0.025
+  hrqs_num_queries: 50
+
+# Explicit non-overlapping groups make every branch jointly trainable while
+# protecting the task-pretrained thermal representation with smaller rates.
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^sd2_conditioner\.residual_scales$'
+      lr: 0.001
+      weight_decay: 0.0
+    -
+      params: '^sd2_conditioner\.(?!residual_scales$).*$'
+      lr: 0.0008
+    -
+      params: '^backbone\.(?!.*(?:norm|bn)).*$'
+      lr: 0.0004
+    -
+      params: '^backbone\.(?=.*(?:norm|bn)).*$'
+      lr: 0.0004
+      weight_decay: 0.0
+    -
+      params: '^encoder\.(?!.*(?:norm|bn|bias)).*$'
+      lr: 0.0008
+    -
+      params: '^encoder\.(?=.*(?:norm|bn|bias)).*$'
+      lr: 0.0008
+      weight_decay: 0.0
+    -
+      params: '^decoder\.(?!.*(?:norm|bn|bias)).*$'
+      lr: 0.0008
+    -
+      params: '^decoder\.(?=.*(?:norm|bn|bias)).*$'
+      lr: 0.0008
+      weight_decay: 0.0
+  lr: 0.0008
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 500
+
+train_dataloader:
+  # The mature thermal extractor is frozen; C, D and M-SD2 remain jointly
+  # trainable. Four physical batches of 8 retain effective batch 32.
+  total_batch_size: 8
+  # Windows/WDDM 下多进程数据加载会挤占 GPU 地址空间；单进程读取更稳定。
+  num_workers: 0
+  persistent_workers: False
+  dataset:
+    type: RGBTCocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/train
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_train.json
+    infrared_folder: F:/data/Anti-UAV/Anti_UAV_6K/train/infrared/images
+    infrared_label_folder: F:/data/Anti-UAV/Anti_UAV_6K/train/infrared/labels
+    transforms:
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: stop_epoch
+        epoch: 200
+        ops: [RandomPhotometricDistort]
+  collate_fn:
+    base_size: 640
+    base_size_repeat: ~
+    stop_epoch: 200
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0
+  dataset:
+    type: RGBTCocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/test
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_test.json
+    infrared_folder: F:/data/Anti-UAV/Anti_UAV_6K/test/infrared/images
+    infrared_label_folder: F:/data/Anti-UAV/Anti_UAV_6K/test/infrared/labels
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+
+scaler:
+  type: GradScaler
+  enabled: True
+  init_scale: 128.0

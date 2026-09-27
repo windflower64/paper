@@ -1,0 +1,8 @@
+__include__: ['./h3_strong_screen_b8a4_20e.yml']
+
+# Matched control: keep STQL modules and mask pipeline constructed, remove only
+# the STQL contribution to the training objective.
+output_dir: E:/two_paper/outputs/QDMF_H3_NO_STQL_STRONG_B8A4_20E_TESTDEV/seed0
+
+DFINECriterion:
+  stql_weight: 0.0

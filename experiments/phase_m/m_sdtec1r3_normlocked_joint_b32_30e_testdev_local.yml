@@ -1,0 +1,11 @@
+__include__: ['./m_sdtec1r2_hybrid_joint_b32_60e_testdev_local.yml']
+
+# R3 changes exactly one training behavior: BatchNorm running statistics remain
+# at the selected frozen-reader checkpoint values. All optimizer learning rates
+# and the SDTEC architecture stay identical to R2 joint tuning.
+output_dir: E:/two_paper/outputs/M_SDTEC1R3_NORMLOCKED_JOINT_B32_30E_TESTDEV/seed0
+epochs: 30
+checkpoint_freq: 5
+
+DFINE:
+  rgbt_lock_norm_stats: True

@@ -1,0 +1,17 @@
+__include__: [
+  './dfine_n_visible_640x512_full.yml',
+]
+
+output_dir: /root/autodl-tmp/rgbt_experiments/outputs/dfine_n_visible_640x512_pilot5_seed0
+epochs: 5
+checkpoint_freq: 5
+
+train_dataloader:
+  dataset:
+    transforms:
+      policy:
+        name: stop_epoch
+        epoch: 5
+        ops: [RandomPhotometricDistort, RandomZoomOut, RandomIoUCrop]
+  collate_fn:
+    stop_epoch: 1000

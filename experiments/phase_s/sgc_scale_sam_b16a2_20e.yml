@@ -1,0 +1,4 @@
+__include__: ['./sgc_scale_none_b16a2_20e.yml']
+output_dir: E:/two_paper/outputs/SGC_SCALE_SAM_B16A2_20E_TESTDEV/seed0
+DFINE:
+  sgc_s4_rescue: sam

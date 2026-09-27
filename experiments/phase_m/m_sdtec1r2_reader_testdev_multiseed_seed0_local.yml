@@ -1,0 +1,5 @@
+__include__: ['./m_sdtec1r2_hybrid_reader_b32_30e_testdev_local.yml']
+
+# Strict original-test-as-development-validation rerun.  This makes seed 0 use
+# the same per-epoch selection protocol as the new seed 1/2 repetitions.
+output_dir: E:/two_paper/outputs/M_SDTEC1R2_READER_TESTDEV_MULTISEED/seed0

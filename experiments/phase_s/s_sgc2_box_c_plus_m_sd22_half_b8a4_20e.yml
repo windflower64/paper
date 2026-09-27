@@ -1,0 +1,6 @@
+__include__: ['./s_sgc2_sam_c_plus_m_sd22_half_b8a4_20e.yml']
+
+# 完整底座形状归因：仅改变分组区域，保留SAM读取及共同资格。
+output_dir: E:/two_paper/outputs/C_PLUS_M_SD22_HALF_SGC2_BOX_DECAY9_14_B8A4_20E_TESTDEV/seed0
+DFINE:
+  sgc_supervision: box

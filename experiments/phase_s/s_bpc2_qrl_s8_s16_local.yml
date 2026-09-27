@@ -1,0 +1,54 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+output_dir: E:/two_paper/runs/20_spatial_importance/S_BPC2_QRL/seed0
+
+# Expose the native S8 tensor immediately before the standard Stage3
+# S8-to-S16 reduction.  This is a read-only capture; QRL detaches it.
+HGNetv2:
+  qrl_source_stage: 2
+
+# Query-aligned localization-only carrier.  The source is B0 stage2 output
+# (256 channels); the detector hidden dimension remains inherited at 128.
+DFINETransformer:
+  qrl_enabled: True
+  qrl_source_channels: 256
+  qrl_detail_channels: 32
+  qrl_context_dim: 16
+  qrl_delta_hidden_dim: 64
+
+DFINECriterion:
+  qrl_region_aux_weight: 1.0
+  qrl_region_dice_weight: 1.0
+  qrl_region_decay_start: 20
+  qrl_region_decay_end: 45
+  qrl_region_radius_fraction: 0.1
+  qrl_region_radius_min: 1
+  qrl_region_radius_max: 4
+
+# Restore the exact A00/BPC1 batch32 optimizer protocol.
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.0001
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.0001
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 32
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 32

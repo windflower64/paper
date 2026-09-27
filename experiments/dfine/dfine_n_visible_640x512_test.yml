@@ -1,0 +1,14 @@
+__include__: [
+  './dfine_n_visible_640x512_full.yml',
+]
+
+# Test-only evaluation config. The D-FINE evaluator always consumes the
+# val_dataloader entry, so this override points that entry at the strict test
+# split while leaving training and model settings unchanged.
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0
+  dataset:
+    img_folder: /root/autodl-tmp/rgbt_experiments/data/antiuav6k_common/images/test
+    ann_file: /root/autodl-tmp/rgbt_experiments/data/antiuav6k_common/annotations/instances_visible_common_test.json
+

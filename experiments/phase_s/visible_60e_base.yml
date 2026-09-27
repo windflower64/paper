@@ -1,0 +1,19 @@
+__include__: [
+  '../../experiments/dfine/dfine_n_visible_640x512_full.yml',
+]
+
+# Frozen short-horizon protocol.  Keeping stop_epoch outside the run makes
+# this exactly comparable with the first 60 epochs of A00.
+epochs: 60
+checkpoint_freq: 12
+
+train_dataloader:
+  dataset:
+    transforms:
+      policy:
+        name: stop_epoch
+        epoch: 200
+        ops: [RandomPhotometricDistort, RandomZoomOut, RandomIoUCrop]
+  collate_fn:
+    stop_epoch: 200
+

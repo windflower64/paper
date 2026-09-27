@@ -1,0 +1,43 @@
+__include__: ['./h3_s_qdmf.yml']
+
+# One-run strong-protocol screen for C-GQ1 + STQL + QDMF.
+# Keep module definitions frozen; restore the historical detector training scale.
+output_dir: E:/two_paper/outputs/QDMF_H3_STRONG_SCREEN_B8A4_20E_TESTDEV/seed0
+epochs: 20
+checkpoint_freq: 2
+gradient_accumulation_steps: 4
+skip_model_profile: True
+
+DFINE:
+  rgbt_lock_norm_stats: False
+  rgbt_thermal_forward_chunk_size: 2
+
+optimizer:
+  type: AdamW
+  foreach: False
+  params:
+    -
+      params: '^(?=.*(?:stql|qdmf)).*$'
+      lr: 0.0002
+    -
+      params: '^(?=.*backbone)(?!.*(?:norm|bn)).*$'
+      lr: 0.0001
+    -
+      params: '^(?=.*backbone)(?=.*(?:norm|bn)).*$'
+      lr: 0.0001
+      weight_decay: 0.0
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      lr: 0.0002
+      weight_decay: 0.0
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  persistent_workers: False
+
+val_dataloader:
+  total_batch_size: 8

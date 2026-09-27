@@ -1,0 +1,10 @@
+__include__: [
+  './s_bpc2_qrl_s8_s16_local.yml',
+]
+
+output_dir: E:/two_paper/runs/20_spatial_importance/S_BPC2_QRL_R1_DETAIL_ONLY/seed0
+
+# R1 changes only the side-token-to-delta mapping.  The legacy QRL config
+# remains reproducible with its context/geometry head.
+DFINETransformer:
+  qrl_detail_only_delta: True

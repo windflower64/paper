@@ -1,0 +1,2 @@
+__include__: ['./s_sbra1_common.yml']
+output_dir: E:/two_paper/outputs/S_BRA1_SAM_B8A4_20E_TESTDEV/seed0

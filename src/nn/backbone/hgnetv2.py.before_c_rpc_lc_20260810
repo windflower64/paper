@@ -1,0 +1,1188 @@
+"""
+reference
+- https://github.com/PaddlePaddle/PaddleDetection/blob/develop/ppdet/modeling/backbones/hgnet_v2.py
+
+Copyright (c) 2024 The D-FINE Authors. All Rights Reserved.
+"""
+
+import logging
+import math
+import os
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+from ...core import register
+from .common import FrozenBatchNorm2d
+from .srtod_modules import DGFE, RH, DeficiencyPredictor
+
+# Constants for initialization
+kaiming_normal_ = nn.init.kaiming_normal_
+zeros_ = nn.init.zeros_
+ones_ = nn.init.ones_
+
+__all__ = ["HGNetv2"]
+
+def safe_barrier():
+    if torch.distributed.is_available() and torch.distributed.is_initialized():
+        torch.distributed.barrier()
+    else:
+        pass
+
+def safe_get_rank():
+    if torch.distributed.is_available() and torch.distributed.is_initialized():
+        return torch.distributed.get_rank()
+    else:
+        return 0
+
+class LearnableAffineBlock(nn.Module):
+    def __init__(self, scale_value=1.0, bias_value=0.0):
+        super().__init__()
+        self.scale = nn.Parameter(torch.tensor([scale_value]), requires_grad=True)
+        self.bias = nn.Parameter(torch.tensor([bias_value]), requires_grad=True)
+
+    def forward(self, x):
+        return self.scale * x + self.bias
+
+
+class ConvBNAct(nn.Module):
+    def __init__(
+        self,
+        in_chs,
+        out_chs,
+        kernel_size,
+        stride=1,
+        groups=1,
+        padding="",
+        use_act=True,
+        use_lab=False,
+    ):
+        super().__init__()
+        self.use_act = use_act
+        self.use_lab = use_lab
+        if padding == "same":
+            self.conv = nn.Sequential(
+                nn.ZeroPad2d([0, 1, 0, 1]),
+                nn.Conv2d(in_chs, out_chs, kernel_size, stride, groups=groups, bias=False),
+            )
+        else:
+            self.conv = nn.Conv2d(
+                in_chs,
+                out_chs,
+                kernel_size,
+                stride,
+                padding=(kernel_size - 1) // 2,
+                groups=groups,
+                bias=False,
+            )
+        self.bn = nn.BatchNorm2d(out_chs)
+        if self.use_act:
+            self.act = nn.ReLU()
+        else:
+            self.act = nn.Identity()
+        if self.use_act and self.use_lab:
+            self.lab = LearnableAffineBlock()
+        else:
+            self.lab = nn.Identity()
+
+    def forward(self, x):
+        x = self.conv(x)
+        x = self.bn(x)
+        x = self.act(x)
+        x = self.lab(x)
+        return x
+
+
+class LightConvBNAct(nn.Module):
+    def __init__(
+        self,
+        in_chs,
+        out_chs,
+        kernel_size,
+        groups=1,
+        use_lab=False,
+    ):
+        super().__init__()
+        self.conv1 = ConvBNAct(
+            in_chs,
+            out_chs,
+            kernel_size=1,
+            use_act=False,
+            use_lab=use_lab,
+        )
+        self.conv2 = ConvBNAct(
+            out_chs,
+            out_chs,
+            kernel_size=kernel_size,
+            groups=out_chs,
+            use_act=True,
+            use_lab=use_lab,
+        )
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x = self.conv2(x)
+        return x
+
+
+class StemBlock(nn.Module):
+    # for HGNetv2
+    def __init__(self, in_chs, mid_chs, out_chs, use_lab=False):
+        super().__init__()
+        self.stem1 = ConvBNAct(
+            in_chs,
+            mid_chs,
+            kernel_size=3,
+            stride=2,
+            use_lab=use_lab,
+        )
+        self.stem2a = ConvBNAct(
+            mid_chs,
+            mid_chs // 2,
+            kernel_size=2,
+            stride=1,
+            use_lab=use_lab,
+        )
+        self.stem2b = ConvBNAct(
+            mid_chs // 2,
+            mid_chs,
+            kernel_size=2,
+            stride=1,
+            use_lab=use_lab,
+        )
+        self.stem3 = ConvBNAct(
+            mid_chs * 2,
+            mid_chs,
+            kernel_size=3,
+            stride=2,
+            use_lab=use_lab,
+        )
+        self.stem4 = ConvBNAct(
+            mid_chs,
+            out_chs,
+            kernel_size=1,
+            stride=1,
+            use_lab=use_lab,
+        )
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=1, ceil_mode=True)
+
+    def forward(self, x):
+        x = self.stem1(x)
+        x = F.pad(x, (0, 1, 0, 1))
+        x2 = self.stem2a(x)
+        x2 = F.pad(x2, (0, 1, 0, 1))
+        x2 = self.stem2b(x2)
+        x1 = self.pool(x)
+        x = torch.cat([x1, x2], dim=1)
+        x = self.stem3(x)
+        x = self.stem4(x)
+        return x
+
+
+class EseModule(nn.Module):
+    def __init__(self, chs):
+        super().__init__()
+        self.conv = nn.Conv2d(
+            chs,
+            chs,
+            kernel_size=1,
+            stride=1,
+            padding=0,
+        )
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, x):
+        identity = x
+        x = x.mean((2, 3), keepdim=True)
+        x = self.conv(x)
+        x = self.sigmoid(x)
+        return torch.mul(identity, x)
+
+
+class HG_Block(nn.Module):
+    def __init__(
+        self,
+        in_chs,
+        mid_chs,
+        out_chs,
+        layer_num,
+        kernel_size=3,
+        residual=False,
+        light_block=False,
+        use_lab=False,
+        agg="ese",
+        drop_path=0.0,
+    ):
+        super().__init__()
+        self.residual = residual
+
+        self.layers = nn.ModuleList()
+        for i in range(layer_num):
+            if light_block:
+                self.layers.append(
+                    LightConvBNAct(
+                        in_chs if i == 0 else mid_chs,
+                        mid_chs,
+                        kernel_size=kernel_size,
+                        use_lab=use_lab,
+                    )
+                )
+            else:
+                self.layers.append(
+                    ConvBNAct(
+                        in_chs if i == 0 else mid_chs,
+                        mid_chs,
+                        kernel_size=kernel_size,
+                        stride=1,
+                        use_lab=use_lab,
+                    )
+                )
+
+        # feature aggregation
+        total_chs = in_chs + layer_num * mid_chs
+        if agg == "se":
+            aggregation_squeeze_conv = ConvBNAct(
+                total_chs,
+                out_chs // 2,
+                kernel_size=1,
+                stride=1,
+                use_lab=use_lab,
+            )
+            aggregation_excitation_conv = ConvBNAct(
+                out_chs // 2,
+                out_chs,
+                kernel_size=1,
+                stride=1,
+                use_lab=use_lab,
+            )
+            self.aggregation = nn.Sequential(
+                aggregation_squeeze_conv,
+                aggregation_excitation_conv,
+            )
+        else:
+            aggregation_conv = ConvBNAct(
+                total_chs,
+                out_chs,
+                kernel_size=1,
+                stride=1,
+                use_lab=use_lab,
+            )
+            att = EseModule(out_chs)
+            self.aggregation = nn.Sequential(
+                aggregation_conv,
+                att,
+            )
+
+        self.drop_path = nn.Dropout(drop_path) if drop_path else nn.Identity()
+
+    def forward(self, x):
+        identity = x
+        output = [x]
+        for layer in self.layers:
+            x = layer(x)
+            output.append(x)
+        x = torch.cat(output, dim=1)
+        x = self.aggregation(x)
+        if self.residual:
+            x = self.drop_path(x) + identity
+        return x
+
+
+class PartialInformationPreservingDownsample(nn.Module):
+    """Add a cheap sub-pixel detail residual to an existing downsample.
+
+    A fixed fraction of input channels is rearranged with PixelUnshuffle before
+    projection.  The original HGNetv2 depthwise downsample remains untouched,
+    which preserves checkpoint compatibility and provides the semantic branch.
+    The ``pooled`` mode has exactly the same learned projection as ``pixel`` but
+    removes the four sub-pixel phases, making it a parameter-matched control.
+    """
+
+    def __init__(
+        self,
+        channels,
+        ratio=0.25,
+        groups=4,
+        mode="pixel",
+        init_scale=0.1,
+    ):
+        super().__init__()
+        if not 0.0 < ratio <= 1.0:
+            raise ValueError(f"preserve ratio must be in (0, 1], got {ratio}")
+        if mode not in {"pixel", "pooled"}:
+            raise ValueError(f"unsupported preserve mode: {mode}")
+
+        detail_channels = max(1, int(round(channels * ratio)))
+        projection_groups = math.gcd(math.gcd(4 * detail_channels, channels), groups)
+
+        self.detail_channels = detail_channels
+        self.mode = mode
+        self.proj = nn.Conv2d(
+            4 * detail_channels,
+            channels,
+            kernel_size=1,
+            groups=max(1, projection_groups),
+            bias=False,
+        )
+        self.bn = nn.BatchNorm2d(channels)
+        self.scale = nn.Parameter(torch.tensor(float(init_scale)))
+
+    def forward(self, x, semantic):
+        detail = x[:, : self.detail_channels]
+        pad_h = detail.shape[-2] % 2
+        pad_w = detail.shape[-1] % 2
+        if pad_h or pad_w:
+            detail = F.pad(detail, (0, pad_w, 0, pad_h))
+
+        if self.mode == "pixel":
+            detail = F.pixel_unshuffle(detail, 2)
+        else:
+            detail = F.avg_pool2d(detail, kernel_size=2, stride=2)
+            detail = detail.repeat_interleave(4, dim=1)
+
+        detail = self.bn(self.proj(detail))
+        return semantic + self.scale * detail
+
+
+class PhaseCandidateResidualMLP(nn.Module):
+    """Per-channel nonlinear mixing of the four explicit 2x2 phases.
+
+    PixelUnshuffle stores four consecutive phase channels for every original
+    channel. Grouped 1x1 convolutions with ``groups=C`` therefore implement an
+    independent 4->4 MLP for each original channel. The second projection is
+    zero-initialized, making the whole block an exact identity at startup.
+    """
+
+    def __init__(self, channels):
+        super().__init__()
+        phase_channels = 4 * channels
+        self.expand = nn.Conv2d(
+            phase_channels, phase_channels, kernel_size=1, groups=channels, bias=True
+        )
+        self.act = nn.SiLU(inplace=True)
+        self.project = nn.Conv2d(
+            phase_channels, phase_channels, kernel_size=1, groups=channels, bias=True
+        )
+        nn.init.zeros_(self.project.weight)
+        nn.init.zeros_(self.project.bias)
+
+    def forward(self, x):
+        return x + self.project(self.act(self.expand(x)))
+
+
+class PhaseCandidateDirectMLP(nn.Module):
+    """Direct nonlinear 4->4 phase transform without an identity bypass."""
+
+    def __init__(self, channels):
+        super().__init__()
+        phase_channels = 4 * channels
+        self.expand = nn.Conv2d(
+            phase_channels, phase_channels, kernel_size=1, groups=channels, bias=True
+        )
+        self.act = nn.SiLU(inplace=True)
+        self.project = nn.Conv2d(
+            phase_channels, phase_channels, kernel_size=1, groups=channels, bias=True
+        )
+
+    def forward(self, x):
+        return self.project(self.act(self.expand(x)))
+
+
+class LightAdaptiveWeightDownsample(nn.Module):
+    """Paper-faithful LAD operator from LRDS-YOLO (Han et al., 2025).
+
+    The attention path predicts four phase weights per output channel from a
+    non-overlapping 2x2 average-pooled feature.  The local path uses a 3x3,
+    stride-2, eight-group convolution to produce four candidate values per
+    output channel.  Softmax-weighted phase candidates are summed back to C.
+
+    LAD was lightweight relative to YOLO's dense stride convolution.  HGNetv2
+    already uses a depthwise stride convolution, so its cost must be measured
+    rather than assumed to be lightweight in this backbone.
+    """
+
+    def __init__(self, channels, groups=8, target_gate=False, candidate_mode="learned_conv"):
+        super().__init__()
+        if channels % groups != 0:
+            raise ValueError(f"LAD channels={channels} must be divisible by groups={groups}")
+        self.channels = channels
+        self.target_gate = bool(target_gate)
+        self.candidate_mode = candidate_mode
+        self.weight_projection = nn.Conv2d(channels, 4 * channels, kernel_size=1, bias=True)
+        if candidate_mode == "learned_conv":
+            self.local_projection = nn.Conv2d(
+                channels,
+                4 * channels,
+                kernel_size=3,
+                stride=2,
+                padding=1,
+                groups=groups,
+                bias=True,
+            )
+            self.phase_transform = None
+        elif candidate_mode in ("polyphase", "polyphase_mlp", "polyphase_direct_mlp"):
+            # Exact 2x2 space-to-depth rearrangement.  Channel ordering from
+            # pixel_unshuffle is [channel, phase], matching [B,C,4,H/2,W/2].
+            self.local_projection = None
+            if candidate_mode == "polyphase_mlp":
+                self.phase_transform = PhaseCandidateResidualMLP(channels)
+            elif candidate_mode == "polyphase_direct_mlp":
+                self.phase_transform = PhaseCandidateDirectMLP(channels)
+            else:
+                self.phase_transform = None
+        else:
+            raise ValueError(f"unsupported LAD candidate_mode: {candidate_mode}")
+        # S-LAD2-TG predicts targetness at the original S8 resolution.  The
+        # predictor can be initialized from the independently validated S-AUX
+        # head because both consume the same 256-channel S8 representation.
+        self.target_projection = (
+            nn.Conv2d(channels, 1, kernel_size=1, bias=True) if self.target_gate else None
+        )
+        # Evaluation-only causal controls.  Training uses ``learned`` unless a
+        # diagnostic script explicitly changes this attribute after loading.
+        self.phase_weight_mode = "learned"
+        self.phase_shuffle_seed = 20260808
+        # Evaluation-only intervention on the correspondence between the
+        # four encoded candidates and their predicted phase weights.
+        self.candidate_phase_mode = "learned"
+        # Evaluation-only intervention on targetness q.  This is independent
+        # from ``phase_weight_mode`` so causal audits can isolate whether the
+        # learned target locations, rather than phase weights alone, matter.
+        self.target_gate_mode = "learned"
+        self.target_gate_override = None
+        self.last_selectivity_map = None
+        self.last_phase_entropy = None
+        self.last_candidate_variance = None
+        self.last_weight_deviation_from_uniform = None
+        self.last_target_logits = None
+        self.last_target_gate = None
+
+    def forward(self, x):
+        self.last_target_logits = self.target_projection(x) if self.target_projection is not None else None
+        pooled = F.avg_pool2d(x, kernel_size=2, stride=2)
+        batch, _, height, width = pooled.shape
+        weights = self.weight_projection(pooled).reshape(
+            batch, self.channels, 4, height, width
+        )
+        weights = weights.softmax(dim=2)
+        if self.candidate_mode == "learned_conv":
+            candidates = self.local_projection(x).reshape(
+                batch, self.channels, 4, height, width
+            )
+        else:
+            phase_features = F.pixel_unshuffle(x, downscale_factor=2)
+            if self.phase_transform is not None:
+                phase_features = self.phase_transform(phase_features)
+            candidates = phase_features.reshape(
+                batch, self.channels, 4, height, width
+            )
+        if self.candidate_phase_mode in ("permuted", "paired_permuted"):
+            # Preserve every candidate value and its spatial position while
+            # breaking only the candidate-index/weight-index correspondence.
+            candidates = candidates[:, :, [2, 0, 3, 1], :, :]
+        elif self.candidate_phase_mode != "learned":
+            raise ValueError(
+                f"unsupported LAD candidate_phase_mode: {self.candidate_phase_mode}"
+            )
+        if self.target_gate:
+            # If any S8 cell inside a 2x2 compression window is target-like,
+            # retain the adaptive phase selector for that S16 output cell.
+            target_gate = F.max_pool2d(self.last_target_logits.sigmoid(), kernel_size=2, stride=2)
+            if self.target_gate_mode == "oracle":
+                if self.target_gate_override is None:
+                    raise RuntimeError("oracle target gate requires target_gate_override")
+                target_gate = self.target_gate_override.to(
+                    device=target_gate.device, dtype=target_gate.dtype
+                )
+            elif self.target_gate_mode == "one":
+                target_gate = torch.ones_like(target_gate)
+            elif self.target_gate_mode == "zero":
+                target_gate = torch.zeros_like(target_gate)
+            elif self.target_gate_mode == "shuffled":
+                generator = torch.Generator(device="cpu")
+                generator.manual_seed(self.phase_shuffle_seed + height * 917 + width)
+                permutation = torch.randperm(height * width, generator=generator).to(target_gate.device)
+                target_gate = target_gate.flatten(-2).index_select(-1, permutation).reshape_as(target_gate)
+            elif self.target_gate_mode != "learned":
+                raise ValueError(f"unsupported LAD target_gate_mode: {self.target_gate_mode}")
+            self.last_target_gate = target_gate.detach()
+            weights = 0.25 + target_gate.unsqueeze(2) * (weights - 0.25)
+        else:
+            self.last_target_gate = None
+
+        if self.phase_weight_mode == "uniform":
+            weights = torch.full_like(weights, 0.25)
+        elif self.phase_weight_mode == "shuffled":
+            # Use one fixed spatial permutation for every sample/channel.  It
+            # preserves the learned weight distribution while breaking its
+            # correspondence to the current image location.
+            generator = torch.Generator(device="cpu")
+            generator.manual_seed(self.phase_shuffle_seed + height * 1009 + width)
+            permutation = torch.randperm(height * width, generator=generator).to(weights.device)
+            weights = weights.flatten(-2).index_select(-1, permutation).reshape_as(weights)
+        elif self.phase_weight_mode != "learned":
+            raise ValueError(f"unsupported LAD phase_weight_mode: {self.phase_weight_mode}")
+
+        if self.candidate_phase_mode == "paired_permuted":
+            # Algebraic sanity control: the same candidate/weight permutation
+            # must leave their weighted sum unchanged.
+            weights = weights[:, :, [2, 0, 3, 1], :, :]
+
+        # Mean maximum phase probability is a non-constant, single-channel
+        # diagnostic map.  It is detached so it never retains a training graph.
+        self.last_selectivity_map = weights.max(dim=2).values.mean(dim=1, keepdim=True).detach()
+        entropy = -(weights.clamp_min(1e-12) * weights.clamp_min(1e-12).log()).sum(dim=2)
+        self.last_phase_entropy = (entropy / math.log(4.0)).mean().detach()
+        self.last_candidate_variance = candidates.var(dim=2, unbiased=False).mean().detach()
+        self.last_weight_deviation_from_uniform = (weights - 0.25).abs().mean().detach()
+        return (weights * candidates).sum(dim=2)
+
+
+class TargetConditionalLADDetail(nn.Module):
+    """Route between a stable standard downsample and a learned LAD detail path.
+
+    The standard branch is owned by ``HG_Stage`` so its parameter names remain
+    checkpoint-compatible with the official D-FINE model.  This module only
+    predicts targetness, LAD candidates and their four-way weights.  A bounded
+    scalar ``alpha`` controls the global intervention strength:
+
+        output = (1 - alpha * q) * standard + alpha * q * detail
+
+    Consequently q=0 (or alpha=0) is an exact structural fallback to the
+    original downsample.  PixelUnshuffle is intentionally absent: this first
+    experiment tests conditional compression rather than a candidate operator.
+    """
+
+    def __init__(self, channels, groups=8, route_init=0.1, target_gate_mode="learned"):
+        super().__init__()
+        if channels % groups != 0:
+            raise ValueError(
+                f"conditional LAD channels={channels} must be divisible by groups={groups}"
+            )
+        if not 0.0 < route_init < 1.0:
+            raise ValueError(f"route_init must be in (0, 1), got {route_init}")
+        self.channels = channels
+        self.weight_projection = nn.Conv2d(channels, 4 * channels, kernel_size=1, bias=True)
+        self.local_projection = nn.Conv2d(
+            channels,
+            4 * channels,
+            kernel_size=3,
+            stride=2,
+            padding=1,
+            groups=groups,
+            bias=True,
+        )
+        self.phase_transform = None
+        self.target_projection = nn.Conv2d(channels, 1, kernel_size=1, bias=True)
+        route_logit = math.log(route_init / (1.0 - route_init))
+        self.route_scale_logit = nn.Parameter(torch.tensor(route_logit, dtype=torch.float32))
+
+        if target_gate_mode not in {"learned", "one", "budget_centered"}:
+            raise ValueError(
+                "training target_gate_mode must be 'learned', 'one', or "
+                "'budget_centered', "
+                f"got {target_gate_mode}"
+            )
+
+        # ``one`` is also a training configuration for the ALLON-AUX
+        # single-variable control. Other values remain evaluation-only causal
+        # interventions assigned after model construction.
+        self.phase_weight_mode = "learned"
+        self.target_gate_mode = target_gate_mode
+        self.route_scale_mode = "learned"
+        self.phase_shuffle_seed = 20260809
+        self.target_gate_override = None
+
+        # Detached diagnostics populated on every forward.
+        self.last_target_logits = None
+        self.last_target_gate = None
+        self.last_route_gate = None
+        self.last_route_alpha = None
+        self.last_selectivity_map = None
+        self.last_phase_entropy = None
+        self.last_candidate_variance = None
+        self.last_weight_deviation_from_uniform = None
+        self.last_base_detail_rms_ratio = None
+
+    def forward(self, x, standard):
+        self.last_target_logits = self.target_projection(x)
+        pooled = F.avg_pool2d(x, kernel_size=2, stride=2)
+        batch, _, height, width = pooled.shape
+        weights = self.weight_projection(pooled).reshape(
+            batch, self.channels, 4, height, width
+        ).softmax(dim=2)
+        candidates = self.local_projection(x).reshape(
+            batch, self.channels, 4, height, width
+        )
+
+        target_gate = F.max_pool2d(
+            self.last_target_logits.sigmoid(), kernel_size=2, stride=2
+        )
+        if self.target_gate_mode == "oracle":
+            if self.target_gate_override is None:
+                raise RuntimeError("oracle target gate requires target_gate_override")
+            target_gate = self.target_gate_override.to(
+                device=target_gate.device, dtype=target_gate.dtype
+            )
+        elif self.target_gate_mode == "one":
+            target_gate = torch.ones_like(target_gate)
+        elif self.target_gate_mode == "budget_centered":
+            # Preserve the ALLON residual budget exactly while allowing q to
+            # redistribute it spatially. Since q is in [0, 1], the centered
+            # allocation remains bounded in [0, 2] and starts near ALLON when
+            # q is initially close to uniform.
+            spatial_mean = target_gate.mean(dim=(-2, -1), keepdim=True)
+            target_gate = 1.0 + target_gate - spatial_mean
+        elif self.target_gate_mode == "budget_centered_shuffled":
+            # Evaluation-only causal control for CDS2. Preserve both the
+            # per-image mean allocation (=1) and the learned allocation-value
+            # distribution, while breaking correspondence to image locations.
+            spatial_mean = target_gate.mean(dim=(-2, -1), keepdim=True)
+            target_gate = 1.0 + target_gate - spatial_mean
+            generator = torch.Generator(device="cpu")
+            generator.manual_seed(self.phase_shuffle_seed + height * 917 + width)
+            permutation = torch.randperm(height * width, generator=generator).to(target_gate.device)
+            target_gate = target_gate.flatten(-2).index_select(-1, permutation).reshape_as(target_gate)
+        elif self.target_gate_mode == "zero":
+            target_gate = torch.zeros_like(target_gate)
+        elif self.target_gate_mode == "shuffled":
+            generator = torch.Generator(device="cpu")
+            generator.manual_seed(self.phase_shuffle_seed + height * 917 + width)
+            permutation = torch.randperm(height * width, generator=generator).to(target_gate.device)
+            target_gate = target_gate.flatten(-2).index_select(-1, permutation).reshape_as(target_gate)
+        elif self.target_gate_mode != "learned":
+            raise ValueError(f"unsupported target gate mode: {self.target_gate_mode}")
+
+        if self.phase_weight_mode == "uniform":
+            weights = torch.full_like(weights, 0.25)
+        elif self.phase_weight_mode == "shuffled":
+            generator = torch.Generator(device="cpu")
+            generator.manual_seed(self.phase_shuffle_seed + height * 1009 + width)
+            permutation = torch.randperm(height * width, generator=generator).to(weights.device)
+            weights = weights.flatten(-2).index_select(-1, permutation).reshape_as(weights)
+        elif self.phase_weight_mode != "learned":
+            raise ValueError(f"unsupported phase weight mode: {self.phase_weight_mode}")
+
+        detail = (weights * candidates).sum(dim=2)
+        alpha = self.route_scale_logit.sigmoid()
+        if self.route_scale_mode == "zero":
+            alpha = torch.zeros_like(alpha)
+        elif self.route_scale_mode == "one":
+            alpha = torch.ones_like(alpha)
+        elif self.route_scale_mode != "learned":
+            raise ValueError(f"unsupported route scale mode: {self.route_scale_mode}")
+        route_gate = alpha * target_gate
+        output = standard + route_gate * (detail - standard)
+
+        self.last_target_gate = target_gate.detach()
+        self.last_route_gate = route_gate.detach()
+        self.last_route_alpha = alpha.detach()
+        self.last_selectivity_map = weights.max(dim=2).values.mean(dim=1, keepdim=True).detach()
+        entropy = -(weights.clamp_min(1e-12) * weights.clamp_min(1e-12).log()).sum(dim=2)
+        self.last_phase_entropy = (entropy / math.log(4.0)).mean().detach()
+        self.last_candidate_variance = candidates.var(dim=2, unbiased=False).mean().detach()
+        self.last_weight_deviation_from_uniform = (weights - 0.25).abs().mean().detach()
+        base_rms = standard.detach().float().square().mean().sqrt().clamp_min(1e-12)
+        detail_rms = detail.detach().float().square().mean().sqrt()
+        self.last_base_detail_rms_ratio = (detail_rms / base_rms).detach()
+        return output
+
+
+class FixedBlurFilter(nn.Module):
+    """Checkpoint-compatible anti-alias prefilter for a stride-2 downsample.
+
+    The fixed 3x3 binomial kernel is applied depthwise at stride 1.  Keeping
+    the original learned downsample as a separate following operation retains
+    all of its pretrained parameters and isolates the anti-aliasing variable.
+    """
+
+    def __init__(self, channels):
+        super().__init__()
+        kernel_1d = torch.tensor([1.0, 2.0, 1.0])
+        kernel_2d = kernel_1d[:, None] * kernel_1d[None, :]
+        kernel_2d = kernel_2d / kernel_2d.sum()
+        self.channels = channels
+        self.register_buffer("kernel", kernel_2d.reshape(1, 1, 3, 3).repeat(channels, 1, 1, 1))
+
+    def forward(self, x):
+        return F.conv2d(x, self.kernel, stride=1, padding=1, groups=self.channels)
+
+
+class HG_Stage(nn.Module):
+    def __init__(
+        self,
+        in_chs,
+        mid_chs,
+        out_chs,
+        block_num,
+        layer_num,
+        downsample=True,
+        light_block=False,
+        kernel_size=3,
+        use_lab=False,
+        agg="se",
+        drop_path=0.0,
+        preserve_mode="none",
+        preserve_ratio=0.0,
+        preserve_groups=4,
+        preserve_init_scale=0.1,
+        downsample_mode="standard",
+        lad_groups=8,
+        lad_target_gate=False,
+        lad_candidate_mode="learned_conv",
+        lad_fusion_mode="replace",
+        lad_route_init=0.1,
+        lad_target_gate_mode="learned",
+        preblur=False,
+    ):
+        super().__init__()
+        self.downsample = downsample
+        self.conditional_detail = None
+        if downsample and downsample_mode == "lad":
+            self.downsample = LightAdaptiveWeightDownsample(
+                in_chs,
+                groups=lad_groups,
+                target_gate=lad_target_gate,
+                candidate_mode=lad_candidate_mode,
+            )
+        elif downsample and downsample_mode == "conditional_lad":
+            self.downsample = ConvBNAct(
+                in_chs,
+                in_chs,
+                kernel_size=3,
+                stride=2,
+                groups=in_chs,
+                use_act=False,
+                use_lab=use_lab,
+            )
+            self.conditional_detail = TargetConditionalLADDetail(
+                in_chs,
+                groups=lad_groups,
+                route_init=lad_route_init,
+                target_gate_mode=lad_target_gate_mode,
+            )
+        elif downsample and downsample_mode == "standard":
+            self.downsample = ConvBNAct(
+                in_chs,
+                in_chs,
+                kernel_size=3,
+                stride=2,
+                groups=in_chs,
+                use_act=False,
+                use_lab=use_lab,
+            )
+        elif not downsample:
+            self.downsample = nn.Identity()
+        else:
+            raise ValueError(f"unsupported downsample_mode: {downsample_mode}")
+
+        self.preblur = FixedBlurFilter(in_chs) if downsample and preblur else nn.Identity()
+
+        if downsample and preserve_mode != "none":
+            self.preserve_downsample = PartialInformationPreservingDownsample(
+                in_chs,
+                ratio=preserve_ratio,
+                groups=preserve_groups,
+                mode=preserve_mode,
+                init_scale=preserve_init_scale,
+            )
+        else:
+            self.preserve_downsample = None
+
+        blocks_list = []
+        for i in range(block_num):
+            blocks_list.append(
+                HG_Block(
+                    in_chs if i == 0 else out_chs,
+                    mid_chs,
+                    out_chs,
+                    layer_num,
+                    residual=False if i == 0 else True,
+                    kernel_size=kernel_size,
+                    light_block=light_block,
+                    use_lab=use_lab,
+                    agg=agg,
+                    drop_path=drop_path[i] if isinstance(drop_path, (list, tuple)) else drop_path,
+                )
+            )
+        self.blocks = nn.Sequential(*blocks_list)
+
+    def forward(self, x):
+        identity = x
+        x = self.preblur(x)
+        x = self.downsample(x)
+        if self.conditional_detail is not None:
+            x = self.conditional_detail(identity, x)
+        if self.preserve_downsample is not None:
+            x = self.preserve_downsample(identity, x)
+        x = self.blocks(x)
+        return x
+
+
+@register()
+class HGNetv2(nn.Module):
+    """
+    HGNetV2
+    Args:
+        stem_channels: list. Number of channels for the stem block.
+        stage_type: str. The stage configuration of HGNet. such as the number of channels, stride, etc.
+        use_lab: boolean. Whether to use LearnableAffineBlock in network.
+        lr_mult_list: list. Control the learning rate of different stages.
+    Returns:
+        model: nn.Layer. Specific HGNetV2 model depends on args.
+    """
+
+    arch_configs = {
+        "B0": {
+            "stem_channels": [3, 16, 16],
+            "stage_config": {
+                # in_channels, mid_channels, out_channels, num_blocks, downsample, light_block, kernel_size, layer_num
+                "stage1": [16, 16, 64, 1, False, False, 3, 3],
+                "stage2": [64, 32, 256, 1, True, False, 3, 3],
+                "stage3": [256, 64, 512, 2, True, True, 5, 3],
+                "stage4": [512, 128, 1024, 1, True, True, 5, 3],
+            },
+            "url": "https://github.com/Peterande/storage/releases/download/dfinev1.0/PPHGNetV2_B0_stage1.pth",
+        },
+        "B1": {
+            "stem_channels": [3, 24, 32],
+            "stage_config": {
+                # in_channels, mid_channels, out_channels, num_blocks, downsample, light_block, kernel_size, layer_num
+                "stage1": [32, 32, 64, 1, False, False, 3, 3],
+                "stage2": [64, 48, 256, 1, True, False, 3, 3],
+                "stage3": [256, 96, 512, 2, True, True, 5, 3],
+                "stage4": [512, 192, 1024, 1, True, True, 5, 3],
+            },
+            "url": "https://github.com/Peterande/storage/releases/download/dfinev1.0/PPHGNetV2_B1_stage1.pth",
+        },
+        "B2": {
+            "stem_channels": [3, 24, 32],
+            "stage_config": {
+                # in_channels, mid_channels, out_channels, num_blocks, downsample, light_block, kernel_size, layer_num
+                "stage1": [32, 32, 96, 1, False, False, 3, 4],
+                "stage2": [96, 64, 384, 1, True, False, 3, 4],
+                "stage3": [384, 128, 768, 3, True, True, 5, 4],
+                "stage4": [768, 256, 1536, 1, True, True, 5, 4],
+            },
+            "url": "https://github.com/Peterande/storage/releases/download/dfinev1.0/PPHGNetV2_B2_stage1.pth",
+        },
+        "B3": {
+            "stem_channels": [3, 24, 32],
+            "stage_config": {
+                # in_channels, mid_channels, out_channels, num_blocks, downsample, light_block, kernel_size, layer_num
+                "stage1": [32, 32, 128, 1, False, False, 3, 5],
+                "stage2": [128, 64, 512, 1, True, False, 3, 5],
+                "stage3": [512, 128, 1024, 3, True, True, 5, 5],
+                "stage4": [1024, 256, 2048, 1, True, True, 5, 5],
+            },
+            "url": "https://github.com/Peterande/storage/releases/download/dfinev1.0/PPHGNetV2_B3_stage1.pth",
+        },
+        "B4": {
+            "stem_channels": [3, 32, 48],
+            "stage_config": {
+                # in_channels, mid_channels, out_channels, num_blocks, downsample, light_block, kernel_size, layer_num
+                "stage1": [48, 48, 128, 1, False, False, 3, 6],
+                "stage2": [128, 96, 512, 1, True, False, 3, 6],
+                "stage3": [512, 192, 1024, 3, True, True, 5, 6],
+                "stage4": [1024, 384, 2048, 1, True, True, 5, 6],
+            },
+            "url": "https://github.com/Peterande/storage/releases/download/dfinev1.0/PPHGNetV2_B4_stage1.pth",
+        },
+        "B5": {
+            "stem_channels": [3, 32, 64],
+            "stage_config": {
+                # in_channels, mid_channels, out_channels, num_blocks, downsample, light_block, kernel_size, layer_num
+                "stage1": [64, 64, 128, 1, False, False, 3, 6],
+                "stage2": [128, 128, 512, 2, True, False, 3, 6],
+                "stage3": [512, 256, 1024, 5, True, True, 5, 6],
+                "stage4": [1024, 512, 2048, 2, True, True, 5, 6],
+            },
+            "url": "https://github.com/Peterande/storage/releases/download/dfinev1.0/PPHGNetV2_B5_stage1.pth",
+        },
+        "B6": {
+            "stem_channels": [3, 48, 96],
+            "stage_config": {
+                # in_channels, mid_channels, out_channels, num_blocks, downsample, light_block, kernel_size, layer_num
+                "stage1": [96, 96, 192, 2, False, False, 3, 6],
+                "stage2": [192, 192, 512, 3, True, False, 3, 6],
+                "stage3": [512, 384, 1024, 6, True, True, 5, 6],
+                "stage4": [1024, 768, 2048, 3, True, True, 5, 6],
+            },
+            "url": "https://github.com/Peterande/storage/releases/download/dfinev1.0/PPHGNetV2_B6_stage1.pth",
+        },
+    }
+
+    def __init__(
+        self,
+        name,
+        use_lab=False,
+        return_idx=[1, 2, 3],
+        freeze_stem_only=True,
+        freeze_at=0,
+        freeze_norm=True,
+        pretrained=True,
+        local_model_dir="weight/hgnetv2/",
+        preserve_stage=-1,
+        preserve_mode="none",
+        preserve_ratio=0.0,
+        preserve_groups=4,
+        preserve_init_scale=0.1,
+        spatial_aux_stage=-1,
+        lad_stage=-1,
+        lad_groups=8,
+        lad_target_gate=False,
+        lad_candidate_mode="learned_conv",
+        lad_fusion_mode="replace",
+        lad_route_init=0.1,
+        lad_target_gate_mode="learned",
+        blur_stage=-1,
+        srtod_stage=-1,
+        srtod_threshold=0.0156862,
+        srtod_student_only=False,
+        srtod_student_hidden_channels=32,
+    ):
+        super().__init__()
+        self.use_lab = use_lab
+        self.return_idx = return_idx
+
+        stem_channels = self.arch_configs[name]["stem_channels"]
+        stage_config = self.arch_configs[name]["stage_config"]
+        download_url = self.arch_configs[name]["url"]
+
+        self._out_strides = [4, 8, 16, 32]
+        self._out_channels = [stage_config[k][2] for k in stage_config]
+        self.spatial_aux_stage = spatial_aux_stage
+        self.lad_stage = lad_stage
+        self.srtod_stage = srtod_stage
+        self.srtod_student_only = bool(srtod_student_only)
+        self.spatial_importance_logits = None
+        self.srtod_reconstruction_loss = None
+        self.srtod_difference_map = None
+        self.srtod_difference_mask = None
+        self.spatial_aux_head = (
+            nn.Conv2d(self._out_channels[spatial_aux_stage], 1, kernel_size=1, bias=True)
+            if 0 <= spatial_aux_stage < len(self._out_channels)
+            else None
+        )
+        if srtod_stage < -1 or srtod_stage >= len(self._out_channels):
+            raise ValueError(
+                f"srtod_stage must be -1 or a valid stage index, got {srtod_stage}"
+            )
+        if srtod_stage >= 0 and srtod_stage not in return_idx:
+            raise ValueError(
+                "SR-TOD DGFE must enhance a returned detection feature; "
+                f"stage {srtod_stage} is not in return_idx={return_idx}"
+            )
+        if self.srtod_student_only and srtod_stage < 0:
+            raise ValueError("srtod_student_only requires a valid srtod_stage")
+        self.srtod_rh = (
+            RH(
+                in_channels=self._out_channels[srtod_stage],
+                out_channels=stem_channels[0],
+            )
+            if srtod_stage >= 0 and not self.srtod_student_only
+            else None
+        )
+        self.srtod_deficiency_head = (
+            DeficiencyPredictor(
+                in_channels=self._out_channels[srtod_stage],
+                hidden_channels=int(srtod_student_hidden_channels),
+            )
+            if srtod_stage >= 0 and self.srtod_student_only
+            else None
+        )
+        self.srtod_dgfe = (
+            DGFE(gate_channels=self._out_channels[srtod_stage])
+            if srtod_stage >= 0
+            else None
+        )
+        self.srtod_learnable_thresh = (
+            nn.Parameter(torch.tensor(float(srtod_threshold), dtype=torch.float32))
+            if srtod_stage >= 0 and not self.srtod_student_only
+            else None
+        )
+
+        # stem
+        self.stem = StemBlock(
+            in_chs=stem_channels[0],
+            mid_chs=stem_channels[1],
+            out_chs=stem_channels[2],
+            use_lab=use_lab,
+        )
+
+        # stages
+        self.stages = nn.ModuleList()
+        for i, k in enumerate(stage_config):
+            (
+                in_channels,
+                mid_channels,
+                out_channels,
+                block_num,
+                downsample,
+                light_block,
+                kernel_size,
+                layer_num,
+            ) = stage_config[k]
+            self.stages.append(
+                HG_Stage(
+                    in_channels,
+                    mid_channels,
+                    out_channels,
+                    block_num,
+                    layer_num,
+                    downsample,
+                    light_block,
+                    kernel_size,
+                    use_lab,
+                    preserve_mode=(preserve_mode if i == preserve_stage else "none"),
+                    preserve_ratio=preserve_ratio,
+                    preserve_groups=preserve_groups,
+                    preserve_init_scale=preserve_init_scale,
+                    downsample_mode=(
+                        ("conditional_lad" if lad_fusion_mode == "stable_route" else "lad")
+                        if i == lad_stage else "standard"
+                    ),
+                    lad_groups=lad_groups,
+                    lad_target_gate=(lad_target_gate and i == lad_stage),
+                    lad_candidate_mode=lad_candidate_mode,
+                    lad_fusion_mode=lad_fusion_mode,
+                    lad_route_init=lad_route_init,
+                    lad_target_gate_mode=lad_target_gate_mode,
+                    preblur=(i == blur_stage),
+                )
+            )
+
+        if freeze_at >= 0:
+            self._freeze_parameters(self.stem)
+            if not freeze_stem_only:
+                for i in range(min(freeze_at + 1, len(self.stages))):
+                    self._freeze_parameters(self.stages[i])
+
+        if freeze_norm:
+            self._freeze_norm(self)
+
+        if pretrained:
+            RED, GREEN, RESET = "\033[91m", "\033[92m", "\033[0m"
+            try:
+                # If the file doesn't exist locally, download from the URL
+                if safe_get_rank() == 0:
+                    print(
+                        GREEN
+                        + "If the pretrained HGNetV2 can't be downloaded automatically. Please check your network connection."
+                        + RESET
+                    )
+                    print(
+                        GREEN
+                        + "Please check your network connection. Or download the model manually from "
+                        + RESET
+                        + f"{download_url}"
+                        + GREEN
+                        + " to "
+                        + RESET
+                        + f"{local_model_dir}."
+                        + RESET
+                    )
+                    state = torch.hub.load_state_dict_from_url(
+                        download_url, map_location="cpu", model_dir=local_model_dir
+                    )
+                    print(f"Loaded stage1 {name} HGNetV2 from URL.")
+
+                # Wait for rank 0 to download the model
+                safe_barrier()
+
+                # All processes load the downloaded model
+                model_path = local_model_dir + "PPHGNetV2_" + name + "_stage1.pth"
+                state = torch.load(model_path, map_location="cpu")
+
+                self.load_state_dict(state)
+                print(f"Loaded stage1 {name} HGNetV2 from URL.")
+
+            except (Exception, KeyboardInterrupt) as e:
+                if safe_get_rank() == 0:
+                    print(f"{str(e)}")
+                    logging.error(
+                        RED + "CRITICAL WARNING: Failed to load pretrained HGNetV2 model" + RESET
+                    )
+                    logging.error(
+                        GREEN
+                        + "Please check your network connection. Or download the model manually from "
+                        + RESET
+                        + f"{download_url}"
+                        + GREEN
+                        + " to "
+                        + RESET
+                        + f"{local_model_dir}."
+                        + RESET
+                    )
+                exit()
+
+    def _freeze_norm(self, m: nn.Module):
+        if isinstance(m, nn.BatchNorm2d):
+            m = FrozenBatchNorm2d(m.num_features)
+        else:
+            for name, child in m.named_children():
+                _child = self._freeze_norm(child)
+                if _child is not child:
+                    setattr(m, name, _child)
+        return m
+
+    def _freeze_parameters(self, m: nn.Module):
+        for p in m.parameters():
+            p.requires_grad = False
+
+    def forward(self, x):
+        self.spatial_importance_logits = None
+        source_image = x
+        self.srtod_reconstruction_loss = None
+        self.srtod_difference_map = None
+        self.srtod_difference_mask = None
+        x = self.stem(x)
+        outs = []
+        for idx, stage in enumerate(self.stages):
+            x = stage(x)
+            if idx == self.srtod_stage:
+                if self.srtod_student_only:
+                    deficiency_probability = self.srtod_deficiency_head(x).sigmoid()
+                    x = self.srtod_dgfe.forward_with_mask(x, deficiency_probability)
+                    self.srtod_difference_map = deficiency_probability.detach()
+                    self.srtod_difference_mask = deficiency_probability.detach()
+                else:
+                    reconstruction = self.srtod_rh(x.clone())
+                    if reconstruction.shape[-2:] != source_image.shape[-2:]:
+                        # D-FINE-N's first detection feature is S16, whereas the
+                        # official SR-TOD input is P2/S4. This is the only spatial
+                        # interface adaptation; RH and DGFE remain unchanged.
+                        reconstruction = F.interpolate(
+                            reconstruction,
+                            size=source_image.shape[-2:],
+                            mode="bilinear",
+                            align_corners=False,
+                        )
+                    difference_map = torch.sum(
+                        torch.abs(reconstruction - source_image), dim=1, keepdim=True
+                    ) / source_image.shape[1]
+                    x = self.srtod_dgfe(
+                        x,
+                        difference_map,
+                        self.srtod_learnable_thresh,
+                    )
+                    self.srtod_reconstruction_loss = F.mse_loss(reconstruction, source_image)
+                    self.srtod_difference_map = difference_map.detach()
+                    self.srtod_difference_mask = (
+                        (torch.sign(difference_map - self.srtod_learnable_thresh) + 1) * 0.5
+                    ).detach()
+            if idx == self.spatial_aux_stage and self.spatial_aux_head is not None:
+                self.spatial_importance_logits = self.spatial_aux_head(x)
+            if idx == self.lad_stage:
+                lad_module = (
+                    stage.conditional_detail
+                    if getattr(stage, "conditional_detail", None) is not None
+                    else stage.downsample
+                )
+                target_logits = getattr(lad_module, "last_target_logits", None)
+                if target_logits is not None:
+                    self.spatial_importance_logits = target_logits
+            if idx in self.return_idx:
+                outs.append(x)
+        return outs

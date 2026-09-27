@@ -1,0 +1,10 @@
+__include__: ["./m_layout_recovery_r1_warmup.yml"]
+
+# Same C+S/common initialization/data/schedule as R1/R2. This is a
+# coordinate-free, ordinary global-statistics channel-conditioning control.
+output_dir: E:/two_paper/outputs/M_GLOBAL_CONTROL_20E_TESTDEV/warmup
+
+DFINE:
+  rgbt_sd2_variant: global
+  rgbt_sd2_max_rms_ratio: 0.015
+

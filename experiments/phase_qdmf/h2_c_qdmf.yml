@@ -1,0 +1,14 @@
+__include__: ['./common_v1.yml']
+
+output_dir: E:/two_paper/outputs/QDMF_H2_C_QDMF_B16A2_20E_TESTDEV/seed0
+
+HGNetv2:
+  return_idx: [1, 2, 3]
+
+DFINE:
+  stql_enabled: False
+  qdmf_enabled: True
+
+DFINECriterion:
+  stql_weight: 0.0
+

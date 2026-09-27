@@ -1,0 +1,13 @@
+__include__: ['../phase_s/visible_60e_base.yml']
+
+# Official PAT_ch control at exactly the same three Stage4 spatial-mixer
+# locations and 32/96 split as C-PAT-SF1/C-PAT-PC1.  The 32-channel path uses
+# Conv3x3; the 96-channel path uses PartialNet SRM (global mean+std channel
+# modulation).  This isolates low-cost global context from token attention.
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/30_channel/C_PAT_CH1_S32_R4/seed0
+
+HGNetv2:
+  pat_stage: -1
+  pat_sf_stage: 3
+  pat_sf_n_div: 4
+  pat_sf_variant: channel

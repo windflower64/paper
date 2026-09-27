@@ -1,0 +1,20 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_JOINTINIT_CONTROL_B32_60E/seed0
+epochs: 60
+checkpoint_freq: 10
+
+# The default AMP scale 65536 overflows on the first full batch even though
+# model outputs and losses are finite. Start lower; dynamic scaling remains on.
+scaler:
+  type: GradScaler
+  enabled: True
+  init_scale: 1024.0
+
+train_dataloader:
+  total_batch_size: 32
+
+val_dataloader:
+  total_batch_size: 32

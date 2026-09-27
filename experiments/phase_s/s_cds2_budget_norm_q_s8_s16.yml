@@ -1,0 +1,20 @@
+__include__:
+  - './visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_CDS2_BUDGET_NORM_Q_S8_S16/seed0
+
+# Equal-budget spatial allocation control.
+# alpha controls the global detail budget; centered q only redistributes the
+# same budget across S16 locations, so mean(route_gate) == alpha per image.
+HGNetv2:
+  lad_stage: 2
+  lad_groups: 8
+  lad_target_gate: True
+  lad_candidate_mode: learned_conv
+  lad_fusion_mode: stable_route
+  lad_route_init: 0.10
+  lad_target_gate_mode: budget_centered
+
+DFINECriterion:
+  spatial_aux_weight: 0.10
+  spatial_aux_dice_weight: 1.0

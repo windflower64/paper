@@ -1,0 +1,14 @@
+__include__:
+  - './visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_DEF1_STUDENT_ONLY_S16/seed0
+
+# Deployment-only form of the validated S-DEF0 soft mask.  RH, RGB
+# reconstruction, MSE supervision and hard thresholding are absent.
+HGNetv2:
+  srtod_stage: 2
+  srtod_student_only: true
+  srtod_student_hidden_channels: 32
+
+DFINECriterion:
+  srtod_reconstruction_weight: 0.0

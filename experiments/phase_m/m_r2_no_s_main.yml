@@ -1,0 +1,6 @@
+__include__: ["./m_r2_no_s_warmup.yml"]
+
+output_dir: E:/two_paper/outputs/M_R2_SAM_FACTORIAL_20E_TESTDEV/no_s_seed0
+epochs: 20
+tuning: ~
+resume: E:/two_paper/outputs/M_R2_SAM_FACTORIAL_20E_TESTDEV/no_s_warmup/last.pth

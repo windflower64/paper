@@ -1,0 +1,16 @@
+__include__:
+  - './visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_HBS1_BG_SMOOTH_AUX_P16_P32/seed0
+
+# CVPR 2025 SET-HBS direct transfer.  The normal inference path is unchanged;
+# HBS supplies a second, shared-decoder detection loss only during training.
+DFINE:
+  hbs_enabled: True
+  hbs_channels: [128, 128]
+  hbs_strides: [16, 32]
+  hbs_reduction: 4
+  hbs_strict_background: True
+
+DFINECriterion:
+  hbs_aux_weight: 1.0

@@ -1,0 +1,13 @@
+__include__: [
+  './s_rep1_1_spar_w025_ft6_lr02_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_SPAR_SHIFT50_W025_FT6_LR02/seed0
+
+# Causal negative control: preserve the architecture, optimizer and loss
+# magnitude while deliberately moving every SAM target half an image width.
+DFINECriterion:
+  spar_aux_weight: 0.25
+  spar_l1_weight: 1.0
+  spar_dice_weight: 2.0
+  spar_mask_shift_fraction: 0.5

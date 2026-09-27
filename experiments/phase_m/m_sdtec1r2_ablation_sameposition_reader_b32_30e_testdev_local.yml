@@ -1,0 +1,29 @@
+__include__: ['./m_sdtec1r2_hybrid_reader_b32_30e_testdev_local.yml']
+
+# Deliberate negative control: inject each thermal S32 descriptor only into the
+# RGB descriptor with the same flattened index.  This assumes an alignment the
+# dataset does not guarantee; it does not use coordinate-free evidence tokens.
+output_dir: E:/two_paper/outputs/M_SDTEC1R2_ABLATION_SAMEPOSITION_TESTDEV/seed0
+
+DFINETransformer:
+  sdtec_fusion_mode: same_position
+
+DFINECriterion:
+  sdtec_presence_weight: 0.0
+  sdtec_diversity_weight: 0.0
+  sdtec_fallback_weight: 0.0
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^decoder\.sdtec_spatial_coupler\.residual_scale$'
+      lr: 0.005
+      weight_decay: 0.0
+    -
+      params: '^decoder\.sdtec_(?!.*residual_scale).*$'
+      lr: 0.0002
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+

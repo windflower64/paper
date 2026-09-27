@@ -1,0 +1,13 @@
+__include__: ['../phase_s/visible_60e_base.yml']
+
+# Strict mechanism control for C-PAT-GQ1.  Keep Stage4, three mixers, the
+# 32/96 split and projection topology, but force the global attention weights
+# to 1/N.  This tests whether input-dependent content selection survives a
+# from-scratch retraining comparison against global mean broadcasting.
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/30_channel/C_PAT_GM1_S32_R4/seed0
+
+HGNetv2:
+  pat_stage: -1
+  pat_sf_stage: 3
+  pat_sf_n_div: 4
+  pat_sf_variant: global_mean

@@ -1,0 +1,48 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+output_dir: E:/two_paper/runs/20_spatial_importance/S_BPC1_SAM_BOUNDARY_POLYPHASE/seed0
+
+# BPC1 keeps the complete standard Stage2 path and adds a lightweight native
+# S8 polyphase residual to its S16 output.  SAM masks supervise only the
+# student locator; validation and deployment use the predicted gate.
+HGNetv2:
+  bpc_stage: 2
+  bpc_detail_channels: 32
+  bpc_project_groups: 8
+  bpc_max_scale: 0.25
+  bpc_init_scale: 0.05
+
+DFINECriterion:
+  bpc_boundary_aux_weight: 1.0
+  bpc_boundary_dice_weight: 1.0
+  bpc_boundary_radius_pixels: 4
+
+# Restore the historical A00 batch32 protocol now that the RTX 4080 batch16
+# preflight leaves ample memory headroom.  This removes TNDP2's batch/LR
+# comparison confound and improves GPU/data-loader overlap.
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.0001
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.0001
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 32
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 32

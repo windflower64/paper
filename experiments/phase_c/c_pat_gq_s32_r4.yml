@@ -1,0 +1,14 @@
+__include__: ['../phase_s/visible_60e_base.yml']
+
+# C-PAT-GQ1 is the mechanism-derived successor to C-PAT-SF1.  Three causal
+# probes showed that the trained full-attention branch is almost spatially
+# constant, while a single content-selective global query reproduces its best
+# validation result.  Keep the same Stage4 32/96 channel split, but replace
+# NxN self-attention by one global query attending to N keys/values.
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/30_channel/C_PAT_GQ1_S32_R4/seed0
+
+HGNetv2:
+  pat_stage: -1
+  pat_sf_stage: 3
+  pat_sf_n_div: 4
+  pat_sf_variant: global_query

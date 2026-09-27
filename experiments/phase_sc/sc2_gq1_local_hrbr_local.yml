@@ -1,0 +1,5 @@
+__include__: ['./sc_gq1_hrbr1_local.yml']
+
+# SC2保持冻结GQ1和HRBR训练协议不变，只由命令行将HRBR输入从
+# S4/S8/S16/S32改为S4/S8/S16，隔离C的深层全局职责与S的局部校准职责。
+output_dir: E:/two_paper/outputs/SC2_GQ1_LOCAL_HRBR_SEED0

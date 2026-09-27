@@ -1,0 +1,4 @@
+__include__: ['./s_rc1_common.yml']
+output_dir: E:/two_paper/outputs/S_RC1_NONE_B8A4_20E_TESTDEV/seed0
+DFINE:
+  mfam_supervision: none

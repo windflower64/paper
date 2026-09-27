@@ -1,0 +1,15 @@
+__include__: ['../phase_c/c_pat_gq_s32_r4.yml']
+
+# SC1只把冻结检测器切换为C-PAT-GQ1；检测器结构与权重不再改动。
+# HRBR1校准头由独立训练器从零初始化训练，不能加载A00上的旧refiner。
+output_dir: E:/two_paper/outputs/SC1_GQ1_HRBR1_SEED0
+
+train_dataloader:
+  dataset:
+    img_folder: E:/two_paper/data/antiuav6k_common/images/train
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_train.json
+
+val_dataloader:
+  dataset:
+    img_folder: E:/two_paper/data/antiuav6k_common/images/val
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_val.json

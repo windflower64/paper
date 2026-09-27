@@ -1,0 +1,7 @@
+__include__: ['../phase_m/m_sdtec1r2_ablation_k1_reader_b32_30e_testdev_local.yml']
+
+# SCM1通用结构配置。HRBR残差强度由独立训练器的命令行参数控制。
+# 冻结C-GQ1 + M1-K1，只训练读取可见光S4/S8/S16的局部框校准头。
+# 验证使用项目原test划分；该划分已经参与开发，只能称为原test开发验证集。
+output_dir: E:/two_paper/outputs/SCM1_GQ1_MK1_LOCAL_HRBR
+

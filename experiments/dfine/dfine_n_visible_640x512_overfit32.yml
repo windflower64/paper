@@ -1,0 +1,38 @@
+__include__: [
+  './dfine_n_visible_640x512.yml',
+]
+
+output_dir: /root/autodl-tmp/rgbt_experiments/outputs/dfine_n_visible_640x512_overfit32
+epochs: 80
+checkpoint_freq: 20
+use_ema: False
+
+lr_scheduler:
+  type: MultiStepLR
+  milestones: [60]
+  gamma: 0.1
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 20
+
+train_dataloader:
+  total_batch_size: 8
+  dataset:
+    ann_file: /root/autodl-tmp/rgbt_experiments/data/antiuav6k_common/annotations/instances_visible_common_overfit32.json
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy: ~
+  collate_fn:
+    base_size: 640
+    base_size_repeat: ~
+    stop_epoch: 1000
+
+val_dataloader:
+  total_batch_size: 8
+  dataset:
+    img_folder: /root/autodl-tmp/rgbt_experiments/data/antiuav6k_common/images/train
+    ann_file: /root/autodl-tmp/rgbt_experiments/data/antiuav6k_common/annotations/instances_visible_common_overfit32.json

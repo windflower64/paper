@@ -1,0 +1,25 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_SPAR/seed0
+
+# D-FINE-scale reproduction of FALCON-SFOD SPAR.  The published fusion
+# topology is preserved; only its width is reduced from 256 to 64 because
+# HGNetv2-B0 is roughly one tenth the size of the original ResNet detector.
+HGNetv2:
+  spar_enabled: True
+  spar_fusion_channels: 64
+
+DFINECriterion:
+  spar_aux_weight: 1.0
+  spar_l1_weight: 1.0
+  spar_dice_weight: 2.0
+
+train_dataloader:
+  total_batch_size: 16
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 16

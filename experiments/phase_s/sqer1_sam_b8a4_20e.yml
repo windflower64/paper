@@ -1,0 +1,7 @@
+__include__: ["./sqer1_common_b8a4_20e.yml"]
+
+output_dir: E:/two_paper/outputs/SQER1_SAM_B8A4_20E_TESTDEV/seed0
+
+DFINECriterion:
+  sqer_supervision: sam
+

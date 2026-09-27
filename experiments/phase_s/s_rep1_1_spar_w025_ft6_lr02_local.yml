@@ -1,0 +1,36 @@
+__include__: [
+  './s_rep1_spar_sam_feature_regularization_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_1_SPAR_W025_FT6_LR02/seed0
+epochs: 6
+
+# Keep the paper's internal L1:Dice ratio, but reduce the global influence so
+# SAM corrects an already trained detector instead of dominating it.
+DFINECriterion:
+  spar_aux_weight: 0.25
+  spar_l1_weight: 1.0
+  spar_dice_weight: 2.0
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.00002
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.00002
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.00004
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 16
+
+val_dataloader:
+  total_batch_size: 16

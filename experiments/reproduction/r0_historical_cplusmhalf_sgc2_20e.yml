@@ -1,0 +1,5 @@
+# R0：历史最佳候选的独立复现配置。
+# 基础配置来自历史运行目录 artifacts 快照；只替换输出目录，禁止覆盖历史结果。
+__include__: ['E:/two_paper/outputs/C_PLUS_M_SD22_HALF_SGC2_SAM_DECAY9_14_B8A4_20E_TESTDEV/seed0/artifacts/experiments/phase_s/s_sgc2_sam_c_plus_m_sd22_half_b8a4_20e.yml']
+
+output_dir: E:/two_paper/outputs/REPRO_R0_HISTORICAL_CPLUSMHALF_SGC2_20E_TESTDEV/seed0

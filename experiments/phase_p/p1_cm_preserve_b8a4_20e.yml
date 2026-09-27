@@ -1,0 +1,6 @@
+__include__: ['../phase_m/c_plus_m_sd22_b8a4_20e_testdev_local.yml']
+output_dir: E:/two_paper/outputs/P1_CM_PRESERVE_B8A4_20E/seed0
+rgb_preservation:
+  enabled: True
+  loss_weight: 1.0
+  teacher_checkpoint: E:/two_paper/outputs/C_ONLY_GQ1_B8A4_20E_TESTDEV/seed0/best_stg1.pth

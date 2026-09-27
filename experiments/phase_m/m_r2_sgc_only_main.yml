@@ -1,0 +1,10 @@
+__include__: ["./m_layout_recovery_r2_main.yml"]
+
+# Same original R2 warmup state; SGC2 stays on, SQER2 stays bypassed.
+output_dir: E:/two_paper/outputs/M_R2_SAM_FACTORIAL_20E_TESTDEV/sgc_only_seed0
+
+DFINE:
+  sqer_bypass: True
+
+DFINECriterion:
+  sqer_shape_weight: 0.0

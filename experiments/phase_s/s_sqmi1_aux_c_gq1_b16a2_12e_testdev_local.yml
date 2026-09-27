@@ -1,0 +1,38 @@
+__include__: ['../phase_m/c_only_gq1_b8a4_20e_testdev_local.yml']
+
+# S-QMI1 strict AUX control.  It learns the identical SAM-supervised query
+# masks, but the mask-to-reference-box path is forced to exact zero.
+output_dir: E:/two_paper/outputs/S_SQMI1_AUX_C_GQ1_B16A2_12E_TESTDEV/seed0
+epochs: 12
+checkpoint_freq: 1
+gradient_accumulation_steps: 2
+
+HGNetv2:
+  return_idx: [2, 3]
+  sqmi_source_stage: 1
+
+DFINETransformer:
+  hrqs_enabled: False
+  sqmi_enabled: True
+  sqmi_source_channels: 256
+  sqmi_mask_dim: 64
+  sqmi_topk: 64
+  sqmi_max_mix: 0.25
+  sqmi_max_box_delta: 0.25
+  sqmi_gate_bias: -4.0
+  sqmi_apply_initialization: False
+
+DFINECriterion:
+  sqmi_aux_weight: 0.25
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 0
+  persistent_workers: False
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 0
+

@@ -1,0 +1,39 @@
+__include__: ['./common_v1.yml']
+
+# Frozen QDMF v1 implementation/preflight configuration.  This file is not
+# launched automatically; the 20-epoch H0-H3 matrix requires user approval.
+output_dir: E:/two_paper/outputs/QDMF_H3_S_QDMF_PREFLIGHT/seed0
+
+HGNetv2:
+  return_idx: [1, 2, 3]
+
+DFINE:
+  stql_enabled: True
+  qdmf_enabled: True
+  qdmf_bypass: False
+  qdmf_scales: [8, 16, 32]
+  qdmf_roi_expand: 1.5
+  qdmf_roi_grid: 3
+  qdmf_num_heads: 4
+  qdmf_gate_dim: 64
+  qdmf_gate_hidden: 128
+  qdmf_gate_init_bias: -2.0
+  qdmf_output_init_std: 0.001
+  qdmf_ir_dropout: 0.10
+  qdmf_detach_ir_features: True
+  qdmf_detach_base_boxes: True
+  qdmf_detach_rgb_uncertainty: True
+  qdmf_matcher_use_base_outputs: True
+  qdmf_residual_warmup_start: 0
+  qdmf_residual_warmup_end: 6
+  qdmf_residual_init_scale: 0.10
+  qdmf_residual_final_scale: 1.00
+  qdmf_log_diagnostics: True
+
+DFINECriterion:
+  stql_weight: 0.1
+  stql_supervision: sam
+
+train_dataloader:
+  dataset:
+    sam_mask_root: E:/two_paper/reports/104_sam3_role_control/masks_train

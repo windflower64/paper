@@ -1,0 +1,10 @@
+__include__: ['./m_sdtec1r2_hybrid_reader_b32_30e_testdev_local.yml']
+
+# Strong TAG-style control: retain one learned global thermal evidence vector,
+# but remove all competitive local evidence slots.  Every other reader setting
+# and the original-test development protocol remain unchanged.
+output_dir: E:/two_paper/outputs/M_SDTEC1R2_ABLATION_K1_TESTDEV/seed0
+
+DFINETransformer:
+  sdtec_num_tokens: 1
+

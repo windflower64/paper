@@ -1,0 +1,10 @@
+__include__: [
+  './s_rep2_mdqa_w025_ft6_lr02_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP2_1_MDQA_QD_W025_FT6_LR02/seed0
+
+# The only change from REP2: the matched detector query remains the instance
+# condition, but the SAM loss cannot backpropagate into the detector query.
+DFINETransformer:
+  mdqa_detach_query: True

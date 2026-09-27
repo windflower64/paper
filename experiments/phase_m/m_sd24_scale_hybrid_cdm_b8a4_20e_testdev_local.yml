@@ -1,0 +1,13 @@
+__include__: ['./m_sd21_token_cdm_b8a4_20e_testdev_local.yml']
+
+output_dir: E:/two_paper/outputs/M_SD24_SCALE_HYBRID_CDM_B8A4_20E_TESTDEV/seed0
+
+# Evidence-driven per-scale residual definition:
+# - S16 (level 0): direct zero-anchored thermal interaction, which produced
+#   the strongest APS/AP75 result in the M-SD2.3 same-checkpoint ablation.
+# - S32 (level 1): M-SD2.2 subtractive thermal contrast, which was beneficial
+#   when complementing S16 and preserved medium-target semantics.
+DFINE:
+  rgbt_sd2_thermal_contrastive: True
+  rgbt_sd2_zero_anchored: False
+  rgbt_sd2_zero_anchored_levels: [0]

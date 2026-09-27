@@ -1,0 +1,39 @@
+__include__: [
+  './dfine_n_visible_640_square.yml',
+]
+
+output_dir: /root/autodl-tmp/rgbt_experiments/outputs/dfine_n_visible_640x512
+eval_spatial_size: [512, 640]
+
+train_dataloader:
+  dataset:
+    img_folder: /root/autodl-tmp/rgbt_experiments/data/antiuav6k_common/images/train
+    ann_file: /root/autodl-tmp/rgbt_experiments/data/antiuav6k_common/annotations/instances_visible_common_train.json
+    transforms:
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomZoomOut, fill: 0}
+        - {type: RandomIoUCrop, p: 0.8}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: stop_epoch
+        epoch: 200
+        ops: [RandomPhotometricDistort, RandomZoomOut, RandomIoUCrop]
+  collate_fn:
+    base_size: 640
+    base_size_repeat: ~
+    stop_epoch: 200
+
+val_dataloader:
+  dataset:
+    img_folder: /root/autodl-tmp/rgbt_experiments/data/antiuav6k_common/images/val
+    ann_file: /root/autodl-tmp/rgbt_experiments/data/antiuav6k_common/annotations/instances_visible_common_val.json
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}

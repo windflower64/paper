@@ -1,0 +1,9 @@
+__include__: ['./m_sd21_token_cdm_b8a4_20e_testdev_local.yml']
+
+output_dir: E:/two_paper/outputs/M_SD22_THERMAL_CONTRAST_CDM_B8A4_20E_TESTDEV/seed0
+
+# M-SD2.2 changes only the residual definition.  The learned response to an
+# empty thermal token set is subtracted before applying the unchanged 3% RMS
+# bound, so the conditioner cannot act as an extra RGB-only refinement block.
+DFINE:
+  rgbt_sd2_thermal_contrastive: True

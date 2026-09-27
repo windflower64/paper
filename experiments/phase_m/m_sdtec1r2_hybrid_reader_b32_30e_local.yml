@@ -1,0 +1,65 @@
+__include__: ['./m_sdtec1_gq1_b32_60e_local.yml']
+
+# M-SDTEC1-R2, stage 1: both mature modality streams and the RGB detector are
+# frozen by zero learning rates.  Only the coordinate-free tokenizer, query
+# couplers and bounded residual scales learn.  This isolates whether thermal
+# evidence itself can improve the fixed visible GQ1 detector.
+output_dir: E:/two_paper/outputs/M_SDTEC1R2_HYBRID_READER_B32_30E/seed0
+epochs: 30
+checkpoint_freq: 5
+
+DFINE:
+  rgbt_enabled: True
+  rgbt_thermal_dropout: 0.15
+  rgbt_train_sdtec_only: True
+
+DFINETransformer:
+  sdtec_enabled: True
+  sdtec_thermal_channels: 128
+  sdtec_num_tokens: 8
+  sdtec_num_heads: 4
+  sdtec_slot_iterations: 2
+  sdtec_max_residual_scale: 0.05
+  sdtec_warmup_epochs: 1
+  sdtec_ramp_epochs: 5
+
+DFINECriterion:
+  # Synthetic thermal dropout now supplies meaningful availability negatives;
+  # real frame presence alone is 99% positive and is insufficient supervision.
+  sdtec_presence_weight: 0.05
+  sdtec_diversity_weight: 0.02
+  sdtec_fallback_weight: 0.10
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^decoder\.sdtec_couplers\.\d+\.residual_scale$'
+      lr: 0.005
+      weight_decay: 0.0
+    -
+      params: '^decoder\.sdtec_(?!.*residual_scale).*$'
+      lr: 0.0002
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 200
+
+# Windows worker creation costs about 17 seconds at the first batch of every
+# epoch.  The transform policy does not change within this 30/60 epoch range,
+# so persistent workers are protocol-equivalent and remove that repeated cost.
+train_dataloader:
+  persistent_workers: True
+  dataset:
+    transforms:
+      ops:
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: default

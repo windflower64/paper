@@ -1,0 +1,50 @@
+__include__: [
+  '../../experiments/dfine/dfine_n_visible_640x512_full.yml',
+]
+
+# C-ID is a matched recovery test from the trained A00 checkpoint, not a new
+# 60-epoch architecture comparison.  All selectors share this exact protocol.
+epochs: 24
+checkpoint_freq: 6
+
+ema:
+  type: ModelEMA
+  decay: 0.9999
+  warmups: 100
+  start: 0
+
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 50
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.00005
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.00005
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.0001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 32
+  dataset:
+    transforms:
+      policy:
+        name: stop_epoch
+        epoch: 200
+        ops: [RandomPhotometricDistort, RandomZoomOut, RandomIoUCrop]
+  collate_fn:
+    stop_epoch: 200
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0

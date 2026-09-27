@@ -1,0 +1,33 @@
+__include__: [
+  './s_rep1_1_a00ft6_lr02_control_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP3_QCSR_W025_FT6_LR02/seed0
+epochs: 6
+checkpoint_freq: 5
+
+# Training-only taps at the real internal S8 -> S16 transition.
+HGNetv2:
+  qcsr_enabled: True
+
+# The matched query and detached S8 feature form a private SAM-anchored
+# teacher.  Only the S16 student remains connected to the detector path.
+DFINETransformer:
+  qcsr_enabled: True
+  qcsr_s8_channels: 256
+  qcsr_s16_channels: 512
+  qcsr_dim: 64
+
+DFINECriterion:
+  qcsr_teacher_weight: 0.25
+  qcsr_transfer_weight: 0.25
+  qcsr_boundary_radius: 2
+  qcsr_incoherence_floor: 0.25
+
+train_dataloader:
+  total_batch_size: 16
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 16

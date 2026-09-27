@@ -1,0 +1,42 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+# S-BOX2 uses the same official-COCO -> 60e protocol, batch, and learning
+# rates as A00. Launch with: -t E:/two_paper/weights/dfine_n_coco.pth
+output_dir: E:/two_paper/runs/23_sam_box_alignment/S_BOX2_EXTREME_POINT_JOINTINIT_B32_60E/seed0
+
+# 与已经修正协议的 JointInit 对照保持一致。默认 65536 在首个完整
+# batch 可能溢出；1024 仅调整 AMP 的初始缩放，不改变模型或学习率。
+scaler:
+  type: GradScaler
+  enabled: True
+  init_scale: 1024.0
+
+HGNetv2:
+  sbox_enabled: True
+  sbox_hidden_channels: 32
+  # Epochs 0-4 train only the side head; epochs 5-9 gradually expose S8.
+  sbox_gradient_ramp_start: 5
+  sbox_gradient_ramp_end: 10
+  sbox_gradient_max_scale: 1.0
+
+DFINECriterion:
+  # batch32 预检测得辅助/框回归梯度范数比仅 0.00406，故冻结为 1.0。
+  sbox_aux_weight: 1.0
+  sbox_dice_weight: 1.0
+  sbox_focal_alpha: 0.25
+  sbox_focal_gamma: 2.0
+  sbox_extreme_band_pixels: 3
+  sbox_neighborhood_radius: 4
+  sbox_max_side_offset_cells: 1.0
+  sbox_decay_start: 30
+  sbox_decay_end: 45
+
+train_dataloader:
+  total_batch_size: 32
+  dataset:
+    sam_mask_root: E:/two_paper/reports/20_spatial_importance/S_TNDP2_RETENTION_DISTILLATION/masks_train
+
+val_dataloader:
+  total_batch_size: 32

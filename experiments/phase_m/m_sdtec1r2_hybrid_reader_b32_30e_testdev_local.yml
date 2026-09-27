@@ -1,0 +1,20 @@
+__include__: ['./m_sdtec1r2_hybrid_reader_b32_30e_local.yml']
+
+# Unified M-series test-as-development protocol.  Historical validation
+# configs remain unchanged for reproducibility; all new M experiments inherit
+# this test split for per-epoch evaluation and model selection.
+output_dir: E:/two_paper/reports/60_multimodal/M_TESTDEV_SELECTION/M_SDTEC1R2_READER
+
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 0
+  dataset:
+    type: RGBTCocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/test
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_test.json
+    infrared_folder: F:/data/Anti-UAV/Anti_UAV_6K/test/infrared/images
+    infrared_label_folder: F:/data/Anti-UAV/Anti_UAV_6K/test/infrared/labels
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}

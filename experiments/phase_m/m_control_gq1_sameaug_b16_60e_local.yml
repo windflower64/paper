@@ -1,0 +1,49 @@
+__include__: ['../phase_s/visible_60e_base_local.yml']
+
+# Fair RGB-only control for M-SDTEC1.  It uses the same no-crop augmentation
+# schedule, batch size, initialization and 60-epoch horizon as the fusion run.
+output_dir: E:/two_paper/outputs/M_CONTROL_GQ1_SAMEAUG_B16_60E/seed0
+epochs: 60
+checkpoint_freq: 6
+
+HGNetv2:
+  pat_stage: -1
+  pat_sf_stage: 3
+  pat_sf_n_div: 4
+  pat_sf_variant: global_query
+
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 2
+  dataset:
+    type: CocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/train
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_train.json
+    transforms:
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: stop_epoch
+        epoch: 200
+        ops: [RandomPhotometricDistort]
+  collate_fn:
+    base_size: 640
+    base_size_repeat: ~
+    stop_epoch: 200
+
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 0
+  dataset:
+    type: CocoDetection
+    img_folder: E:/two_paper/data/antiuav6k_common/images/val
+    ann_file: E:/two_paper/data/antiuav6k_common/annotations/instances_visible_common_val.json
+    transforms:
+      ops:
+        - {type: Resize, size: [512, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}

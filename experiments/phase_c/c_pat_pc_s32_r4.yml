@@ -1,0 +1,13 @@
+__include__: ['../phase_s/visible_60e_base.yml']
+
+# Mechanism control for C-PAT-SF1. The location, three replaced spatial
+# mixers, 32/96 channel split, initialization, and training protocol are
+# unchanged. The only removed component is RPE self-attention: 32 channels
+# use official PartialNet Conv3x3 and 96 channels remain untouched.
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/30_channel/C_PAT_PC1_S32_R4/seed0
+
+HGNetv2:
+  pat_stage: -1
+  pat_sf_stage: 3
+  pat_sf_n_div: 4
+  pat_sf_variant: partial

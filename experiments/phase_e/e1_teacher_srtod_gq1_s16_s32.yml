@@ -1,0 +1,18 @@
+__include__:
+  - '../phase_s/visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/40_integration/E1_DEF1_GQ1/teacher_seed0
+
+# E1 stage 1: retain DEF1's full RH teacher path at S16 while applying the
+# frozen C-series GQ1 design at S32.  This is not the deployment model.
+HGNetv2:
+  srtod_stage: 2
+  srtod_threshold: 0.0156862
+  srtod_student_only: false
+  pat_stage: -1
+  pat_sf_stage: 3
+  pat_sf_n_div: 4
+  pat_sf_variant: global_query
+
+DFINECriterion:
+  srtod_reconstruction_weight: 1.0

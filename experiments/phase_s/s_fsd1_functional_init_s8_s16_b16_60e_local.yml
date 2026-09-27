@@ -1,0 +1,36 @@
+__include__:
+  - './visible_60e_base_local.yml'
+
+# FSD1：FSD0 结构不变，但正式训练前先让新下采样算子复现
+# COCO 预训练模型中的原始 S8→S16 下采样功能。
+output_dir: E:/two_paper/runs/26_fsd_down/S_FSD1_FUNCTIONAL_INIT_S8_S16_B16_60E/seed0
+
+HGNetv2:
+  fsd_stage: 2
+  reinit_downsample_stage: -1
+
+epochs: 60
+checkpoint_freq: 12
+
+optimizer:
+  type: AdamW
+  params:
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.00005
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.00005
+      weight_decay: 0.
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.
+  lr: 0.0001
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 16
+
+val_dataloader:
+  total_batch_size: 16

@@ -1,0 +1,9 @@
+__include__: ['../phase_c/c_pat_gq_s32_r4.yml']
+
+# R-LSD1 single variable: query-level DDF weights are retained, while the
+# four edge KL terms receive detached mean-one teacher-entropy reliability.
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/40_boundary/R_LSD1_ENTROPY_GQ1/seed0
+
+DFINECriterion:
+  fgl_edge_weight_mode: none
+  ddf_edge_reliability_mode: entropy

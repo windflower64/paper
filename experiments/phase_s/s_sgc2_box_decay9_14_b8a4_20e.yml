@@ -1,0 +1,6 @@
+__include__: ['./s_sgc1_common.yml']
+output_dir: E:/two_paper/outputs/S_SGC2_BOX_DECAY9_14_B8A4_20E_TESTDEV/seed0
+DFINE:
+  sgc_supervision: box
+  sgc_decay_start: 9
+  sgc_decay_end: 14

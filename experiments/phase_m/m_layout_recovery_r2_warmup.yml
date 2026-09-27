@@ -1,0 +1,38 @@
+__include__: ["./m_layout_recovery_r1_warmup.yml"]
+
+output_dir: E:/two_paper/outputs/M_LAYOUT_RECOVERY_20E_TESTDEV/R2_OTE2_LAYOUT/warmup
+
+DFINE:
+  rgbt_sd2_enabled: False
+  mote_enabled: True
+  mote_embed_dim: 64
+  mote_num_candidates: 4
+  mote_max_rms_ratio: 0.03
+  mote_final_residual_scale: 0.5
+  mote_objectness_loss_weight: 0.1
+  mote_layout_fix: True
+
+optimizer:
+  type: AdamW
+  foreach: False
+  params:
+    -
+      params: '^mote_fusion.*$'
+      lr: 0.0002
+    -
+      params: '^sqer.*$'
+      lr: 0.0002
+    -
+      params: '^(?=.*backbone)(?!.*norm|bn).*$'
+      lr: 0.0001
+    -
+      params: '^(?=.*backbone)(?=.*norm|bn).*$'
+      lr: 0.0001
+      weight_decay: 0.0
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.0
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+

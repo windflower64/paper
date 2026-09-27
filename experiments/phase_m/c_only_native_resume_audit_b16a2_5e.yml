@@ -1,0 +1,17 @@
+__include__: ['./c_only_gq1_b8a4_20e_testdev_local.yml']
+
+# Resume checkpoint epoch17 and run epochs18..22: five new epochs.
+output_dir: E:/two_paper/outputs/C_ONLY_NATIVE_RESUME_AUDIT_B16A2_5E/seed0
+epochs: 23
+checkpoint_freq: 1
+gradient_accumulation_steps: 2
+skip_model_profile: True
+print_freq: 20
+use_wandb: False
+train_dataloader:
+  total_batch_size: 16
+  num_workers: 0
+  persistent_workers: False
+val_dataloader:
+  total_batch_size: 16
+  num_workers: 0

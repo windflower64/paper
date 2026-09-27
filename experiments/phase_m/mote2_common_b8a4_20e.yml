@@ -1,0 +1,76 @@
+__include__: ["../phase_s/s_sgc2_sam_c_plus_m_sd22_b8a4_20e.yml"]
+
+# Shared C+S training recipe. The thermal source is replaced by the verified
+# IR checkpoint in the common initializer builder.
+output_dir: E:/two_paper/outputs/M_OTE2_C_S_PAIR_20E_TESTDEV/_shared_config_only
+epochs: 20
+checkpoint_freq: 2
+gradient_accumulation_steps: 4
+skip_model_profile: True
+tuning: E:/two_paper/outputs/M_OTE2_C_S_PAIR_20E_TESTDEV/common_init.pth
+resume: ~
+
+DFINE:
+  rgbt_enabled: True
+  rgbt_freeze_thermal_stream: True
+  rgbt_thermal_forward_chunk_size: 4
+  rgbt_sd2_enabled: False
+  rgbt_sd2_variant: token
+  rgbt_sd2_thermal_contrastive: False
+  rgbt_sd2_final_residual_scale: 0.5
+  mote_enabled: False
+  sqer_enabled: True
+  sqer_bypass: False
+  sqer_bypass_until_epoch: 2
+  sqer_evidence_only: True
+  sqer_topk: 64
+  sqer_roi_size: 16
+  sqer_roi_expand: 2.0
+  sqer_min_roi_width_px: 32.0
+  sqer_min_roi_height_px: 32.0
+
+optimizer:
+  type: AdamW
+  foreach: False
+  params:
+    -
+      params: '^mote_fusion.*$'
+      lr: 0.0002
+    -
+      params: '^sqer.*$'
+      lr: 0.0002
+    -
+      params: '^sd2_conditioner.*$'
+      lr: 0.0002
+    -
+      params: '^(?=.*backbone)(?!.*(?:norm|bn)).*$'
+      lr: 0.0001
+    -
+      params: '^(?=.*backbone)(?=.*(?:norm|bn)).*$'
+      lr: 0.0001
+      weight_decay: 0.0
+    -
+      params: '^(?=.*(?:encoder|decoder))(?=.*(?:norm|bn|bias)).*$'
+      weight_decay: 0.0
+  lr: 0.0002
+  betas: [0.9, 0.999]
+  weight_decay: 0.0001
+
+train_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  persistent_workers: False
+  dataset:
+    infrared_label_folder: E:/two_paper/data/antiuav6k_ir_raw_verified/train/labels
+
+val_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  persistent_workers: False
+  dataset:
+    infrared_label_folder: E:/two_paper/data/antiuav6k_ir_raw_verified/test/labels
+
+DFINECriterion:
+  sqer_shape_weight: 0.05
+  sqer_shape_start_epoch: 2
+  sqer_supervision: sam

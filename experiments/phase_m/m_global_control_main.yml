@@ -1,0 +1,13 @@
+__include__: ["./m_global_control_warmup.yml"]
+
+output_dir: E:/two_paper/outputs/M_GLOBAL_CONTROL_20E_TESTDEV/seed0
+epochs: 20
+tuning: ~
+resume: E:/two_paper/outputs/M_GLOBAL_CONTROL_20E_TESTDEV/warmup/last.pth
+
+DFINE:
+  sqer_bypass: False
+
+DFINECriterion:
+  sqer_shape_weight: 0.05
+  sqer_supervision: sam

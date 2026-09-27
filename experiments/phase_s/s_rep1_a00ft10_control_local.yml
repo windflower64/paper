@@ -1,0 +1,13 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+output_dir: E:/two_paper/runs/21_public_reproduction/S_REP1_A00FT10_CONTROL/seed0
+epochs: 10
+
+train_dataloader:
+  total_batch_size: 16
+
+val_dataloader:
+  total_batch_size: 16
+

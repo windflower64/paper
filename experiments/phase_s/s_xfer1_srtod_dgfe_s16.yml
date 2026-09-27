@@ -1,0 +1,16 @@
+__include__:
+  - './visible_60e_base.yml'
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/20_spatial_importance/S_XFER1_SRTOD_DGFE_S16/seed0
+
+# Paper-faithful transfer of SR-TOD's RH + difference map + DGFE unit.
+# D-FINE-N returns only S16/S32; stage 2 is therefore the first feature used
+# by the detector and is the closest counterpart to SR-TOD's first FPN level.
+HGNetv2:
+  srtod_stage: 2
+  srtod_threshold: 0.0156862
+
+# The official SR-TOD configuration uses MSE reconstruction loss weight 1.0.
+DFINECriterion:
+  srtod_reconstruction_weight: 1.0
+

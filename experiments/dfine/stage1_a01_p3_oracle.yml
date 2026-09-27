@@ -1,0 +1,20 @@
+__include__: [
+  './stage1_visible_preservation_base.yml',
+]
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/10_visible_preservation/A01_p3_oracle/seed0
+
+HGNetv2:
+  return_idx: [1, 2, 3]
+
+HybridEncoder:
+  in_channels: [256, 512, 1024]
+  feat_strides: [8, 16, 32]
+  use_encoder_idx: [2]
+
+DFINETransformer:
+  feat_channels: [128, 128, 128]
+  feat_strides: [8, 16, 32]
+  num_levels: 3
+  num_points: [6, 6, 6]
+

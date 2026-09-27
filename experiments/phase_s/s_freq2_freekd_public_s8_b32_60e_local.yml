@@ -1,0 +1,27 @@
+__include__: [
+  './visible_60e_base_local.yml',
+]
+
+output_dir: E:/two_paper/runs/22_sam_frequency_detail/S_FREQ2_FREEKD_PUBLIC_S8_B32_60E/seed0
+
+# S-FREQ2先单独验证FreeKD公开公式迁移，不叠加项目专属SAM边界门控。
+# 学生结构、标准S8->S16下采样、检测头和推理路径均与A00一致。
+frequency_distillation:
+  enabled: True
+  teacher_config: E:/two_paper/D-FINE/experiments/phase_s/visible_60e_base_local.yml
+  teacher_checkpoint: E:/two_paper/outputs/dfine_n_visible_640x512_full_seed0/best_stg1.pth
+  prompt_checkpoint: E:/two_paper/_third_party/FreeKD/checkpoints/FreeKD_retinanet_r101_prompt.pth
+  prompt_module_index: 4
+  level_index: 0
+  # 正式batch32下weight=3.0使共享参数梯度比达到35.6%且轻微冲突。
+  # 固定为0.75；batch32实测共享参数梯度比为3.84%，且方向不冲突。
+  # 这是一次安全性标定，不做权重搜索。
+  loss_weight: 0.75
+  sam_gate_mode: none
+
+# 与正式A00历史协议保持batch32，避免新增批量和学习率混杂变量。
+train_dataloader:
+  total_batch_size: 32
+
+val_dataloader:
+  total_batch_size: 32

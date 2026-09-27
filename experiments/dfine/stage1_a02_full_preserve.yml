@@ -1,0 +1,13 @@
+__include__: [
+  './stage1_visible_preservation_base.yml',
+]
+
+output_dir: /root/autodl-tmp/rgbt_experiments/runs/10_visible_preservation/A02_full_preserve/seed0
+
+HGNetv2:
+  preserve_stage: 2
+  preserve_mode: pixel
+  preserve_ratio: 1.0
+  preserve_groups: 4
+  preserve_init_scale: 0.1
+

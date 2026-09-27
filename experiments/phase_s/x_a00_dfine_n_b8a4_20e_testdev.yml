@@ -1,0 +1,19 @@
+__include__: ['../phase_m/c_only_gq1_b8a4_20e_testdev_local.yml']
+
+# Matched RGB-only D-FINE control for the C-GQ1 comparison.
+output_dir: E:/two_paper/outputs/C_M_SAM_ATTRIBUTION/A0_DFINE_N_B8A4_20E/seed0
+epochs: 20
+checkpoint_freq: 2
+
+HGNetv2:
+  pat_stage: -1
+  pat_sf_stage: -1
+  pat_sf_variant: self
+
+DFINE:
+  rgbt_enabled: False
+  rgbt_sd2_enabled: False
+  rgbt_freeze_thermal_stream: False
+
+DFINETransformer:
+  hrqs_enabled: False

@@ -1,0 +1,55 @@
+__include__: ['./m_thermal_gq1_b32_60e_cocoinit_local.yml']
+output_dir: E:/two_paper/outputs/M_IR_RAW_VERIFIED_GQ1_30E_TESTDEV/seed0
+epochs: 30
+checkpoint_freq: 5
+skip_model_profile: True
+tuning: ~
+resume: ~
+HGNetv2:
+  pretrained: False
+  return_idx: [2, 3]
+DFINE:
+  rgbt_enabled: False
+  rgbt_lock_norm_stats: False
+  sgc_enabled: False
+DFINETransformer:
+  hrqs_enabled: False
+  sdtec_enabled: False
+gradient_accumulation_steps: 1
+optimizer:
+  foreach: False
+lr_scheduler:
+  type: MultiStepLR
+  milestones: [20, 26]
+  gamma: 0.5
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 100
+train_dataloader:
+  total_batch_size: 32
+  num_workers: 0
+  persistent_workers: False
+  dataset:
+    ann_file: E:/two_paper/data/antiuav6k_ir_raw_verified/annotations/instances_infrared_train.json
+    transforms:
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [512, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: stop_epoch
+        epoch: 200
+        ops: [RandomPhotometricDistort]
+val_dataloader:
+  total_batch_size: 8
+  num_workers: 0
+  dataset:
+    img_folder: F:/data/Anti-UAV/Anti_UAV_6K/test/infrared/images
+    ann_file: E:/two_paper/data/antiuav6k_ir_raw_verified/annotations/instances_infrared_test.json
+scaler:
+  type: GradScaler
+  enabled: True
+  init_scale: 128.0
