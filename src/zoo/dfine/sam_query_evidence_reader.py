@@ -426,24 +426,17 @@ def sqer_shape_loss(
         if boxes is None or boxes.numel() == 0:
             skipped_reasons["empty_or_multi"] += 1
             continue
-        if len(boxes) != 1:
-            skipped_reasons["empty_or_multi"] += 1
-            continue
         teacher_quality = target.get("sam_quality")
         if teacher_quality is None or float(torch.as_tensor(teacher_quality).reshape(-1)[0]) <= 0:
             skipped_reasons["teacher_rejected"] += 1
             continue
         source_mask = target.get("masks")
-        if source_mask is None or source_mask.numel() == 0:
+        if source_mask is None or source_mask.numel() == 0 or len(source_mask) != len(boxes):
             skipped_reasons["teacher_rejected"] += 1
             continue
 
-        match_positions = torch.nonzero(tgt_idx == 0, as_tuple=False).flatten()
-        if match_positions.numel() == 0:
-            continue
-        source_queries = src_idx[match_positions]
-        for query_index in source_queries.tolist():
-            box = boxes[0].to(device=device, dtype=torch.float32).reshape(1, 1, 4)
+        for query_index, target_index in zip(src_idx.tolist(), tgt_idx.tolist()):
+            box = boxes[target_index].to(device=device, dtype=torch.float32).reshape(1, 1, 4)
             area_px = box[0, 0, 2] * box[0, 0, 3] * 512.0 * 640.0
             is_small = bool(area_px < 1024.0)
             selected_matches = torch.nonzero(
@@ -455,7 +448,7 @@ def sqer_shape_loss(
                 continue
             selected_index = int(selected_matches[0])
 
-            mask = source_mask[0].to(device=device, dtype=torch.float32)
+            mask = source_mask[target_index].to(device=device, dtype=torch.float32)
             grid = roi_grid[batch_index, selected_index].reshape(
                 1, roi_size, roi_size, 2
             )

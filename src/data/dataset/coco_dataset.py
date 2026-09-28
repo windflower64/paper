@@ -52,6 +52,7 @@ class CocoDetection(FasterCocoDetection, DetDataset):
         self.sam_mask_root = Path(sam_mask_root) if sam_mask_root else None
         self.sam_mask_accepted_ids = set()
         self.sam_mask_quality = {}
+        self.sam_mask_files = {}
         if self.sam_mask_root is not None:
             records_path = self.sam_mask_root / "records.json"
             if not records_path.is_file():
@@ -65,6 +66,13 @@ class CocoDetection(FasterCocoDetection, DetDataset):
             for record in records:
                 if not bool(record.get("accepted", False)):
                     continue
+                if "instance_mask_files" in record:
+                    files = record["instance_mask_files"]
+                    if not isinstance(files, list) or not files or not all(isinstance(name, str) for name in files):
+                        raise ValueError("Invalid SAM instance_mask_files")
+                    if any(Path(name).name != name for name in files):
+                        raise ValueError("SAM instance mask file names must not include directories")
+                    self.sam_mask_files[int(record["image_id"])] = files
                 if "supervision_weight" in record:
                     weight = float(record["supervision_weight"])
                     if not math.isfinite(weight) or not 0.0 <= weight <= 1.0:
@@ -103,21 +111,24 @@ class CocoDetection(FasterCocoDetection, DetDataset):
             num_objects = int(target["boxes"].shape[0])
             masks = torch.zeros((num_objects, height, width), dtype=torch.uint8)
             if num_objects > 0 and image_id in self.sam_mask_accepted_ids:
-                if num_objects != 1:
-                    raise RuntimeError(
-                        "SAM mask loading currently requires at most one object per image; "
-                        f"image_id={image_id} has {num_objects} objects"
-                    )
-                mask_path = self.sam_mask_root / "masks" / f"{int(image_id):06d}.png"
-                if not mask_path.is_file():
-                    raise FileNotFoundError(f"Accepted SAM mask is missing: {mask_path}")
-                mask = Image.open(mask_path).convert("L")
-                if mask.size != image.size:
-                    raise RuntimeError(
-                        f"SAM mask/image size mismatch for image_id={image_id}: "
-                        f"mask={mask.size}, image={image.size}"
-                    )
-                masks[0] = torch.from_numpy(np.array(mask, dtype=np.uint8, copy=True)).gt(0)
+                names = self.sam_mask_files.get(int(image_id))
+                if names is None:
+                    if num_objects != 1:
+                        raise RuntimeError(f"Multi-object SAM masks missing instance_mask_files: image_id={image_id}")
+                    names = [f"{int(image_id):06d}.png"]
+                if len(names) != num_objects:
+                    raise RuntimeError(f"SAM mask count differs from box count: image_id={image_id}")
+                for object_index, name in enumerate(names):
+                    mask_path = self.sam_mask_root / "masks" / name
+                    if not mask_path.is_file():
+                        raise FileNotFoundError(f"Accepted SAM mask is missing: {mask_path}")
+                    mask = Image.open(mask_path).convert("L")
+                    if mask.size != image.size:
+                        raise RuntimeError(
+                            f"SAM mask/image size mismatch for image_id={image_id}: "
+                            f"mask={mask.size}, image={image.size}"
+                        )
+                    masks[object_index] = torch.from_numpy(np.array(mask, dtype=np.uint8, copy=True)).gt(0)
             target["masks"] = masks
             target["sam_quality"] = torch.tensor(
                 [self.sam_mask_quality.get(int(image_id), 0.0)], dtype=torch.float32

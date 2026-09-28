@@ -40,7 +40,7 @@ def selection(target, size, source):
     masks = target['masks'].float()
     h, w = masks.shape[-2:]
     boxes = target['boxes']
-    if len(boxes) != 1 or float(target['sam_quality']) <= 0:
+    if len(boxes) == 0 or masks.shape[0] != len(boxes) or float(target['sam_quality']) <= 0:
         return None
     field = masks.amax(0) if source == 'sam' else raster(boxes, h, w)
     occupancy = F.interpolate(field[None, None], size=size, mode='area')[0, 0]
