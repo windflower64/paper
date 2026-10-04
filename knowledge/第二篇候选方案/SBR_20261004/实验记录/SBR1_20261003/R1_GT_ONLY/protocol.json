@@ -1,0 +1,16 @@
+{
+  "arm": "R1_GT_ONLY",
+  "epochs": 30,
+  "batch_size": 16,
+  "shape_weight": 0.0,
+  "base_sha": "d7fc60568887e12ba66fbe5b474d09be5cfcc5dd4fe14bc102556b5e5b5aa952",
+  "init_sha": "8682cea497fcc8666022d9661c041af3af9a926b2cd2018cbe29a4560007ad03",
+  "seed": 0,
+  "lr": 0.0001,
+  "radius": 0.45,
+  "topk": 64,
+  "roi_size": 32,
+  "frozen_baseline": true,
+  "baseline_contains_old_SAM": true,
+  "new_shape_teacher_only_difference": true
+}

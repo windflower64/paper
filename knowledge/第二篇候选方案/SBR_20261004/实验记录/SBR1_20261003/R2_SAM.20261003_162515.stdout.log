@@ -1,0 +1,16 @@
+building train_dataloader with batch_size=16...
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 0, "steps": 200, "loss": 0.43184876441955566, "lr": 1.0000000000000002e-06, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 10, "steps": 200, "loss": 0.47192350029945374, "lr": 5.500000000000001e-06, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 20, "steps": 200, "loss": 0.4883064329624176, "lr": 1.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 30, "steps": 200, "loss": 0.3518710732460022, "lr": 1.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 40, "steps": 200, "loss": 0.3766782581806183, "lr": 2.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 50, "steps": 200, "loss": 0.5242891907691956, "lr": 2.5500000000000003e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 60, "steps": 200, "loss": 0.43214404582977295, "lr": 3.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 70, "steps": 200, "loss": 0.39674240350723267, "lr": 3.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 80, "steps": 200, "loss": 0.5240756869316101, "lr": 4.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 90, "steps": 200, "loss": 0.4182942807674408, "lr": 4.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 100, "steps": 200, "loss": 0.4643966853618622, "lr": 5.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 110, "steps": 200, "loss": 0.3599674105644226, "lr": 5.550000000000001e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 120, "steps": 200, "loss": 0.42058297991752625, "lr": 6.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 130, "steps": 200, "loss": 0.4218158721923828, "lr": 6.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R2_SAM", "epoch": 0, "step": 140, "steps": 200, "loss": 0.4303862452507019, "lr": 7.05e-05, "best_ap": -1.0}

@@ -1,0 +1,33 @@
+{
+  "arm": "R1_GT_ONLY",
+  "epochs": 30,
+  "batch_size": 16,
+  "shape_weight": 0.0,
+  "base_sha": "d7fc60568887e12ba66fbe5b474d09be5cfcc5dd4fe14bc102556b5e5b5aa952",
+  "init_sha": "7045a02c8c8578a180966ba956759a808cbaab1c1447cb234c96efd8c1c64f26",
+  "seed": 0,
+  "lr": 0.0001,
+  "radius": 0.45,
+  "topk": 64,
+  "roi_size": null,
+  "frozen_baseline": true,
+  "baseline_contains_old_SAM": true,
+  "new_shape_teacher_only_difference": true,
+  "module": "SBR3",
+  "precision": "float32",
+  "position_bins": 17,
+  "strip_points": 16,
+  "epoch_random_seed_base": 20000,
+  "synthetic_candidates": "one exact GT plus two independently jittered boxes per target, side jitter +/-20%",
+  "synthetic_loss_weight": 0.5,
+  "shape_loss": "local soft BCE + dice, weight 1 in SAM arm",
+  "local_encoder_trainable": true,
+  "predicted_shape_in_forward": true,
+  "teacher_in_forward": false,
+  "source_hashes": {
+    "E:\\two_paper\\D-FINE\\tools\\train_sbr3.py": "825320391b2f1af0b3831b43e5fb3fc571b8fb3631088d6e63d054331b3704bc",
+    "E:\\two_paper\\D-FINE\\tools\\train_sbr1.py": "229f27c35cdd580ed96497e28f007036f39df93d79a4dee08747d56734160531",
+    "E:\\two_paper\\D-FINE\\tools\\train_sbr2.py": "49c2032952717a82e2c798b69ed1a1d451858d6667cbdc1f4dc788fa08eee1ef",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_side_search.py": "1fd0c351bf2446caaab8367ae8518bf991d736dad2d858ae0d744165d17fbb0b"
+  }
+}

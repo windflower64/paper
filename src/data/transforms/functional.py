@@ -41,6 +41,8 @@ def crop(image, target, region):
     target["size"] = torch.tensor([h, w])
 
     fields = ["labels", "area", "iscrowd"]
+    if "sam_instance_valid" in target:
+        fields.append("sam_instance_valid")
 
     if "boxes" in target:
         boxes = target["boxes"]

@@ -50,6 +50,23 @@ class SanitizeBoundingBoxes(_VisibleSanitizeBoundingBoxes):
     the same sampled parameters.
     """
 
+    @staticmethod
+    def _sync_sam_validity(output):
+        if isinstance(output, (tuple, list)) and len(output) > 1 and isinstance(output[1], dict):
+            target = output[1]
+            if "sam_instance_valid" in target:
+                # The sanitizer already filters Mask rows by the same box
+                # keep vector. Invalid teacher masks are identically zero.
+                masks = target.get("masks")
+                if masks is None or len(masks) != len(target["boxes"]):
+                    raise RuntimeError("Cannot align SAM validity after sanitizing boxes")
+                target["sam_instance_valid"] = (
+                    masks.reshape(len(masks), -1).bool().any(1)
+                    if len(masks)
+                    else torch.zeros(0, dtype=torch.bool, device=masks.device)
+                )
+        return output
+
     def forward(self, *inputs):
         sample = inputs if len(inputs) > 1 else inputs[0]
         if not (
@@ -58,7 +75,7 @@ class SanitizeBoundingBoxes(_VisibleSanitizeBoundingBoxes):
             and isinstance(sample[1], dict)
             and "infrared_boxes" in sample[1]
         ):
-            return super().forward(*inputs)
+            return self._sync_sam_validity(super().forward(*inputs))
         target = sample[1]
         infrared_boxes = target.pop("infrared_boxes")
         try:
@@ -74,7 +91,7 @@ class SanitizeBoundingBoxes(_VisibleSanitizeBoundingBoxes):
             target["infrared_boxes"] = infrared_boxes
             raise RuntimeError("SanitizeBoundingBoxes returned an unexpected sample")
         output[1]["infrared_boxes"] = infrared_boxes
-        return output
+        return self._sync_sam_validity(output)
 
 
 @register()

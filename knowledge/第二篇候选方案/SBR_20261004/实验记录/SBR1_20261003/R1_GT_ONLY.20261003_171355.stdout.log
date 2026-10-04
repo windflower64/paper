@@ -1,0 +1,1322 @@
+building train_dataloader with batch_size=16...
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 0, "steps": 200, "loss": 0.3210011124610901, "lr": 1.0000000000000002e-06, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 10, "steps": 200, "loss": 0.35808610916137695, "lr": 5.500000000000001e-06, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 20, "steps": 200, "loss": 0.3767090439796448, "lr": 1.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 30, "steps": 200, "loss": 0.2489275485277176, "lr": 1.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 40, "steps": 200, "loss": 0.27337247133255005, "lr": 2.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 50, "steps": 200, "loss": 0.4219001233577728, "lr": 2.5500000000000003e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 60, "steps": 200, "loss": 0.3359714150428772, "lr": 3.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 70, "steps": 200, "loss": 0.30066749453544617, "lr": 3.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 80, "steps": 200, "loss": 0.43515491485595703, "lr": 4.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 90, "steps": 200, "loss": 0.33361387252807617, "lr": 4.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 100, "steps": 200, "loss": 0.3822041451931, "lr": 5.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 110, "steps": 200, "loss": 0.27994975447654724, "lr": 5.550000000000001e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 120, "steps": 200, "loss": 0.3481256663799286, "lr": 6.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 130, "steps": 200, "loss": 0.3480064272880554, "lr": 6.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 140, "steps": 200, "loss": 0.361467570066452, "lr": 7.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 150, "steps": 200, "loss": 0.4647181034088135, "lr": 7.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 160, "steps": 200, "loss": 0.4851531386375427, "lr": 8.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 170, "steps": 200, "loss": 0.32304733991622925, "lr": 8.55e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 180, "steps": 200, "loss": 0.4206019341945648, "lr": 9.05e-05, "best_ap": -1.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 0, "step": 190, "steps": 200, "loss": 0.3377884030342102, "lr": 9.55e-05, "best_ap": -1.0}
+building val_dataloader with batch_size=16...
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.18s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.537
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.580
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.480
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.564
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.589
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 0, "train": {"loss": 0.3663998290896416, "l1": 0.010447461903095246, "giou": 0.15706330195069312, "shape_kl": 2.2626673102378847, "negative_stability": 0.00035915529555154537, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5371226146261315, 0.9398043010651572, 0.5798043536429419, 0.4797554834778753, 0.563619147643046, -1.0, 0.5890597279716144, 0.6342992312241278, 0.6785334121821408, 0.6412844036697247, 0.6962478184991273, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7689399269780134, "iou75_base": 1142, "iou75_refined": 1144, "improved": 799, "worsened": 803}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 170.36000000004424}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 0, "steps": 200, "loss": 0.3571885824203491, "lr": 0.0001, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 10, "steps": 200, "loss": 0.34093421697616577, "lr": 9.999927386411504e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 20, "steps": 200, "loss": 0.39596039056777954, "lr": 9.999709547776411e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 30, "steps": 200, "loss": 0.3408285081386566, "lr": 9.99934649048585e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 40, "steps": 200, "loss": 0.26744598150253296, "lr": 9.998838225191497e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 50, "steps": 200, "loss": 0.33493492007255554, "lr": 9.998184766805256e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 60, "steps": 200, "loss": 0.3839852511882782, "lr": 9.997386134498828e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 70, "steps": 200, "loss": 0.3356438875198364, "lr": 9.996442351703146e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 80, "steps": 200, "loss": 0.35313618183135986, "lr": 9.995353446107685e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 90, "steps": 200, "loss": 0.26045724749565125, "lr": 9.994119449659656e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 100, "steps": 200, "loss": 0.3174692690372467, "lr": 9.992740398563063e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 110, "steps": 200, "loss": 0.3321603238582611, "lr": 9.991216333277644e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 120, "steps": 200, "loss": 0.34327250719070435, "lr": 9.989547298517679e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 130, "steps": 200, "loss": 0.2728096842765808, "lr": 9.987733343250686e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 140, "steps": 200, "loss": 0.5524998307228088, "lr": 9.985774520695977e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 150, "steps": 200, "loss": 0.45642006397247314, "lr": 9.983670888323104e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 160, "steps": 200, "loss": 0.3222562372684479, "lr": 9.981422507850163e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 170, "steps": 200, "loss": 0.38657644391059875, "lr": 9.979029445241997e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 180, "steps": 200, "loss": 0.3807673156261444, "lr": 9.976491770708243e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 1, "step": 190, "steps": 200, "loss": 0.32658663392066956, "lr": 9.97380955870129e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.18s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.537
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.578
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.480
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.563
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.589
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.642
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 1, "train": {"loss": 0.3667394136637449, "l1": 0.0104489855770953, "giou": 0.157228316180408, "shape_kl": 2.1434971100091933, "negative_stability": 0.00037851319135370434, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5369873600511398, 0.9397969212837849, 0.5780928094330937, 0.4803896657472361, 0.5633103868612571, -1.0, 0.5890597279716144, 0.6341809580130101, 0.6785334121821409, 0.6418348623853211, 0.6959860383944153, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7688613555276803, "iou75_base": 1142, "iou75_refined": 1144, "improved": 791, "worsened": 890}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 169.875}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 0, "steps": 200, "loss": 0.3632030785083771, "lr": 9.970982887914081e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 10, "steps": 200, "loss": 0.4802511930465698, "lr": 9.968011841277813e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 20, "steps": 200, "loss": 0.29800060391426086, "lr": 9.964896505959496e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 30, "steps": 200, "loss": 0.3466845154762268, "lr": 9.961636973359409e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 40, "steps": 200, "loss": 0.3480580747127533, "lr": 9.9582333391084e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 50, "steps": 200, "loss": 0.3507618010044098, "lr": 9.954685703065094e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 60, "steps": 200, "loss": 0.36251479387283325, "lr": 9.950994169312961e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 70, "steps": 200, "loss": 0.40922731161117554, "lr": 9.947158846157259e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 80, "steps": 200, "loss": 0.3695344626903534, "lr": 9.943179846121856e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 90, "steps": 200, "loss": 0.36548784375190735, "lr": 9.939057285945933e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 100, "steps": 200, "loss": 0.30159005522727966, "lr": 9.934791286580555e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 110, "steps": 200, "loss": 0.42154085636138916, "lr": 9.930381973185127e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 120, "steps": 200, "loss": 0.3878806531429291, "lr": 9.925829475123716e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 130, "steps": 200, "loss": 0.32338398694992065, "lr": 9.921133925961259e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 140, "steps": 200, "loss": 0.4597284197807312, "lr": 9.916295463459645e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 150, "steps": 200, "loss": 0.38755032420158386, "lr": 9.911314229573673e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 160, "steps": 200, "loss": 0.4026389420032501, "lr": 9.906190370446883e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 170, "steps": 200, "loss": 0.34967032074928284, "lr": 9.900924036407279e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 180, "steps": 200, "loss": 0.36915141344070435, "lr": 9.895515381962903e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 2, "step": 190, "steps": 200, "loss": 0.38612937927246094, "lr": 9.889964565797315e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.537
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.578
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.479
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.563
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.589
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.642
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 2, "train": {"loss": 0.36574168980121613, "l1": 0.010417542196810245, "giou": 0.15680598933249712, "shape_kl": 2.091358433365822, "negative_stability": 0.00042002450885775033, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5366570677468555, 0.9395711370153731, 0.5782244765279132, 0.47924655043346626, 0.5631667055590402, -1.0, 0.589237137788291, 0.6341809580130101, 0.6787108219988174, 0.6423853211009174, 0.6959860383944153, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7688671331334967, "iou75_base": 1142, "iou75_refined": 1143, "improved": 762, "worsened": 919}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 169.9220000000205}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 0, "steps": 200, "loss": 0.40009450912475586, "lr": 9.88427175076493e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 10, "steps": 200, "loss": 0.3753258287906647, "lr": 9.878437103886246e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 20, "steps": 200, "loss": 0.3444517254829407, "lr": 9.872460796342937e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 30, "steps": 200, "loss": 0.3378988206386566, "lr": 9.866343003472837e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 40, "steps": 200, "loss": 0.28571566939353943, "lr": 9.860083904764793e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 50, "steps": 200, "loss": 0.32781267166137695, "lr": 9.853683683853397e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 60, "steps": 200, "loss": 0.355917751789093, "lr": 9.847142528513602e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 70, "steps": 200, "loss": 0.39223745465278625, "lr": 9.84046063065521e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 80, "steps": 200, "loss": 0.37029731273651123, "lr": 9.833638186317245e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 90, "steps": 200, "loss": 0.3514053225517273, "lr": 9.826675395662196e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 100, "steps": 200, "loss": 0.3420862555503845, "lr": 9.819572462970153e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 110, "steps": 200, "loss": 0.2802317142486572, "lr": 9.812329596632806e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 120, "steps": 200, "loss": 0.32455119490623474, "lr": 9.804947009147329e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 130, "steps": 200, "loss": 0.35575926303863525, "lr": 9.797424917110158e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 140, "steps": 200, "loss": 0.3876238167285919, "lr": 9.78976354121062e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 150, "steps": 200, "loss": 0.35108494758605957, "lr": 9.781963106224478e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 160, "steps": 200, "loss": 0.3568301200866699, "lr": 9.774023841007313e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 170, "steps": 200, "loss": 0.3742406964302063, "lr": 9.765945978487828e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 180, "steps": 200, "loss": 0.4039018154144287, "lr": 9.757729755661011e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 3, "step": 190, "steps": 200, "loss": 0.3593890070915222, "lr": 9.749375413581168e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.536
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.578
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.479
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.562
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.588
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.678
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.642
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.799
+{"epoch": 3, "train": {"loss": 0.3650533389300108, "l1": 0.010389261108357459, "giou": 0.15653152085840702, "shape_kl": 2.1682821667194365, "negative_stability": 0.0004399064473545877, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5356373703251323, 0.9399453022466205, 0.5781973781434282, 0.4785936925569101, 0.561976547594975, -1.0, 0.5884092253104672, 0.6338261383796571, 0.6784151389710231, 0.6422018348623852, 0.6956369982547993, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7686950692026873, "iou75_base": 1142, "iou75_refined": 1142, "improved": 740, "worsened": 941}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 169.7029999999795}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 0, "steps": 200, "loss": 0.32468700408935547, "lr": 9.740883197354873e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 10, "steps": 200, "loss": 0.30529701709747314, "lr": 9.732253356133757e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 20, "steps": 200, "loss": 0.3346576690673828, "lr": 9.72348614310721e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 30, "steps": 200, "loss": 0.3141133785247803, "lr": 9.714581815494952e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 40, "steps": 200, "loss": 0.37737730145454407, "lr": 9.705540634539474e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 50, "steps": 200, "loss": 0.3960486352443695, "lr": 9.696362865498396e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 60, "steps": 200, "loss": 0.3136276602745056, "lr": 9.68704877763666e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 70, "steps": 200, "loss": 0.29749587178230286, "lr": 9.677598644218653e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 80, "steps": 200, "loss": 0.31413304805755615, "lr": 9.668012742500166e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 90, "steps": 200, "loss": 0.4495014548301697, "lr": 9.658291353720285e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 100, "steps": 200, "loss": 0.34714749455451965, "lr": 9.648434763093118e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 110, "steps": 200, "loss": 0.3547585904598236, "lr": 9.638443259799439e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 120, "steps": 200, "loss": 0.3556567430496216, "lr": 9.628317136978201e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 130, "steps": 200, "loss": 0.3885115683078766, "lr": 9.618056691717934e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 140, "steps": 200, "loss": 0.32033902406692505, "lr": 9.607662225048037e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 150, "steps": 200, "loss": 0.3213997483253479, "lr": 9.597134041929928e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 160, "steps": 200, "loss": 0.28758034110069275, "lr": 9.58647245124812e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 170, "steps": 200, "loss": 0.379639208316803, "lr": 9.575677765801137e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 180, "steps": 200, "loss": 0.3474932610988617, "lr": 9.564750302292357e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 4, "step": 190, "steps": 200, "loss": 0.3675714135169983, "lr": 9.553690381320699e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.536
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.582
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.480
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.563
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.589
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.643
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.799
+{"epoch": 4, "train": {"loss": 0.36510079696774483, "l1": 0.01037880111951381, "giou": 0.1565789346769452, "shape_kl": 2.2379798889160156, "negative_stability": 0.0004892200037284056, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5363452776266289, 0.9403891581115578, 0.5821875861378231, 0.4797198644881565, 0.5627098083328964, -1.0, 0.588882318154938, 0.6341809580130102, 0.6786516853932585, 0.6425688073394495, 0.6958115183246073, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7685287828534613, "iou75_base": 1142, "iou75_refined": 1144, "improved": 731, "worsened": 949}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 169.170999999973}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 0, "steps": 200, "loss": 0.3653145432472229, "lr": 9.542498327371238e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 10, "steps": 200, "loss": 0.44577011466026306, "lr": 9.531174468805669e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 20, "steps": 200, "loss": 0.323801726102829, "lr": 9.519719137852681e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 30, "steps": 200, "loss": 0.3547111451625824, "lr": 9.508132670598211e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 40, "steps": 200, "loss": 0.21708300709724426, "lr": 9.496415406975575e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 50, "steps": 200, "loss": 0.327810138463974, "lr": 9.484567690755506e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 60, "steps": 200, "loss": 0.41133952140808105, "lr": 9.47258986953606e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 70, "steps": 200, "loss": 0.2980961501598358, "lr": 9.460482294732421e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 80, "steps": 200, "loss": 0.3891754150390625, "lr": 9.448245321566592e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 90, "steps": 200, "loss": 0.5155451893806458, "lr": 9.435879309056969e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 100, "steps": 200, "loss": 0.3926760256290436, "lr": 9.423384620007814e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 110, "steps": 200, "loss": 0.3461396098136902, "lr": 9.410761620998603e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 120, "steps": 200, "loss": 0.39637991786003113, "lr": 9.39801068237328e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 130, "steps": 200, "loss": 0.3094353675842285, "lr": 9.385132178229384e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 140, "steps": 200, "loss": 0.26541653275489807, "lr": 9.372126486407073e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 150, "steps": 200, "loss": 0.4853149354457855, "lr": 9.358993988478052e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 160, "steps": 200, "loss": 0.318164199590683, "lr": 9.345735069734357e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 170, "steps": 200, "loss": 0.3609679937362671, "lr": 9.332350119177069e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 180, "steps": 200, "loss": 0.6081656217575073, "lr": 9.318839529504891e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 5, "step": 190, "steps": 200, "loss": 0.32387349009513855, "lr": 9.305203697102629e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.534
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.579
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.479
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.560
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.588
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.678
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.642
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.799
+{"epoch": 5, "train": {"loss": 0.3640405738353729, "l1": 0.010328589382115751, "giou": 0.156172484010458, "shape_kl": 2.3733403700590134, "negative_stability": 0.0005266045191092417, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5340320218200351, 0.9403891581115578, 0.5792379261671684, 0.4788368427845276, 0.5601103709579281, -1.0, 0.587699586043761, 0.633826138379657, 0.6784151389710231, 0.6422018348623852, 0.6956369982547993, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7680456726875162, "iou75_base": 1142, "iou75_refined": 1141, "improved": 714, "worsened": 967}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 170.06200000003446}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 0, "steps": 200, "loss": 0.4193403422832489, "lr": 9.291443022029567e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 10, "steps": 200, "loss": 0.36879825592041016, "lr": 9.277557908007724e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 20, "steps": 200, "loss": 0.3556375205516815, "lr": 9.26354876241001e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 30, "steps": 200, "loss": 0.30500781536102295, "lr": 9.24941599624828e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 40, "steps": 200, "loss": 0.4263957142829895, "lr": 9.235160024161264e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 50, "steps": 200, "loss": 0.2783566117286682, "lr": 9.220781264402413e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 60, "steps": 200, "loss": 0.41799941658973694, "lr": 9.206280138827628e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 70, "steps": 200, "loss": 0.4194677770137787, "lr": 9.19165707288287e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 80, "steps": 200, "loss": 0.2847987115383148, "lr": 9.176912495591695e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 90, "steps": 200, "loss": 0.3270402252674103, "lr": 9.162046839542654e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 100, "steps": 200, "loss": 0.3648630678653717, "lr": 9.147060540876609e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 110, "steps": 200, "loss": 0.3303835093975067, "lr": 9.131954039273932e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 120, "steps": 200, "loss": 0.4278590977191925, "lr": 9.116727777941612e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 130, "steps": 200, "loss": 0.34530913829803467, "lr": 9.101382203600241e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 140, "steps": 200, "loss": 0.35984018445014954, "lr": 9.085917766470922e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 150, "steps": 200, "loss": 0.2759610414505005, "lr": 9.070334920262045e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 160, "steps": 200, "loss": 0.29971837997436523, "lr": 9.05463412215599e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 170, "steps": 200, "loss": 0.28026846051216125, "lr": 9.038815832795702e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 180, "steps": 200, "loss": 0.39884504675865173, "lr": 9.022880516271183e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 6, "step": 190, "steps": 200, "loss": 0.30263328552246094, "lr": 9.006828640105872e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.534
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.582
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.480
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.559
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.588
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.642
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 6, "train": {"loss": 0.3632409157603979, "l1": 0.01028838859172538, "giou": 0.15587097018957138, "shape_kl": 2.397092211842537, "negative_stability": 0.0005703235587861855, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.533825243967983, 0.9403891581115578, 0.5815788389603336, 0.479961210731975, 0.5592637566532593, -1.0, 0.5875221762270846, 0.6341809580130101, 0.6787699586043761, 0.6418348623853211, 0.6963350785340314, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7679161627191471, "iou75_base": 1142, "iou75_refined": 1143, "improved": 703, "worsened": 978}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 169.4529999999795}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 0, "steps": 200, "loss": 0.4089926779270172, "lr": 8.990660675242938e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 10, "steps": 200, "loss": 0.32259401679039, "lr": 8.974377096031444e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 20, "steps": 200, "loss": 0.36237800121307373, "lr": 8.957978380212454e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 30, "steps": 200, "loss": 0.2588089406490326, "lr": 8.941465008904997e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 40, "steps": 200, "loss": 0.2954906225204468, "lr": 8.924837466591961e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 50, "steps": 200, "loss": 0.3738795518875122, "lr": 8.908096241105879e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 60, "steps": 200, "loss": 0.5226821899414062, "lr": 8.891241823614612e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 70, "steps": 200, "loss": 0.3891662359237671, "lr": 8.874274708606941e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 80, "steps": 200, "loss": 0.32866644859313965, "lr": 8.857195393878063e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 90, "steps": 200, "loss": 0.3212028741836548, "lr": 8.840004380514981e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 100, "steps": 200, "loss": 0.29782822728157043, "lr": 8.822702172881801e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 110, "steps": 200, "loss": 0.42252030968666077, "lr": 8.805289278604944e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 120, "steps": 200, "loss": 0.2804579436779022, "lr": 8.787766208558243e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 130, "steps": 200, "loss": 0.3279484510421753, "lr": 8.77013347684796e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 140, "steps": 200, "loss": 0.35362040996551514, "lr": 8.752391600797701e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 150, "steps": 200, "loss": 0.3107452094554901, "lr": 8.734541100933239e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 160, "steps": 200, "loss": 0.36563700437545776, "lr": 8.716582500967239e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 170, "steps": 200, "loss": 0.3854268789291382, "lr": 8.6985163277839e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 180, "steps": 200, "loss": 0.43847957253456116, "lr": 8.68034311142349e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 7, "step": 190, "steps": 200, "loss": 0.38873112201690674, "lr": 8.662063385066802e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.16s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.533
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.941
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.579
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.478
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.559
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.586
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.978
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.797
+{"epoch": 7, "train": {"loss": 0.3624069033563137, "l1": 0.010250412933528423, "giou": 0.15554777037352324, "shape_kl": 2.33689433157444, "negative_stability": 0.0005929789882793557, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5328708008952983, 0.9406056469416166, 0.5790388976059743, 0.4783968963310509, 0.5587892588418365, -1.0, 0.5863985807214667, 0.6339444115907746, 0.6785334121821407, 0.6412844036697247, 0.6962478184991274, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7674121018972783, "iou75_base": 1142, "iou75_refined": 1140, "improved": 689, "worsened": 991}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 169.5}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 0, "steps": 200, "loss": 0.3495376706123352, "lr": 8.643677685019498e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 10, "steps": 200, "loss": 0.32709455490112305, "lr": 8.625186550696393e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 20, "steps": 200, "loss": 0.40041056275367737, "lr": 8.606590524605614e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 30, "steps": 200, "loss": 0.32676777243614197, "lr": 8.587890152332692e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 40, "steps": 200, "loss": 0.31034108996391296, "lr": 8.569085982524551e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 50, "steps": 200, "loss": 0.35779544711112976, "lr": 8.55017856687341e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 60, "steps": 200, "loss": 0.41972365975379944, "lr": 8.531168460100606e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 70, "steps": 200, "loss": 0.33059391379356384, "lr": 8.512056219940306e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 80, "steps": 200, "loss": 0.4513271450996399, "lr": 8.492842407123156e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 90, "steps": 200, "loss": 0.36702635884284973, "lr": 8.473527585359819e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 100, "steps": 200, "loss": 0.3200148940086365, "lr": 8.454112321324446e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 110, "steps": 200, "loss": 0.3684777319431305, "lr": 8.434597184638042e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 120, "steps": 200, "loss": 0.30379602313041687, "lr": 8.414982747851764e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 130, "steps": 200, "loss": 0.4665425717830658, "lr": 8.395269586430112e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 140, "steps": 200, "loss": 0.4016818702220917, "lr": 8.37545827873405e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 150, "steps": 200, "loss": 0.28314557671546936, "lr": 8.355549406004043e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 160, "steps": 200, "loss": 0.30289772152900696, "lr": 8.335543552342996e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 170, "steps": 200, "loss": 0.288921982049942, "lr": 8.315441304699123e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 180, "steps": 200, "loss": 0.41049039363861084, "lr": 8.29524325284872e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 8, "step": 190, "steps": 200, "loss": 0.332570880651474, "lr": 8.27494998937887e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.531
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.573
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.478
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.585
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.678
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.978
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.797
+{"epoch": 8, "train": {"loss": 0.3625416737794876, "l1": 0.010257115638814866, "giou": 0.15560440097004175, "shape_kl": 2.328448026180267, "negative_stability": 0.00047293568059103563, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5312568603476283, 0.939938674412989, 0.5734304365988432, 0.47833160749270726, 0.5564639930583655, -1.0, 0.5853932584269663, 0.6334713187463039, 0.6784742755765818, 0.6414678899082569, 0.6960732984293194, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7673096432665055, "iou75_base": 1142, "iou75_refined": 1136, "improved": 693, "worsened": 986}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 168.875}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 0, "steps": 200, "loss": 0.3345508873462677, "lr": 8.254562109670047e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 10, "steps": 200, "loss": 0.41572561860084534, "lr": 8.234080211878662e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 20, "steps": 200, "loss": 0.35078752040863037, "lr": 8.213504896919502e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 30, "steps": 200, "loss": 0.3403131365776062, "lr": 8.1928367684481e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 40, "steps": 200, "loss": 0.4299449026584625, "lr": 8.172076432843038e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 50, "steps": 200, "loss": 0.32017451524734497, "lr": 8.151224499188134e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 60, "steps": 200, "loss": 0.3062025010585785, "lr": 8.130281579254597e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 70, "steps": 200, "loss": 0.4196835160255432, "lr": 8.10924828748306e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 80, "steps": 200, "loss": 0.30977460741996765, "lr": 8.088125240965561e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 90, "steps": 200, "loss": 0.4834815561771393, "lr": 8.066913059427436e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 100, "steps": 200, "loss": 0.4772348701953888, "lr": 8.045612365209138e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 110, "steps": 200, "loss": 0.32768914103507996, "lr": 8.024223783247978e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 120, "steps": 200, "loss": 0.27159571647644043, "lr": 8.00274794105979e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 130, "steps": 200, "loss": 0.3399341404438019, "lr": 7.98118546872052e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 140, "steps": 200, "loss": 0.3024848699569702, "lr": 7.959536998847744e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 150, "steps": 200, "loss": 0.28043633699417114, "lr": 7.937803166582096e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 160, "steps": 200, "loss": 0.32848674058914185, "lr": 7.91598460956865e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 170, "steps": 200, "loss": 0.3032127916812897, "lr": 7.894081967938208e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 180, "steps": 200, "loss": 0.35035133361816406, "lr": 7.872095884288499e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 9, "step": 190, "steps": 200, "loss": 0.5586730241775513, "lr": 7.850027003665364e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.18s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.531
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.575
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.477
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.557
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.585
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.678
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.978
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 9, "train": {"loss": 0.36199371337890623, "l1": 0.010233891436364502, "giou": 0.15538492612540722, "shape_kl": 2.34558235168457, "negative_stability": 0.0005440490954788401, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5311255093084788, 0.939558185431411, 0.5745808629918424, 0.477392535550535, 0.5565869745036512, -1.0, 0.5846836191602602, 0.6331756357185098, 0.6782968657599053, 0.6412844036697247, 0.6958987783595113, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7671185489931204, "iou75_base": 1142, "iou75_refined": 1138, "improved": 686, "worsened": 995}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 169.76600000000326}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 0, "steps": 200, "loss": 0.3105897009372711, "lr": 7.827875973543794e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 10, "steps": 200, "loss": 0.3999740481376648, "lr": 7.805643443808955e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 20, "steps": 200, "loss": 0.35921090841293335, "lr": 7.783330066737118e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 30, "steps": 200, "loss": 0.3328379690647125, "lr": 7.760936496976515e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 40, "steps": 200, "loss": 0.45319288969039917, "lr": 7.738463391528144e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 50, "steps": 200, "loss": 0.41486993432044983, "lr": 7.715911409726477e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 60, "steps": 200, "loss": 0.35496947169303894, "lr": 7.693281213220133e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 70, "steps": 200, "loss": 0.37638553977012634, "lr": 7.67057346595246e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 80, "steps": 200, "loss": 0.295629620552063, "lr": 7.647788834142044e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 90, "steps": 200, "loss": 0.36829084157943726, "lr": 7.624927986263182e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 100, "steps": 200, "loss": 0.4108503758907318, "lr": 7.601991593026258e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 110, "steps": 200, "loss": 0.30357804894447327, "lr": 7.578980327358068e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 120, "steps": 200, "loss": 0.3286616802215576, "lr": 7.555894864382078e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 130, "steps": 200, "loss": 0.35827428102493286, "lr": 7.532735881398612e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 140, "steps": 200, "loss": 0.4260168671607971, "lr": 7.509504057864992e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 150, "steps": 200, "loss": 0.38671568036079407, "lr": 7.486200075375588e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 160, "steps": 200, "loss": 0.3047597110271454, "lr": 7.46282461764183e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 170, "steps": 200, "loss": 0.30445951223373413, "lr": 7.439378370472155e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 180, "steps": 200, "loss": 0.3505248427391052, "lr": 7.41586202175187e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 10, "step": 190, "steps": 200, "loss": 0.5040013790130615, "lr": 7.392276261422986e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.533
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.579
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.478
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.558
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.586
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.799
+{"epoch": 10, "train": {"loss": 0.36174328088760377, "l1": 0.010244388678111137, "giou": 0.1552373507246375, "shape_kl": 2.357543580532074, "negative_stability": 0.00046636011262307875, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5327148719650786, 0.9399297030259094, 0.5794536690643076, 0.4784620573011849, 0.5581999928640596, -1.0, 0.5859846244825546, 0.6340035481963336, 0.6786516853932584, 0.6414678899082569, 0.6963350785340314, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.767340600045562, "iou75_base": 1142, "iou75_refined": 1142, "improved": 691, "worsened": 989}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 173.14100000000326}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 0, "steps": 200, "loss": 0.3647647798061371, "lr": 7.368621781463961e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 10, "steps": 200, "loss": 0.4968664050102234, "lr": 7.344899275869415e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 20, "steps": 200, "loss": 0.3404625952243805, "lr": 7.321109440629753e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 30, "steps": 200, "loss": 0.3020970821380615, "lr": 7.297252973710757e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 40, "steps": 200, "loss": 0.29804328083992004, "lr": 7.273330575033103e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 50, "steps": 200, "loss": 0.38054999709129333, "lr": 7.249342946451824e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 60, "steps": 200, "loss": 0.3614135980606079, "lr": 7.225290791735725e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 70, "steps": 200, "loss": 0.4092671573162079, "lr": 7.201174816546734e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 80, "steps": 200, "loss": 0.36698704957962036, "lr": 7.176995728419192e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 90, "steps": 200, "loss": 0.4250035285949707, "lr": 7.152754236739101e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 100, "steps": 200, "loss": 0.4469067454338074, "lr": 7.12845105272331e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 110, "steps": 200, "loss": 0.4818105101585388, "lr": 7.104086889398649e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 120, "steps": 200, "loss": 0.2793255150318146, "lr": 7.07966246158101e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 130, "steps": 200, "loss": 0.36889326572418213, "lr": 7.05517848585437e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 140, "steps": 200, "loss": 0.3155114948749542, "lr": 7.03063568054978e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 150, "steps": 200, "loss": 0.30182042717933655, "lr": 7.006034765724269e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 160, "steps": 200, "loss": 0.3511259853839874, "lr": 6.981376463139745e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 170, "steps": 200, "loss": 0.4080960154533386, "lr": 6.956661496241796e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 180, "steps": 200, "loss": 0.45696917176246643, "lr": 6.931890590138475e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 11, "step": 190, "steps": 200, "loss": 0.31172600388526917, "lr": 6.907064471579033e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.16s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.531
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.939
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.580
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.477
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.557
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.585
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.978
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.799
+{"epoch": 11, "train": {"loss": 0.3611890964955091, "l1": 0.010205849765334278, "giou": 0.1550568575412035, "shape_kl": 2.2823366832733156, "negative_stability": 0.0004613286815583706, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5313926026002281, 0.9387639133899021, 0.5795322306551691, 0.47664958540951735, 0.5572380266414909, -1.0, 0.585156712004731, 0.6335304553518629, 0.6786516853932585, 0.6414678899082569, 0.6963350785340314, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7671148513043371, "iou75_base": 1142, "iou75_refined": 1142, "improved": 688, "worsened": 993}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 173.32800000003772}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 0, "steps": 200, "loss": 0.3231990337371826, "lr": 6.882183868932578e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 10, "steps": 200, "loss": 0.3566869795322418, "lr": 6.857249512166722e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 20, "steps": 200, "loss": 0.36741122603416443, "lr": 6.83226213282617e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 30, "steps": 200, "loss": 0.3325960338115692, "lr": 6.807222464011228e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 40, "steps": 200, "loss": 0.3387161195278168, "lr": 6.782131240356329e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 50, "steps": 200, "loss": 0.3146246075630188, "lr": 6.756989198008454e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 60, "steps": 200, "loss": 0.33333417773246765, "lr": 6.731797074605553e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 70, "steps": 200, "loss": 0.3632968068122864, "lr": 6.70655560925489e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 80, "steps": 200, "loss": 0.3056894540786743, "lr": 6.681265542511365e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 90, "steps": 200, "loss": 0.36829808354377747, "lr": 6.655927616355787e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 100, "steps": 200, "loss": 0.2669987678527832, "lr": 6.630542574173102e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 110, "steps": 200, "loss": 0.3771151900291443, "lr": 6.605111160730586e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 120, "steps": 200, "loss": 0.28583166003227234, "lr": 6.57963412215599e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 130, "steps": 200, "loss": 0.39428725838661194, "lr": 6.554112205915659e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 140, "steps": 200, "loss": 0.3179781138896942, "lr": 6.528546160792592e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 150, "steps": 200, "loss": 0.3559406101703644, "lr": 6.502936736864477e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 160, "steps": 200, "loss": 0.47538116574287415, "lr": 6.477284685481686e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 170, "steps": 200, "loss": 0.3843924105167389, "lr": 6.451590759245233e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 180, "steps": 200, "loss": 0.2934263348579407, "lr": 6.425855711984682e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 12, "step": 190, "steps": 200, "loss": 0.32116374373435974, "lr": 6.400080298736052e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.18s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.531
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.576
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.477
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.557
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.585
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.978
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 12, "train": {"loss": 0.3603815068304539, "l1": 0.010185963201802224, "giou": 0.15469961322844028, "shape_kl": 2.3306413781642914, "negative_stability": 0.0005246575511409901, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5313181513220822, 0.939558185431411, 0.5761159179168724, 0.4768338687800617, 0.5568523176163572, -1.0, 0.5845062093435837, 0.6336487285629806, 0.6786516853932585, 0.6412844036697247, 0.6964223385689354, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7668355106999013, "iou75_base": 1142, "iou75_refined": 1139, "improved": 673, "worsened": 1008}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 175.625}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 0, "steps": 200, "loss": 0.44817107915878296, "lr": 6.374265275719643e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 10, "steps": 200, "loss": 0.2831908166408539, "lr": 6.348411400317865e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 20, "steps": 200, "loss": 0.30434712767601013, "lr": 6.322519431053006e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 30, "steps": 200, "loss": 0.32248538732528687, "lr": 6.296590127564989e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 40, "steps": 200, "loss": 0.3374929130077362, "lr": 6.270624250589073e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 50, "steps": 200, "loss": 0.41715559363365173, "lr": 6.244622561933543e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 60, "steps": 200, "loss": 0.34628164768218994, "lr": 6.21858582445736e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 70, "steps": 200, "loss": 0.322100430727005, "lr": 6.19251480204777e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 80, "steps": 200, "loss": 0.3387349843978882, "lr": 6.166410259597902e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 90, "steps": 200, "loss": 0.41839081048965454, "lr": 6.140272962984323e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 100, "steps": 200, "loss": 0.3268771171569824, "lr": 6.114103679044569e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 110, "steps": 200, "loss": 0.28519320487976074, "lr": 6.087903175554646e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 120, "steps": 200, "loss": 0.32859888672828674, "lr": 6.061672221206508e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 130, "steps": 200, "loss": 0.3627271056175232, "lr": 6.035411585585491e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 140, "steps": 200, "loss": 0.32895609736442566, "lr": 6.0091220391477594e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 150, "steps": 200, "loss": 0.5098423361778259, "lr": 5.982804353197676e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 160, "steps": 200, "loss": 0.30996018648147583, "lr": 5.956459299865187e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 170, "steps": 200, "loss": 0.3608320653438568, "lr": 5.930087652083169e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 180, "steps": 200, "loss": 0.3287414610385895, "lr": 5.903690183564742e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 13, "step": 190, "steps": 200, "loss": 0.35858771204948425, "lr": 5.877267668780582e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.18s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.531
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.578
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.477
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.585
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.642
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 13, "train": {"loss": 0.36067726224660873, "l1": 0.01020368188386783, "giou": 0.15479966793209315, "shape_kl": 2.400589748620987, "negative_stability": 0.0005951722743338905, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5306935519442733, 0.9395711370153731, 0.5781842245147993, 0.4766424495992597, 0.5561270153908299, -1.0, 0.5846244825547013, 0.6335895919574217, 0.6787699586043762, 0.641651376146789, 0.6964223385689354, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7669216531539795, "iou75_base": 1142, "iou75_refined": 1142, "improved": 676, "worsened": 1005}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 179.57800000003772}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 0, "steps": 200, "loss": 0.46055838465690613, "lr": 5.850820882936185e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 10, "steps": 200, "loss": 0.3369330167770386, "lr": 5.824350601949142e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 20, "steps": 200, "loss": 0.4055268466472626, "lr": 5.797857602426359e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 30, "steps": 200, "loss": 0.30886712670326233, "lr": 5.771342661641272e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 40, "steps": 200, "loss": 0.5825538635253906, "lr": 5.744806557511055e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 50, "steps": 200, "loss": 0.3671233355998993, "lr": 5.718250068573786e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 60, "steps": 200, "loss": 0.3644883334636688, "lr": 5.6916739739656115e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 70, "steps": 200, "loss": 0.2932206988334656, "lr": 5.665079053397886e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 80, "steps": 200, "loss": 0.36515429615974426, "lr": 5.6384660871342874e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 90, "steps": 200, "loss": 0.3019734025001526, "lr": 5.611835855967945e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 100, "steps": 200, "loss": 0.35245418548583984, "lr": 5.585189141198512e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 110, "steps": 200, "loss": 0.3897586166858673, "lr": 5.5585267246092535e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 120, "steps": 200, "loss": 0.3699992597103119, "lr": 5.531849388444108e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 130, "steps": 200, "loss": 0.4072299897670746, "lr": 5.505157915384738e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 140, "steps": 200, "loss": 0.36394989490509033, "lr": 5.478453088527564e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 150, "steps": 200, "loss": 0.34948959946632385, "lr": 5.4517356913607854e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 160, "steps": 200, "loss": 0.5089185833930969, "lr": 5.4250065077414104e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 170, "steps": 200, "loss": 0.3664516806602478, "lr": 5.398266321872245e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 180, "steps": 200, "loss": 0.2773899435997009, "lr": 5.371515918278884e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 14, "step": 190, "steps": 200, "loss": 0.32571539282798767, "lr": 5.3447560817867004e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.21s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.531
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.576
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.477
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.584
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 14, "train": {"loss": 0.3598543369024992, "l1": 0.010167412851005793, "giou": 0.15447861101478338, "shape_kl": 2.40288306415081, "negative_stability": 0.0006005009020736907, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.530719061709723, 0.9395711370153731, 0.5760812343341372, 0.4766599154182208, 0.5560554451360208, -1.0, 0.5838557066824364, 0.6336487285629805, 0.6786516853932585, 0.6412844036697247, 0.6964223385689354, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7666516986112141, "iou75_base": 1142, "iou75_refined": 1139, "improved": 675, "worsened": 1006}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 177.36000000004424}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 0, "steps": 200, "loss": 0.3416145145893097, "lr": 5.317987597497817e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 10, "steps": 200, "loss": 0.29431939125061035, "lr": 5.291211250768075e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 20, "steps": 200, "loss": 0.3651065230369568, "lr": 5.264427827183987e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 30, "steps": 200, "loss": 0.3989907205104828, "lr": 5.237638112539695e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 40, "steps": 200, "loss": 0.40077146887779236, "lr": 5.210842892813915e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 50, "steps": 200, "loss": 0.30995428562164307, "lr": 5.184042954146866e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 60, "steps": 200, "loss": 0.3580188453197479, "lr": 5.157239082817227e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 70, "steps": 200, "loss": 0.3347550928592682, "lr": 5.130432065219051e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 80, "steps": 200, "loss": 0.28154104948043823, "lr": 5.103622687838697e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 90, "steps": 200, "loss": 0.3106938600540161, "lr": 5.076811737231764e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 100, "steps": 200, "loss": 0.2899967432022095, "lr": 5.05e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 110, "steps": 200, "loss": 0.4249880909919739, "lr": 5.023188262768236e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 120, "steps": 200, "loss": 0.37288108468055725, "lr": 4.996377312161303e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 130, "steps": 200, "loss": 0.36940985918045044, "lr": 4.969567934780949e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 140, "steps": 200, "loss": 0.3970925211906433, "lr": 4.942760917182774e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 150, "steps": 200, "loss": 0.3877967894077301, "lr": 4.915957045853135e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 160, "steps": 200, "loss": 0.30968141555786133, "lr": 4.889157107186087e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 170, "steps": 200, "loss": 0.3892994821071625, "lr": 4.8623618874603045e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 180, "steps": 200, "loss": 0.33434516191482544, "lr": 4.8355721728160126e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 15, "step": 190, "steps": 200, "loss": 0.3034198582172394, "lr": 4.808788749231926e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.530
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.579
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.477
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.584
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.642
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 15, "train": {"loss": 0.3597342601418495, "l1": 0.010174304863903671, "giou": 0.15439937941730023, "shape_kl": 2.353078544139862, "negative_stability": 0.0006397668081626762, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5304895566512919, 0.9395711370153731, 0.5787121347759248, 0.47688125926833, 0.556049564146596, -1.0, 0.5840922531046717, 0.6337670017740982, 0.6788290952099351, 0.641651376146789, 0.6965095986038394, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7664988235229575, "iou75_base": 1142, "iou75_refined": 1142, "improved": 673, "worsened": 1006}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 175.1720000000205}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 0, "steps": 200, "loss": 0.27682095766067505, "lr": 4.782012402502185e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 10, "steps": 200, "loss": 0.3395075798034668, "lr": 4.7552439182133004e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 20, "steps": 200, "loss": 0.32042452692985535, "lr": 4.728484081721116e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 30, "steps": 200, "loss": 0.47126513719558716, "lr": 4.701733678127756e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 40, "steps": 200, "loss": 0.32857322692871094, "lr": 4.6749934922585885e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 50, "steps": 200, "loss": 0.29790592193603516, "lr": 4.648264308639216e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 60, "steps": 200, "loss": 0.3644493818283081, "lr": 4.6215469114724385e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 70, "steps": 200, "loss": 0.30422911047935486, "lr": 4.594842084615262e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 80, "steps": 200, "loss": 0.4075110852718353, "lr": 4.568150611555892e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 90, "steps": 200, "loss": 0.39604640007019043, "lr": 4.541473275390747e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 100, "steps": 200, "loss": 0.32421013712882996, "lr": 4.5148108588014884e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 110, "steps": 200, "loss": 0.5373268127441406, "lr": 4.488164144032056e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 120, "steps": 200, "loss": 0.41769492626190186, "lr": 4.461533912865712e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 130, "steps": 200, "loss": 0.43177878856658936, "lr": 4.434920946602117e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 140, "steps": 200, "loss": 0.312174528837204, "lr": 4.408326026034389e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 150, "steps": 200, "loss": 0.32075610756874084, "lr": 4.3817499314262135e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 160, "steps": 200, "loss": 0.4061599671840668, "lr": 4.355193442488946e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 170, "steps": 200, "loss": 0.29995161294937134, "lr": 4.3286573383587286e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 180, "steps": 200, "loss": 0.2865619957447052, "lr": 4.302142397573643e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 16, "step": 190, "steps": 200, "loss": 0.381574809551239, "lr": 4.275649398050857e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.16s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.530
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.577
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.476
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.583
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.678
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 16, "train": {"loss": 0.3590829960256815, "l1": 0.01015059594064951, "giou": 0.15413073223084212, "shape_kl": 2.366080986261368, "negative_stability": 0.0006855255248956382, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5300571328316662, 0.9395711370153731, 0.5772918660683748, 0.47573505525750565, 0.5557882064133427, -1.0, 0.5830869308101715, 0.6330573625073921, 0.6782968657599054, 0.6412844036697247, 0.6958987783595114, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7665225794436415, "iou75_base": 1142, "iou75_refined": 1140, "improved": 664, "worsened": 1017}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 171.14100000000326}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 0, "steps": 200, "loss": 0.29855239391326904, "lr": 4.249179117063815e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 10, "steps": 200, "loss": 0.3581245243549347, "lr": 4.22273233121942e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 20, "steps": 200, "loss": 0.3032856285572052, "lr": 4.196309816435259e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 30, "steps": 200, "loss": 0.3391876220703125, "lr": 4.1699123479168325e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 40, "steps": 200, "loss": 0.37677454948425293, "lr": 4.143540700134813e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 50, "steps": 200, "loss": 0.38502225279808044, "lr": 4.1171956468023255e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 60, "steps": 200, "loss": 0.38401925563812256, "lr": 4.09087796085224e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 70, "steps": 200, "loss": 0.4039923846721649, "lr": 4.0645884144145085e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 80, "steps": 200, "loss": 0.35706618428230286, "lr": 4.038327778793496e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 90, "steps": 200, "loss": 0.27671143412590027, "lr": 4.0120968244453536e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 100, "steps": 200, "loss": 0.35046130418777466, "lr": 3.985896320955431e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 110, "steps": 200, "loss": 0.3932175934314728, "lr": 3.9597270370156765e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 120, "steps": 200, "loss": 0.35009706020355225, "lr": 3.9335897404020976e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 130, "steps": 200, "loss": 0.33609601855278015, "lr": 3.9074851979522324e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 140, "steps": 200, "loss": 0.4030832052230835, "lr": 3.881414175542642e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 150, "steps": 200, "loss": 0.325171560049057, "lr": 3.8553774380664574e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 160, "steps": 200, "loss": 0.4130554795265198, "lr": 3.829375749410929e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 170, "steps": 200, "loss": 0.3566465377807617, "lr": 3.803409872435011e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 180, "steps": 200, "loss": 0.4309168756008148, "lr": 3.7774805689469955e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 17, "step": 190, "steps": 200, "loss": 0.32512760162353516, "lr": 3.751588599682137e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.530
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.578
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.475
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.583
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.678
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 17, "train": {"loss": 0.35849570482969284, "l1": 0.010129202641546726, "giou": 0.1538887157663703, "shape_kl": 2.3574569380283354, "negative_stability": 0.0007226159490528516, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5301093718931793, 0.9399565244047793, 0.5782089534309172, 0.47516641684041555, 0.5559327699344477, -1.0, 0.583264340626848, 0.6332347723240686, 0.6784742755765819, 0.6412844036697247, 0.6961605584642234, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7664310522597793, "iou75_base": 1142, "iou75_refined": 1141, "improved": 680, "worsened": 1000}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 177.375}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 0, "steps": 200, "loss": 0.3380814492702484, "lr": 3.725734724280357e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 10, "steps": 200, "loss": 0.32826921343803406, "lr": 3.699919701263948e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 20, "steps": 200, "loss": 0.3724735677242279, "lr": 3.674144288015318e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 30, "steps": 200, "loss": 0.40881863236427307, "lr": 3.648409240754771e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 40, "steps": 200, "loss": 0.44333553314208984, "lr": 3.622715314518314e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 50, "steps": 200, "loss": 0.37039491534233093, "lr": 3.597063263135523e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 60, "steps": 200, "loss": 0.44622671604156494, "lr": 3.571453839207408e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 70, "steps": 200, "loss": 0.3242897689342499, "lr": 3.54588779408434e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 80, "steps": 200, "loss": 0.28266939520835876, "lr": 3.520365877844012e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 90, "steps": 200, "loss": 0.3544536232948303, "lr": 3.494888839269417e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 100, "steps": 200, "loss": 0.47039446234703064, "lr": 3.4694574258269e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 110, "steps": 200, "loss": 0.348566472530365, "lr": 3.444072383644214e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 120, "steps": 200, "loss": 0.3858674168586731, "lr": 3.418734457488635e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 130, "steps": 200, "loss": 0.3665637671947479, "lr": 3.3934443907451126e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 140, "steps": 200, "loss": 0.29847195744514465, "lr": 3.368202925394449e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 150, "steps": 200, "loss": 0.3217160403728485, "lr": 3.3430108019915465e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 160, "steps": 200, "loss": 0.3230162262916565, "lr": 3.3178687596436724e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 170, "steps": 200, "loss": 0.3394095003604889, "lr": 3.2927775359887716e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 180, "steps": 200, "loss": 0.3191213011741638, "lr": 3.267737867173831e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 18, "step": 190, "steps": 200, "loss": 0.2870084345340729, "lr": 3.242750487833277e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.530
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.580
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.475
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.583
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 18, "train": {"loss": 0.35883222743868826, "l1": 0.010169519043993205, "giou": 0.15395206417888402, "shape_kl": 2.37365517616272, "negative_stability": 0.0008050596530665644, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5301479922460892, 0.9395711370153731, 0.5797642776742721, 0.4748353123804793, 0.55626484078021, -1.0, 0.5833234772324067, 0.633471318746304, 0.6785925487876996, 0.6407339449541284, 0.6965968586387434, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7664793796511284, "iou75_base": 1142, "iou75_refined": 1143, "improved": 678, "worsened": 1003}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 173.53100000001723}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 0, "steps": 200, "loss": 0.29639047384262085, "lr": 3.2178161310674246e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 10, "steps": 200, "loss": 0.35382136702537537, "lr": 3.192935528420969e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 20, "steps": 200, "loss": 0.3482092618942261, "lr": 3.168109409861524e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 30, "steps": 200, "loss": 0.39467278122901917, "lr": 3.143338503758206e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 40, "steps": 200, "loss": 0.3819045424461365, "lr": 3.118623536860257e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 50, "steps": 200, "loss": 0.4966365396976471, "lr": 3.0939652342757317e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 60, "steps": 200, "loss": 0.2993396818637848, "lr": 3.0693643194502215e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 70, "steps": 200, "loss": 0.37108543515205383, "lr": 3.044821514145629e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 80, "steps": 200, "loss": 0.2787032425403595, "lr": 3.0203375384189918e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 90, "steps": 200, "loss": 0.34642472863197327, "lr": 2.995913110601351e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 100, "steps": 200, "loss": 0.341806024312973, "lr": 2.9715489472766906e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 110, "steps": 200, "loss": 0.4312477707862854, "lr": 2.9472457632609005e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 120, "steps": 200, "loss": 0.497610867023468, "lr": 2.923004271580808e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 130, "steps": 200, "loss": 0.3206325173377991, "lr": 2.8988251834532687e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 140, "steps": 200, "loss": 0.26597511768341064, "lr": 2.8747092082642758e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 150, "steps": 200, "loss": 0.4299421012401581, "lr": 2.8506570535481785e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 160, "steps": 200, "loss": 0.39759111404418945, "lr": 2.826669424966899e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 170, "steps": 200, "loss": 0.2696315348148346, "lr": 2.8027470262892417e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 180, "steps": 200, "loss": 0.3328673541545868, "lr": 2.7788905593702484e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 19, "step": 190, "steps": 200, "loss": 0.4680277705192566, "lr": 2.7551007241305873e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.16s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.529
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.939
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.576
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.474
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.583
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.799
+{"epoch": 19, "train": {"loss": 0.35707242086529734, "l1": 0.010095728153828532, "giou": 0.15325542476028203, "shape_kl": 2.35136012673378, "negative_stability": 0.0008293149745441042, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5294208297090378, 0.9390711216747046, 0.5760374587622612, 0.4736455146784481, 0.5557937839688946, -1.0, 0.5829095209934949, 0.6334713187463039, 0.6787108219988173, 0.6411009174311926, 0.6965968586387434, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7662559625098404, "iou75_base": 1142, "iou75_refined": 1139, "improved": 667, "worsened": 1013}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 169.84400000004098}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 0, "steps": 200, "loss": 0.37373876571655273, "lr": 2.7313782185360394e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 10, "steps": 200, "loss": 0.2979765236377716, "lr": 2.7077237385770144e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 20, "steps": 200, "loss": 0.3582901656627655, "lr": 2.6841379782481294e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 30, "steps": 200, "loss": 0.3095657229423523, "lr": 2.660621629527848e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 40, "steps": 200, "loss": 0.3234739303588867, "lr": 2.637175382358171e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 50, "steps": 200, "loss": 0.29630380868911743, "lr": 2.6137999246244136e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 60, "steps": 200, "loss": 0.3709004521369934, "lr": 2.59049594213501e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 70, "steps": 200, "loss": 0.4415740966796875, "lr": 2.5672641186013867e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 80, "steps": 200, "loss": 0.3644404411315918, "lr": 2.544105135617923e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 90, "steps": 200, "loss": 0.37921980023384094, "lr": 2.521019672641933e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 100, "steps": 200, "loss": 0.4822566509246826, "lr": 2.4980084069737437e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 110, "steps": 200, "loss": 0.3080606758594513, "lr": 2.4750720137368193e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 120, "steps": 200, "loss": 0.2799011468887329, "lr": 2.4522111658579562e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 130, "steps": 200, "loss": 0.29060253500938416, "lr": 2.4294265340475433e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 140, "steps": 200, "loss": 0.3096274435520172, "lr": 2.4067187867798685e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 150, "steps": 200, "loss": 0.27783307433128357, "lr": 2.3840885902735246e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 160, "steps": 200, "loss": 0.31557559967041016, "lr": 2.3615366084718576e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 170, "steps": 200, "loss": 0.3564293682575226, "lr": 2.3390635030234856e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 180, "steps": 200, "loss": 0.2761608958244324, "lr": 2.3166699332628843e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 20, "step": 190, "steps": 200, "loss": 0.410733163356781, "lr": 2.2943565561910455e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.528
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.576
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.555
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 20, "train": {"loss": 0.357456693649292, "l1": 0.0101162215648219, "giou": 0.15339216202497483, "shape_kl": 2.374818867444992, "negative_stability": 0.0009126148198265583, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5284372529940503, 0.9395745461878545, 0.5756716817410035, 0.47276250693032623, 0.554771401181318, -1.0, 0.5820224719101124, 0.6335304553518628, 0.678829095209935, 0.6409174311926605, 0.6968586387434554, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7659763258208296, "iou75_base": 1142, "iou75_refined": 1138, "improved": 673, "worsened": 1007}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 168.65599999995902}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 0, "steps": 200, "loss": 0.3373507559299469, "lr": 2.272124026456208e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 10, "steps": 200, "loss": 0.5361186861991882, "lr": 2.249972996334638e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 20, "steps": 200, "loss": 0.3913540244102478, "lr": 2.2279041157115e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 30, "steps": 200, "loss": 0.38527196645736694, "lr": 2.2059180320617945e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 40, "steps": 200, "loss": 0.41926461458206177, "lr": 2.1840153904313502e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 50, "steps": 200, "loss": 0.29585060477256775, "lr": 2.1621968334179068e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 60, "steps": 200, "loss": 0.4458535611629486, "lr": 2.1404630011522586e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 70, "steps": 200, "loss": 0.33021363615989685, "lr": 2.118814531279479e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 80, "steps": 200, "loss": 0.3300411105155945, "lr": 2.0972520589402124e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 90, "steps": 200, "loss": 0.36096417903900146, "lr": 2.075776216752023e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 100, "steps": 200, "loss": 0.275463342666626, "lr": 2.0543876347908638e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 110, "steps": 200, "loss": 0.33739805221557617, "lr": 2.0330869405725645e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 120, "steps": 200, "loss": 0.36926546692848206, "lr": 2.0118747590344383e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 130, "steps": 200, "loss": 0.30510419607162476, "lr": 1.9907517125169408e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 140, "steps": 200, "loss": 0.32551711797714233, "lr": 1.969718420745403e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 150, "steps": 200, "loss": 0.36582210659980774, "lr": 1.9487755008118652e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 160, "steps": 200, "loss": 0.372749388217926, "lr": 1.9279235671569648e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 170, "steps": 200, "loss": 0.3592095971107483, "lr": 1.9071632315519e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 180, "steps": 200, "loss": 0.32440149784088135, "lr": 1.8864951030805002e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 21, "step": 190, "steps": 200, "loss": 0.2999383807182312, "lr": 1.8659197881213394e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.15s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.529
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.576
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.555
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 21, "train": {"loss": 0.3566541393101215, "l1": 0.010099601307883859, "giou": 0.15302923943847418, "shape_kl": 2.355298390388489, "negative_stability": 0.0009765467658871785, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5287708107032941, 0.9395745461878545, 0.5755754872472115, 0.4729646186944714, 0.5552548732727615, -1.0, 0.581785925487877, 0.6332347723240686, 0.6785334121821408, 0.6407339449541285, 0.6965095986038394, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7658156158456536, "iou75_base": 1142, "iou75_refined": 1137, "improved": 672, "worsened": 1009}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 167.81300000002375}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 0, "steps": 200, "loss": 0.3278866410255432, "lr": 1.8454378903299537e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 10, "steps": 200, "loss": 0.3479413688182831, "lr": 1.8250500106211322e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 20, "steps": 200, "loss": 0.3088446855545044, "lr": 1.80475674715128e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 30, "steps": 200, "loss": 0.3094547688961029, "lr": 1.7845586953008772e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 40, "steps": 200, "loss": 0.3247178792953491, "lr": 1.7644564476570042e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 50, "steps": 200, "loss": 0.32477396726608276, "lr": 1.7444505939959566e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 60, "steps": 200, "loss": 0.2898593544960022, "lr": 1.724541721265949e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 70, "steps": 200, "loss": 0.36039483547210693, "lr": 1.70473041356989e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 80, "steps": 200, "loss": 0.37500980496406555, "lr": 1.6850172521482377e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 90, "steps": 200, "loss": 0.32489266991615295, "lr": 1.6654028153619583e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 100, "steps": 200, "loss": 0.2966291904449463, "lr": 1.645887678675556e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 110, "steps": 200, "loss": 0.3053494393825531, "lr": 1.626472414640181e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 120, "steps": 200, "loss": 0.41500043869018555, "lr": 1.6071575928768447e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 130, "steps": 200, "loss": 0.4497271776199341, "lr": 1.587943780059694e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 140, "steps": 200, "loss": 0.27645036578178406, "lr": 1.568831539899394e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 150, "steps": 200, "loss": 0.4025364816188812, "lr": 1.54982143312659e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 160, "steps": 200, "loss": 0.4676361083984375, "lr": 1.5309140174754496e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 170, "steps": 200, "loss": 0.29412204027175903, "lr": 1.512109847667307e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 180, "steps": 200, "loss": 0.35253891348838806, "lr": 1.4934094753943882e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 22, "step": 190, "steps": 200, "loss": 0.519900918006897, "lr": 1.4748134493036088e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.16s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.529
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.579
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.555
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 22, "train": {"loss": 0.35632184639573095, "l1": 0.010078639769926668, "giou": 0.1529127148538828, "shape_kl": 2.3651917934417725, "negative_stability": 0.0010321753242169508, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5287623241531928, 0.9395745461878545, 0.5786491606656199, 0.472767839631158, 0.5552674512034566, -1.0, 0.5821998817267888, 0.6333530455351862, 0.6788882318154938, 0.6411009174311927, 0.6968586387434554, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7659618956367868, "iou75_base": 1142, "iou75_refined": 1139, "improved": 672, "worsened": 1009}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 167.71900000004098}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 0, "steps": 200, "loss": 0.4097270667552948, "lr": 1.4563223149805042e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 10, "steps": 200, "loss": 0.38749533891677856, "lr": 1.4379366149331999e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 20, "steps": 200, "loss": 0.4262333810329437, "lr": 1.4196568885765085e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 30, "steps": 200, "loss": 0.3812693953514099, "lr": 1.4014836722161016e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 40, "steps": 200, "loss": 0.3823217749595642, "lr": 1.3834174990327621e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 50, "steps": 200, "loss": 0.39088499546051025, "lr": 1.365458899066762e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 60, "steps": 200, "loss": 0.3052675426006317, "lr": 1.3476083992022992e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 70, "steps": 200, "loss": 0.45943403244018555, "lr": 1.3298665231520396e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 80, "steps": 200, "loss": 0.2943127155303955, "lr": 1.3122337914417584e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 90, "steps": 200, "loss": 0.3914530873298645, "lr": 1.2947107213950584e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 100, "steps": 200, "loss": 0.385797917842865, "lr": 1.2772978271182002e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 110, "steps": 200, "loss": 0.3288675546646118, "lr": 1.2599956194850213e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 120, "steps": 200, "loss": 0.28438669443130493, "lr": 1.242804606121937e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 130, "steps": 200, "loss": 0.2854228615760803, "lr": 1.22572529139306e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 140, "steps": 200, "loss": 0.3451610207557678, "lr": 1.20875817638539e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 150, "steps": 200, "loss": 0.29497218132019043, "lr": 1.1919037588941217e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 160, "steps": 200, "loss": 0.33922773599624634, "lr": 1.1751625334080383e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 170, "steps": 200, "loss": 0.6033533811569214, "lr": 1.1585349910950033e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 180, "steps": 200, "loss": 0.315647691488266, "lr": 1.142021619787547e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 23, "step": 190, "steps": 200, "loss": 0.32355087995529175, "lr": 1.1256229039685565e-05, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.529
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.577
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 23, "train": {"loss": 0.35616110742092133, "l1": 0.010100699404720217, "giou": 0.1527757912874222, "shape_kl": 2.363974927663803, "negative_stability": 0.0010602830688003452, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5288596770176958, 0.9395745461878545, 0.5771726450593555, 0.47270901704299145, 0.5555048071028618, -1.0, 0.5822590183323477, 0.6335304553518628, 0.6788882318154938, 0.6411009174311927, 0.6968586387434554, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7659777140587409, "iou75_base": 1142, "iou75_refined": 1139, "improved": 679, "worsened": 1002}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 167.875}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 0, "steps": 200, "loss": 0.46541374921798706, "lr": 1.1093393247570646e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 10, "steps": 200, "loss": 0.3969181478023529, "lr": 1.0931713598941281e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 20, "steps": 200, "loss": 0.48420247435569763, "lr": 1.077119483728819e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 30, "steps": 200, "loss": 0.3263854682445526, "lr": 1.0611841672042999e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 40, "steps": 200, "loss": 0.277279257774353, "lr": 1.0453658778440109e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 50, "steps": 200, "loss": 0.3445499539375305, "lr": 1.0296650797379556e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 60, "steps": 200, "loss": 0.3454917371273041, "lr": 1.0140822335290787e-05, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 70, "steps": 200, "loss": 0.32728761434555054, "lr": 9.986177963997587e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 80, "steps": 200, "loss": 0.30440765619277954, "lr": 9.832722220583902e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 90, "steps": 200, "loss": 0.3245854675769806, "lr": 9.680459607260684e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 100, "steps": 200, "loss": 0.31415316462516785, "lr": 9.529394591233924e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 110, "steps": 200, "loss": 0.3655039668083191, "lr": 9.379531604573473e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 120, "steps": 200, "loss": 0.28198930621147156, "lr": 9.230875044083055e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 130, "steps": 200, "loss": 0.3080892264842987, "lr": 9.083429271171306e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 140, "steps": 200, "loss": 0.33823034167289734, "lr": 8.937198611723741e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 150, "steps": 200, "loss": 0.6356014013290405, "lr": 8.792187355975874e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 160, "steps": 200, "loss": 0.3238360583782196, "lr": 8.64839975838738e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 170, "steps": 200, "loss": 0.37348589301109314, "lr": 8.505840037517217e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 180, "steps": 200, "loss": 0.24807429313659668, "lr": 8.364512375899902e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 24, "step": 190, "steps": 200, "loss": 0.29653826355934143, "lr": 8.22442091992277e-06, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.16s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.529
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.574
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.555
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 24, "train": {"loss": 0.35598345294594763, "l1": 0.010091125704348088, "giou": 0.15270937293767928, "shape_kl": 2.3883980226516726, "negative_stability": 0.0010907811828656123, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5286741101156636, 0.9395745461878545, 0.5741672633953908, 0.47266941158876147, 0.5551535108522702, -1.0, 0.5819633353045535, 0.6334121821407451, 0.6788290952099351, 0.6409174311926605, 0.6968586387434554, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7658724066008836, "iou75_base": 1142, "iou75_refined": 1135, "improved": 674, "worsened": 1007}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 167.59399999998277}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 0, "steps": 200, "loss": 0.44182631373405457, "lr": 8.085569779704332e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 10, "steps": 200, "loss": 0.3350966274738312, "lr": 7.947963028973717e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 20, "steps": 200, "loss": 0.37988221645355225, "lr": 7.811604704951106e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 30, "steps": 200, "loss": 0.4722113013267517, "lr": 7.676498808229322e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 40, "steps": 200, "loss": 0.42572689056396484, "lr": 7.54264930265643e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 50, "steps": 200, "loss": 0.3733827471733093, "lr": 7.410060115219487e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 60, "steps": 200, "loss": 0.32711562514305115, "lr": 7.2787351359292624e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 70, "steps": 200, "loss": 0.31359657645225525, "lr": 7.148678217706176e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 80, "steps": 200, "loss": 0.3103601932525635, "lr": 7.019893176267211e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 90, "steps": 200, "loss": 0.342962384223938, "lr": 6.892383790013966e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 100, "steps": 200, "loss": 0.5170201063156128, "lr": 6.76615379992187e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 110, "steps": 200, "loss": 0.3713036775588989, "lr": 6.641206909430303e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 120, "steps": 200, "loss": 0.3717461824417114, "lr": 6.5175467843340835e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 130, "steps": 200, "loss": 0.3340606987476349, "lr": 6.395177052675806e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 140, "steps": 200, "loss": 0.4065483510494232, "lr": 6.274101304639412e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 150, "steps": 200, "loss": 0.32501447200775146, "lr": 6.1543230924449456e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 160, "steps": 200, "loss": 0.3170599043369293, "lr": 6.03584593024426e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 170, "steps": 200, "loss": 0.43520388007164, "lr": 5.9186732940178975e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 180, "steps": 200, "loss": 0.35279786586761475, "lr": 5.8028086214731894e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 25, "step": 190, "steps": 200, "loss": 0.38920924067497253, "lr": 5.688255311943318e-06, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.529
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.580
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 25, "train": {"loss": 0.3552142532169819, "l1": 0.010054875363130123, "giou": 0.15241495780646802, "shape_kl": 2.3485292994976046, "negative_stability": 0.0010995969382929616, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5290476492290831, 0.9395745461878545, 0.5795031022504128, 0.4726192436695563, 0.5556748230814228, -1.0, 0.5823181549379065, 0.6332939089296273, 0.6788882318154937, 0.6407339449541285, 0.6970331588132634, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7659774987431301, "iou75_base": 1142, "iou75_refined": 1139, "improved": 680, "worsened": 1001}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 171.65600000001723}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 0, "steps": 200, "loss": 0.2811136841773987, "lr": 5.575016726287623e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 10, "steps": 200, "loss": 0.3764662444591522, "lr": 5.463096186793012e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 20, "steps": 200, "loss": 0.35357120633125305, "lr": 5.352496977076436e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 30, "steps": 200, "loss": 0.398074746131897, "lr": 5.243222341988632e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 40, "steps": 200, "loss": 0.3619541823863983, "lr": 5.135275487518824e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 50, "steps": 200, "loss": 0.35258039832115173, "lr": 5.028659580700724e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 60, "steps": 200, "loss": 0.3207160234451294, "lr": 4.923377749519639e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 70, "steps": 200, "loss": 0.40757662057876587, "lr": 4.819433082820659e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 80, "steps": 200, "loss": 0.4421864151954651, "lr": 4.716828630218003e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 90, "steps": 200, "loss": 0.44329380989074707, "lr": 4.615567402005619e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 100, "steps": 200, "loss": 0.28834208846092224, "lr": 4.515652369068825e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 110, "steps": 200, "loss": 0.34190043807029724, "lr": 4.417086462797144e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 120, "steps": 200, "loss": 0.37066054344177246, "lr": 4.319872574998325e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 130, "steps": 200, "loss": 0.3660138249397278, "lr": 4.2240135578134876e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 140, "steps": 200, "loss": 0.4119430482387543, "lr": 4.129512223633398e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 150, "steps": 200, "loss": 0.3461996018886566, "lr": 4.036371345016056e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 160, "steps": 200, "loss": 0.3682461380958557, "lr": 3.944593654605264e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 170, "steps": 200, "loss": 0.36271217465400696, "lr": 3.8541818450505e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 180, "steps": 200, "loss": 0.32524874806404114, "lr": 3.7651385689279075e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 26, "step": 190, "steps": 200, "loss": 0.32462847232818604, "lr": 3.677466438662441e-06, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.16s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.528
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.575
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.555
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 26, "train": {"loss": 0.35556008607149125, "l1": 0.01006337301339954, "giou": 0.15256530709564686, "shape_kl": 2.3793856370449067, "negative_stability": 0.001126088577148039, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5283657467466203, 0.9395745461878545, 0.5747903926608814, 0.4726285703422403, 0.5549994022454697, -1.0, 0.5819041986989947, 0.6333530455351862, 0.6786516853932585, 0.6407339449541285, 0.6966841186736474, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7658435584374745, "iou75_base": 1142, "iou75_refined": 1136, "improved": 678, "worsened": 1003}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 172.06199999997625}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 0, "steps": 200, "loss": 0.40292853116989136, "lr": 3.5911680264512783e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 10, "steps": 200, "loss": 0.36655575037002563, "lr": 3.50624586418832e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 20, "steps": 200, "loss": 0.3346883952617645, "lr": 3.422702443389895e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 30, "steps": 200, "loss": 0.34821996092796326, "lr": 3.3405402151217164e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 40, "steps": 200, "loss": 0.4078347682952881, "lr": 3.2597615899268734e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 50, "steps": 200, "loss": 0.3318379521369934, "lr": 3.1803689377552285e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 60, "steps": 200, "loss": 0.3770560920238495, "lr": 3.102364587893799e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 70, "steps": 200, "loss": 0.28988808393478394, "lr": 3.025750828898435e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 80, "steps": 200, "loss": 0.33880069851875305, "lr": 2.950529908526717e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 90, "steps": 200, "loss": 0.33111706376075745, "lr": 2.876704033671956e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 100, "steps": 200, "loss": 0.395349383354187, "lr": 2.8042753702984662e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 110, "steps": 200, "loss": 0.3458847999572754, "lr": 2.7332460433780365e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 120, "steps": 200, "loss": 0.3796103000640869, "lr": 2.663618136827558e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 130, "steps": 200, "loss": 0.33140480518341064, "lr": 2.5953936934479073e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 140, "steps": 200, "loss": 0.31783080101013184, "lr": 2.5285747148639984e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 150, "steps": 200, "loss": 0.2973761260509491, "lr": 2.463163161466037e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 160, "steps": 200, "loss": 0.37586554884910583, "lr": 2.399160952352075e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 170, "steps": 200, "loss": 0.42654216289520264, "lr": 2.3365699652716333e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 180, "steps": 200, "loss": 0.37044572830200195, "lr": 2.275392036570641e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 27, "step": 190, "steps": 200, "loss": 0.30988067388534546, "lr": 2.215628961137552e-06, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.16s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.529
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.576
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.555
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.799
+{"epoch": 27, "train": {"loss": 0.3548564610630274, "l1": 0.010051250900141894, "giou": 0.1522434799000621, "shape_kl": 2.3642658293247223, "negative_stability": 0.0011324664871790447, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5287064598494904, 0.9395745461878545, 0.5758091554863842, 0.4725121048368977, 0.5553444799721085, -1.0, 0.58214074512123, 0.6334713187463039, 0.6788290952099351, 0.6407339449541285, 0.6969458987783594, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.765898261214857, "iou75_base": 1142, "iou75_refined": 1136, "improved": 677, "worsened": 1004}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 171.545999999973}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 0, "steps": 200, "loss": 0.5630165934562683, "lr": 2.1572824923507107e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 10, "steps": 200, "loss": 0.2987004220485687, "lr": 2.1003543420268615e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 20, "steps": 200, "loss": 0.3838439881801605, "lr": 2.0448461803709773e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 30, "steps": 200, "loss": 0.33977001905441284, "lr": 1.9907596359272125e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 40, "steps": 200, "loss": 0.4244363605976105, "lr": 1.9380962955311616e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 50, "steps": 200, "loss": 0.3165949583053589, "lr": 1.8868577042632853e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 60, "steps": 200, "loss": 0.42301639914512634, "lr": 1.837045365403559e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 70, "steps": 200, "loss": 0.32655489444732666, "lr": 1.788660740387422e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 80, "steps": 200, "loss": 0.3794892132282257, "lr": 1.7417052487628603e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 90, "steps": 200, "loss": 0.4255695343017578, "lr": 1.696180268148741e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 100, "steps": 200, "loss": 0.3064177930355072, "lr": 1.652087134194456e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 110, "steps": 200, "loss": 0.3496502637863159, "lr": 1.6094271405406859e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 120, "steps": 200, "loss": 0.30405500531196594, "lr": 1.5682015387814492e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 130, "steps": 200, "loss": 0.2873360514640808, "lr": 1.5284115384274185e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 140, "steps": 200, "loss": 0.3392605483531952, "lr": 1.4900583068703917e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 150, "steps": 200, "loss": 0.4272787272930145, "lr": 1.4531429693490646e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 160, "steps": 200, "loss": 0.30614179372787476, "lr": 1.4176666089160204e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 170, "steps": 200, "loss": 0.3712289333343506, "lr": 1.3836302664059245e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 180, "steps": 200, "loss": 0.5753220319747925, "lr": 1.3510349404050427e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 28, "step": 190, "steps": 200, "loss": 0.39850229024887085, "lr": 1.3198815872218922e-06, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.16s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.529
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.575
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.555
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.798
+{"epoch": 28, "train": {"loss": 0.3547526316344738, "l1": 0.01004500572802499, "giou": 0.15220701262354852, "shape_kl": 2.3750776433944703, "negative_stability": 0.001135771124972962, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5285062849214585, 0.9395745461878545, 0.5752337073880053, 0.4725315777494981, 0.5551280520215064, -1.0, 0.5818450620934359, 0.6332939089296274, 0.6786516853932585, 0.6407339449541285, 0.6966841186736474, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.7657959007766563, "iou75_base": 1142, "iou75_refined": 1136, "improved": 675, "worsened": 1006}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 169.0}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 0, "steps": 200, "loss": 0.43968430161476135, "lr": 1.2901711208592e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 10, "steps": 200, "loss": 0.2634403705596924, "lr": 1.2619044129871098e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 20, "steps": 200, "loss": 0.32660892605781555, "lr": 1.235082292917574e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 30, "steps": 200, "loss": 0.3104963004589081, "lr": 1.2097055475800403e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 40, "steps": 200, "loss": 0.3325025737285614, "lr": 1.1857749214983642e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 50, "steps": 200, "loss": 0.3571026027202606, "lr": 1.1632911167689769e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 60, "steps": 200, "loss": 0.6354667544364929, "lr": 1.1422547930402413e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 70, "steps": 200, "loss": 0.39170512557029724, "lr": 1.122666567493159e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 80, "steps": 200, "loss": 0.30768826603889465, "lr": 1.104527014823228e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 90, "steps": 200, "loss": 0.308982253074646, "lr": 1.0878366672235721e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 100, "steps": 200, "loss": 0.3078375458717346, "lr": 1.072596014369371e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 110, "steps": 200, "loss": 0.4160323739051819, "lr": 1.0588055034034404e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 120, "steps": 200, "loss": 0.3658648431301117, "lr": 1.0464655389231526e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 130, "steps": 200, "loss": 0.35195448994636536, "lr": 1.0355764829685493e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 140, "steps": 200, "loss": 0.32685232162475586, "lr": 1.026138655011723e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 150, "steps": 200, "loss": 0.40671825408935547, "lr": 1.018152331947444e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 160, "steps": 200, "loss": 0.3512880802154541, "lr": 1.0116177480850357e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 170, "steps": 200, "loss": 0.24972455203533173, "lr": 1.0065350951415e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 180, "steps": 200, "loss": 0.333086758852005, "lr": 1.0029045222359017e-06, "best_ap": 0.5371226146261315}
+{"state": "training", "arm": "R1_GT_ONLY", "epoch": 29, "step": 190, "steps": 200, "loss": 0.3996659219264984, "lr": 1.0007261358849659e-06, "best_ap": 0.5371226146261315}
+eval images=16
+eval images=416
+eval images=816
+eval images=1216
+eval images=1616
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.17s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.529
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.940
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.577
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.555
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.582
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.679
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.641
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.979
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.800
+{"epoch": 29, "train": {"loss": 0.3548015791922808, "l1": 0.010052695139311254, "giou": 0.1522120401263237, "shape_kl": 2.373203538656235, "negative_stability": 0.0011402190622175111, "matched": 15.215, "selected_matched": 15.195, "teacher_attempts": 14.93, "teacher_valid": 14.905, "outside_radius": 0.075, "saturation_fraction": 0.0}, "validation": {"coco_eval_bbox": [0.5288485484106056, 0.9395745461878545, 0.5768594943499739, 0.47255186355401274, 0.5554329624778898, -1.0, 0.5821407451212302, 0.6335895919574217, 0.6788882318154938, 0.6407339449541285, 0.6970331588132634, -1.0], "paired_base_assignment": {"targets": 1691, "mean_base_iou": 0.7689805761781549, "mean_refined_iou": 0.765841482065085, "iou75_base": 1142, "iou75_refined": 1138, "improved": 679, "worsened": 1002}, "images": 1820}, "best_ap": 0.5371226146261315, "seconds": 168.7970000000205}

@@ -42,12 +42,30 @@ def selection(target, size, source):
     boxes = target['boxes']
     if len(boxes) == 0 or masks.shape[0] != len(boxes) or float(target['sam_quality']) <= 0:
         return None
+    instance_valid = target.get('sam_instance_valid')
+    ignored = None
+    if instance_valid is not None:
+        instance_valid = torch.as_tensor(instance_valid, device=boxes.device, dtype=torch.bool)
+        if instance_valid.shape != (len(boxes),):
+            raise RuntimeError('SAM instance validity must match detection boxes')
+        if not bool(instance_valid.any()):
+            return None
+        if not bool(instance_valid.all()):
+            # A rejected teacher is unknown, NOT background. Exclude every
+            # S8 cell touching its GT box in either teacher arm.
+            ignored_field = raster(boxes[~instance_valid], h, w)
+            ignored = F.interpolate(ignored_field[None, None], size=size, mode='area')[0, 0] > 0
+        masks = masks[instance_valid]
+        boxes = boxes[instance_valid]
     field = masks.amax(0) if source == 'sam' else raster(boxes, h, w)
     occupancy = F.interpolate(field[None, None], size=size, mode='area')[0, 0]
     region = raster(boxes, h, w, expansion=2.)
     local = F.interpolate(region[None, None], size=size, mode='area')[0, 0]
     positives = (occupancy >= .75).flatten().nonzero().flatten()
     negatives = ((occupancy <= .05) & (local >= .5)).flatten().nonzero().flatten()
+    if ignored is not None:
+        positives = positives[~ignored.flatten()[positives]]
+        negatives = negatives[~ignored.flatten()[negatives]]
     return positives, negatives
 
 

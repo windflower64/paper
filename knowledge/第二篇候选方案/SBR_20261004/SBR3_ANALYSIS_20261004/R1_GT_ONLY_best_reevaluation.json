@@ -1,0 +1,335 @@
+{
+  "best": {
+    "epoch": 12,
+    "train": {
+      "loss": 3.103644618988037,
+      "geometry": 0.38318304881453513,
+      "position_ce": 1.5153431445360184,
+      "synthetic_loss": 1.8631798911094666,
+      "shape_loss": 1.5567715102434159,
+      "stability_ce": 2.7352847838401795,
+      "positive_queries": 15.195,
+      "shape_supervised_images": 14.935,
+      "outside_search_side_fraction": 0.001700892886146903,
+      "positive_side_error_before_px": 1.417498687207699,
+      "positive_side_error_after_px": 1.4863513121008873
+    },
+    "validation": {
+      "coco_eval_bbox": [
+        0.5517113170513526,
+        0.9473722121226267,
+        0.6120933615202045,
+        0.5034403790622713,
+        0.5725165731749831,
+        -1.0,
+        0.6005322294500297,
+        0.6261383796570077,
+        0.6675931401537551,
+        0.6368807339449543,
+        0.6821989528795812,
+        -1.0
+      ],
+      "paired_base_assignment": {
+        "targets": 1691,
+        "mean_base_iou": 0.7689805761781549,
+        "mean_refined_iou": 0.7759607224628805,
+        "iou75_base": 1142,
+        "iou75_refined": 1190,
+        "improved": 884,
+        "worsened": 798
+      },
+      "images": 1820
+    },
+    "best_ap": 0.5517113170513526,
+    "seconds": 153.81300000002375
+  },
+  "last": {
+    "epoch": 29,
+    "train": {
+      "loss": 2.934382005929947,
+      "geometry": 0.34990966565907,
+      "position_ce": 1.4348079162836074,
+      "synthetic_loss": 1.7492356503009796,
+      "shape_loss": 1.4823984599113464,
+      "stability_ce": 2.750465852022171,
+      "positive_queries": 15.195,
+      "shape_supervised_images": 14.935,
+      "outside_search_side_fraction": 0.0017345467582345008,
+      "positive_side_error_before_px": 1.41849937915802,
+      "positive_side_error_after_px": 1.355873843729496
+    },
+    "validation": {
+      "coco_eval_bbox": [
+        0.5450686097814298,
+        0.9445060084853608,
+        0.5952497136300149,
+        0.49761708666746834,
+        0.5658021557231384,
+        -1.0,
+        0.5946185688941454,
+        0.622708456534595,
+        0.6664695446481372,
+        0.638165137614679,
+        0.6799301919720768,
+        -1.0
+      ],
+      "paired_base_assignment": {
+        "targets": 1691,
+        "mean_base_iou": 0.7689805761781549,
+        "mean_refined_iou": 0.7730260540330304,
+        "iou75_base": 1142,
+        "iou75_refined": 1165,
+        "improved": 878,
+        "worsened": 804
+      },
+      "images": 1820
+    },
+    "best_ap": 0.5517113170513526,
+    "seconds": 154.73499999998603
+  },
+  "reproduced": {
+    "coco_eval_bbox": [
+      0.5517113170513526,
+      0.9473722121226267,
+      0.6120933615202045,
+      0.5034403790622713,
+      0.5725165731749831,
+      -1.0,
+      0.6005322294500297,
+      0.6261383796570077,
+      0.6675931401537551,
+      0.6368807339449543,
+      0.6821989528795812,
+      -1.0
+    ],
+    "paired_base_assignment": {
+      "targets": 1691,
+      "mean_base_iou": 0.7689805761781549,
+      "mean_refined_iou": 0.7759607224628805,
+      "iou75_base": 1142,
+      "iou75_refined": 1190,
+      "improved": 884,
+      "worsened": 798
+    },
+    "images": 1820
+  },
+  "max_abs_reproduction_error": 0.0,
+  "best_checkpoint_sha256": "16b3cba44b08631bf5434191078f28b153f5ad44506ff8ae82457ca40cef97d2",
+  "protocol": {
+    "arm": "R1_GT_ONLY",
+    "epochs": 30,
+    "batch_size": 16,
+    "shape_weight": 0.0,
+    "base_sha": "d7fc60568887e12ba66fbe5b474d09be5cfcc5dd4fe14bc102556b5e5b5aa952",
+    "init_sha": "7045a02c8c8578a180966ba956759a808cbaab1c1447cb234c96efd8c1c64f26",
+    "seed": 0,
+    "lr": 0.0001,
+    "radius": 0.45,
+    "topk": 64,
+    "roi_size": null,
+    "frozen_baseline": true,
+    "baseline_contains_old_SAM": true,
+    "new_shape_teacher_only_difference": true,
+    "module": "SBR3",
+    "precision": "float32",
+    "position_bins": 17,
+    "strip_points": 16,
+    "epoch_random_seed_base": 20000,
+    "synthetic_candidates": "one exact GT plus two independently jittered boxes per target, side jitter +/-20%",
+    "synthetic_loss_weight": 0.5,
+    "shape_loss": "local soft BCE + dice, weight 1 in SAM arm",
+    "local_encoder_trainable": true,
+    "predicted_shape_in_forward": true,
+    "teacher_in_forward": false,
+    "source_hashes": {
+      "E:\\two_paper\\D-FINE\\tools\\train_sbr3.py": "825320391b2f1af0b3831b43e5fb3fc571b8fb3631088d6e63d054331b3704bc",
+      "E:\\two_paper\\D-FINE\\tools\\train_sbr1.py": "229f27c35cdd580ed96497e28f007036f39df93d79a4dee08747d56734160531",
+      "E:\\two_paper\\D-FINE\\tools\\train_sbr2.py": "49c2032952717a82e2c798b69ed1a1d451858d6667cbdc1f4dc788fa08eee1ef",
+      "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_side_search.py": "1fd0c351bf2446caaab8367ae8518bf991d736dad2d858ae0d744165d17fbb0b"
+    }
+  },
+  "epochs_above_baseline": 29,
+  "mean_ap_percent": 54.72840126583638,
+  "curves": [
+    {
+      "epoch": 0,
+      "ap": 0.5307842647328468,
+      "iou": 0.7672661138333035,
+      "shape_loss": 2.071297413110733
+    },
+    {
+      "epoch": 1,
+      "ap": 0.5407123604722416,
+      "iou": 0.771950061115233,
+      "shape_loss": 1.5041535276174545
+    },
+    {
+      "epoch": 2,
+      "ap": 0.5502430035357614,
+      "iou": 0.7764955938604811,
+      "shape_loss": 1.442804599404335
+    },
+    {
+      "epoch": 3,
+      "ap": 0.5498957125388042,
+      "iou": 0.7764612920042557,
+      "shape_loss": 1.5537249833345412
+    },
+    {
+      "epoch": 4,
+      "ap": 0.5492308588050504,
+      "iou": 0.7766328599867931,
+      "shape_loss": 1.4821918553113937
+    },
+    {
+      "epoch": 5,
+      "ap": 0.5498048313017787,
+      "iou": 0.7761033904203943,
+      "shape_loss": 1.4788190943002701
+    },
+    {
+      "epoch": 6,
+      "ap": 0.5489855014149522,
+      "iou": 0.7756215514453257,
+      "shape_loss": 1.4939438700675964
+    },
+    {
+      "epoch": 7,
+      "ap": 0.5495435792079492,
+      "iou": 0.7756811903496639,
+      "shape_loss": 1.5220493721961974
+    },
+    {
+      "epoch": 8,
+      "ap": 0.5501241339059297,
+      "iou": 0.775917169381052,
+      "shape_loss": 1.5041153329610824
+    },
+    {
+      "epoch": 9,
+      "ap": 0.550319344322471,
+      "iou": 0.7758374438423659,
+      "shape_loss": 1.5915034770965577
+    },
+    {
+      "epoch": 10,
+      "ap": 0.5516024580914853,
+      "iou": 0.7762943567301404,
+      "shape_loss": 1.5363861757516861
+    },
+    {
+      "epoch": 11,
+      "ap": 0.5511390837532368,
+      "iou": 0.7756643888206259,
+      "shape_loss": 1.610689480304718
+    },
+    {
+      "epoch": 12,
+      "ap": 0.5517113170513526,
+      "iou": 0.7759607224628805,
+      "shape_loss": 1.5567715102434159
+    },
+    {
+      "epoch": 13,
+      "ap": 0.5499875593431652,
+      "iou": 0.7752505061183608,
+      "shape_loss": 1.5422879350185394
+    },
+    {
+      "epoch": 14,
+      "ap": 0.5488441550577606,
+      "iou": 0.7746446480034695,
+      "shape_loss": 1.548155706524849
+    },
+    {
+      "epoch": 15,
+      "ap": 0.549000486883331,
+      "iou": 0.7744877745846528,
+      "shape_loss": 1.5383976101875305
+    },
+    {
+      "epoch": 16,
+      "ap": 0.549335334853567,
+      "iou": 0.774836564885556,
+      "shape_loss": 1.4971922117471694
+    },
+    {
+      "epoch": 17,
+      "ap": 0.5478248690156535,
+      "iou": 0.7746381754169074,
+      "shape_loss": 1.530975946187973
+    },
+    {
+      "epoch": 18,
+      "ap": 0.5471816973431702,
+      "iou": 0.7740803092375557,
+      "shape_loss": 1.5053564244508744
+    },
+    {
+      "epoch": 19,
+      "ap": 0.5472950167711528,
+      "iou": 0.7738899887620132,
+      "shape_loss": 1.505248127579689
+    },
+    {
+      "epoch": 20,
+      "ap": 0.5474118522074146,
+      "iou": 0.7741496722101846,
+      "shape_loss": 1.5015859502553939
+    },
+    {
+      "epoch": 21,
+      "ap": 0.5456374958830896,
+      "iou": 0.7733688283986222,
+      "shape_loss": 1.4734650629758834
+    },
+    {
+      "epoch": 22,
+      "ap": 0.5461082760028493,
+      "iou": 0.7736012483503624,
+      "shape_loss": 1.4864389371871949
+    },
+    {
+      "epoch": 23,
+      "ap": 0.5459340422549254,
+      "iou": 0.7735172951365984,
+      "shape_loss": 1.483546289205551
+    },
+    {
+      "epoch": 24,
+      "ap": 0.5449126669978687,
+      "iou": 0.7732272858853716,
+      "shape_loss": 1.4922762405872345
+    },
+    {
+      "epoch": 25,
+      "ap": 0.545348921878627,
+      "iou": 0.7731767113755349,
+      "shape_loss": 1.482928285598755
+    },
+    {
+      "epoch": 26,
+      "ap": 0.5445255852703841,
+      "iou": 0.7730304706370263,
+      "shape_loss": 1.4798250567913056
+    },
+    {
+      "epoch": 27,
+      "ap": 0.545174153427634,
+      "iou": 0.7731386074732431,
+      "shape_loss": 1.4880157226324082
+    },
+    {
+      "epoch": 28,
+      "ap": 0.5448332076450296,
+      "iou": 0.7729210069413792,
+      "shape_loss": 1.4893970853090286
+    },
+    {
+      "epoch": 29,
+      "ap": 0.5450686097814298,
+      "iou": 0.7730260540330304,
+      "shape_loss": 1.4823984599113464
+    }
+  ]
+}

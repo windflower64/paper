@@ -1,0 +1,335 @@
+{
+  "best": {
+    "epoch": 11,
+    "train": {
+      "loss": 3.405434948205948,
+      "geometry": 0.39577539905905723,
+      "position_ce": 1.5459009784460067,
+      "synthetic_loss": 1.9097092735767365,
+      "shape_loss": 0.2362472830712795,
+      "stability_ce": 2.726566480398178,
+      "positive_queries": 15.195,
+      "shape_supervised_images": 14.935,
+      "outside_search_side_fraction": 0.0017667125165462495,
+      "positive_side_error_before_px": 1.4184678569436073,
+      "positive_side_error_after_px": 1.5380542451143264
+    },
+    "validation": {
+      "coco_eval_bbox": [
+        0.5461288315932896,
+        0.9409011743192771,
+        0.596240580310368,
+        0.4985344537727145,
+        0.5662789392041514,
+        -1.0,
+        0.5956238911886458,
+        0.6206386753400355,
+        0.6632761679479597,
+        0.6333944954128441,
+        0.6774869109947643,
+        -1.0
+      ],
+      "paired_base_assignment": {
+        "targets": 1691,
+        "mean_base_iou": 0.7689805761781549,
+        "mean_refined_iou": 0.7735984549901186,
+        "iou75_base": 1142,
+        "iou75_refined": 1171,
+        "improved": 896,
+        "worsened": 786
+      },
+      "images": 1820
+    },
+    "best_ap": 0.5461288315932896,
+    "seconds": 153.875
+  },
+  "last": {
+    "epoch": 29,
+    "train": {
+      "loss": 3.238253343105316,
+      "geometry": 0.36558401860296724,
+      "position_ce": 1.4748444956541062,
+      "synthetic_loss": 1.8060777139663697,
+      "shape_loss": 0.22129507131874562,
+      "stability_ce": 2.734909096956253,
+      "positive_queries": 15.195,
+      "shape_supervised_images": 14.935,
+      "outside_search_side_fraction": 0.0017345467582345008,
+      "positive_side_error_before_px": 1.41849937915802,
+      "positive_side_error_after_px": 1.4202170583605767
+    },
+    "validation": {
+      "coco_eval_bbox": [
+        0.5418794128390031,
+        0.9405607766844677,
+        0.5918982422953635,
+        0.4938367243165971,
+        0.5628003039078642,
+        -1.0,
+        0.5926079243051449,
+        0.6189828503843879,
+        0.662093435836783,
+        0.6337614678899082,
+        0.6755671902268761,
+        -1.0
+      ],
+      "paired_base_assignment": {
+        "targets": 1691,
+        "mean_base_iou": 0.7689805761781549,
+        "mean_refined_iou": 0.7723984356478324,
+        "iou75_base": 1142,
+        "iou75_refined": 1162,
+        "improved": 890,
+        "worsened": 792
+      },
+      "images": 1820
+    },
+    "best_ap": 0.5461288315932896,
+    "seconds": 158.89100000000326
+  },
+  "reproduced": {
+    "coco_eval_bbox": [
+      0.5461288315932896,
+      0.9409011743192771,
+      0.596240580310368,
+      0.4985344537727145,
+      0.5662789392041514,
+      -1.0,
+      0.5956238911886458,
+      0.6206386753400355,
+      0.6632761679479597,
+      0.6333944954128441,
+      0.6774869109947643,
+      -1.0
+    ],
+    "paired_base_assignment": {
+      "targets": 1691,
+      "mean_base_iou": 0.7689805761781549,
+      "mean_refined_iou": 0.7735984549901186,
+      "iou75_base": 1142,
+      "iou75_refined": 1171,
+      "improved": 896,
+      "worsened": 786
+    },
+    "images": 1820
+  },
+  "max_abs_reproduction_error": 0.0,
+  "best_checkpoint_sha256": "edb8436f0a23952430b54aea63135d18acd1b26bd552b9d698cfebe89bd9a14a",
+  "protocol": {
+    "arm": "R2_SAM",
+    "epochs": 30,
+    "batch_size": 16,
+    "shape_weight": 1.0,
+    "base_sha": "d7fc60568887e12ba66fbe5b474d09be5cfcc5dd4fe14bc102556b5e5b5aa952",
+    "init_sha": "7045a02c8c8578a180966ba956759a808cbaab1c1447cb234c96efd8c1c64f26",
+    "seed": 0,
+    "lr": 0.0001,
+    "radius": 0.45,
+    "topk": 64,
+    "roi_size": null,
+    "frozen_baseline": true,
+    "baseline_contains_old_SAM": true,
+    "new_shape_teacher_only_difference": true,
+    "module": "SBR3",
+    "precision": "float32",
+    "position_bins": 17,
+    "strip_points": 16,
+    "epoch_random_seed_base": 20000,
+    "synthetic_candidates": "one exact GT plus two independently jittered boxes per target, side jitter +/-20%",
+    "synthetic_loss_weight": 0.5,
+    "shape_loss": "local soft BCE + dice, weight 1 in SAM arm",
+    "local_encoder_trainable": true,
+    "predicted_shape_in_forward": true,
+    "teacher_in_forward": false,
+    "source_hashes": {
+      "E:\\two_paper\\D-FINE\\tools\\train_sbr3.py": "825320391b2f1af0b3831b43e5fb3fc571b8fb3631088d6e63d054331b3704bc",
+      "E:\\two_paper\\D-FINE\\tools\\train_sbr1.py": "229f27c35cdd580ed96497e28f007036f39df93d79a4dee08747d56734160531",
+      "E:\\two_paper\\D-FINE\\tools\\train_sbr2.py": "49c2032952717a82e2c798b69ed1a1d451858d6667cbdc1f4dc788fa08eee1ef",
+      "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_side_search.py": "1fd0c351bf2446caaab8367ae8518bf991d736dad2d858ae0d744165d17fbb0b"
+    }
+  },
+  "epochs_above_baseline": 28,
+  "mean_ap_percent": 54.18251639808855,
+  "curves": [
+    {
+      "epoch": 0,
+      "ap": 0.5266324389953491,
+      "iou": 0.7651731244303599,
+      "shape_loss": 0.7764732401072979
+    },
+    {
+      "epoch": 1,
+      "ap": 0.5230055904589989,
+      "iou": 0.7638843376784283,
+      "shape_loss": 0.3371655184030533
+    },
+    {
+      "epoch": 2,
+      "ap": 0.5413413704024616,
+      "iou": 0.7723386661870496,
+      "shape_loss": 0.29508408524096014
+    },
+    {
+      "epoch": 3,
+      "ap": 0.5425951364564904,
+      "iou": 0.7732602253843744,
+      "shape_loss": 0.27927553102374075
+    },
+    {
+      "epoch": 4,
+      "ap": 0.5444229307462526,
+      "iou": 0.7734610625767958,
+      "shape_loss": 0.2665727689117193
+    },
+    {
+      "epoch": 5,
+      "ap": 0.5416203713841113,
+      "iou": 0.7725957052887923,
+      "shape_loss": 0.2590246703475714
+    },
+    {
+      "epoch": 6,
+      "ap": 0.5415798401362809,
+      "iou": 0.7722508936155519,
+      "shape_loss": 0.25261515215039254
+    },
+    {
+      "epoch": 7,
+      "ap": 0.5428774634726571,
+      "iou": 0.7724336151210982,
+      "shape_loss": 0.24864608712494374
+    },
+    {
+      "epoch": 8,
+      "ap": 0.544328188614383,
+      "iou": 0.7730656466493631,
+      "shape_loss": 0.24448336772620677
+    },
+    {
+      "epoch": 9,
+      "ap": 0.5438795491176727,
+      "iou": 0.7731169841028112,
+      "shape_loss": 0.24088021039962768
+    },
+    {
+      "epoch": 10,
+      "ap": 0.5452461740779395,
+      "iou": 0.7738915864391432,
+      "shape_loss": 0.23759893678128718
+    },
+    {
+      "epoch": 11,
+      "ap": 0.5461288315932896,
+      "iou": 0.7735984549901186,
+      "shape_loss": 0.2362472830712795
+    },
+    {
+      "epoch": 12,
+      "ap": 0.5445251217264822,
+      "iou": 0.7736687585970333,
+      "shape_loss": 0.233844393491745
+    },
+    {
+      "epoch": 13,
+      "ap": 0.5439232189739714,
+      "iou": 0.7732247892835484,
+      "shape_loss": 0.23164408780634405
+    },
+    {
+      "epoch": 14,
+      "ap": 0.5436852031360966,
+      "iou": 0.7731134498856481,
+      "shape_loss": 0.23012619614601135
+    },
+    {
+      "epoch": 15,
+      "ap": 0.5438473768299014,
+      "iou": 0.7732009391147822,
+      "shape_loss": 0.22867915406823158
+    },
+    {
+      "epoch": 16,
+      "ap": 0.5443976902931953,
+      "iou": 0.7734845436675477,
+      "shape_loss": 0.22758719503879546
+    },
+    {
+      "epoch": 17,
+      "ap": 0.5434288350102813,
+      "iou": 0.7731553982769258,
+      "shape_loss": 0.22689443178474902
+    },
+    {
+      "epoch": 18,
+      "ap": 0.5433410507890685,
+      "iou": 0.7732446067187206,
+      "shape_loss": 0.22608383156359196
+    },
+    {
+      "epoch": 19,
+      "ap": 0.5425713483783734,
+      "iou": 0.7728247384357336,
+      "shape_loss": 0.22514757834374904
+    },
+    {
+      "epoch": 20,
+      "ap": 0.5430724334569248,
+      "iou": 0.7729906948268995,
+      "shape_loss": 0.22384033396840095
+    },
+    {
+      "epoch": 21,
+      "ap": 0.5413788659338584,
+      "iou": 0.7721395464476346,
+      "shape_loss": 0.22290564723312856
+    },
+    {
+      "epoch": 22,
+      "ap": 0.5425251692613291,
+      "iou": 0.7726797952560684,
+      "shape_loss": 0.22273922763764858
+    },
+    {
+      "epoch": 23,
+      "ap": 0.5421431027437796,
+      "iou": 0.7726300362991042,
+      "shape_loss": 0.22237179912626742
+    },
+    {
+      "epoch": 24,
+      "ap": 0.5427459641746974,
+      "iou": 0.7723535001476195,
+      "shape_loss": 0.22210303418338298
+    },
+    {
+      "epoch": 25,
+      "ap": 0.5415436150017067,
+      "iou": 0.7723097811298283,
+      "shape_loss": 0.2215369376540184
+    },
+    {
+      "epoch": 26,
+      "ap": 0.5417622297503987,
+      "iou": 0.7723306908714461,
+      "shape_loss": 0.22156135037541388
+    },
+    {
+      "epoch": 27,
+      "ap": 0.5422735356518409,
+      "iou": 0.7724929771389942,
+      "shape_loss": 0.22104333363473416
+    },
+    {
+      "epoch": 28,
+      "ap": 0.5420528600197713,
+      "iou": 0.7721987970102863,
+      "shape_loss": 0.220919029712677
+    },
+    {
+      "epoch": 29,
+      "ap": 0.5418794128390031,
+      "iou": 0.7723984356478324,
+      "shape_loss": 0.22129507131874562
+    }
+  ]
+}

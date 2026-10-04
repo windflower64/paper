@@ -53,6 +53,7 @@ class CocoDetection(FasterCocoDetection, DetDataset):
         self.sam_mask_accepted_ids = set()
         self.sam_mask_quality = {}
         self.sam_mask_files = {}
+        self.sam_mask_instance_valid = {}
         if self.sam_mask_root is not None:
             records_path = self.sam_mask_root / "records.json"
             if not records_path.is_file():
@@ -64,6 +65,13 @@ class CocoDetection(FasterCocoDetection, DetDataset):
                 if bool(record.get("accepted", False))
             }
             for record in records:
+                if "instance_mask_valid" in record:
+                    valid = record["instance_mask_valid"]
+                    if not isinstance(valid, list) or not valid or not all(type(v) is bool for v in valid):
+                        raise ValueError("Invalid SAM instance_mask_valid")
+                    if bool(record.get("accepted", False)) != any(valid):
+                        raise ValueError("SAM image acceptance must equal any instance_mask_valid")
+                    self.sam_mask_instance_valid[int(record["image_id"])] = valid
                 if not bool(record.get("accepted", False)):
                     continue
                 if "instance_mask_files" in record:
@@ -110,6 +118,9 @@ class CocoDetection(FasterCocoDetection, DetDataset):
             height, width = image.size[1], image.size[0]
             num_objects = int(target["boxes"].shape[0])
             masks = torch.zeros((num_objects, height, width), dtype=torch.uint8)
+            instance_valid = self.sam_mask_instance_valid.get(int(image_id))
+            if instance_valid is not None and len(instance_valid) != num_objects:
+                raise RuntimeError(f"SAM validity count differs from box count: image_id={image_id}")
             if num_objects > 0 and image_id in self.sam_mask_accepted_ids:
                 names = self.sam_mask_files.get(int(image_id))
                 if names is None:
@@ -119,6 +130,8 @@ class CocoDetection(FasterCocoDetection, DetDataset):
                 if len(names) != num_objects:
                     raise RuntimeError(f"SAM mask count differs from box count: image_id={image_id}")
                 for object_index, name in enumerate(names):
+                    if instance_valid is not None and not instance_valid[object_index]:
+                        continue
                     mask_path = self.sam_mask_root / "masks" / name
                     if not mask_path.is_file():
                         raise FileNotFoundError(f"Accepted SAM mask is missing: {mask_path}")
@@ -130,6 +143,10 @@ class CocoDetection(FasterCocoDetection, DetDataset):
                         )
                     masks[object_index] = torch.from_numpy(np.array(mask, dtype=np.uint8, copy=True)).gt(0)
             target["masks"] = masks
+            if instance_valid is not None:
+                # Keep every detection box. Invalid teacher rows remain zero
+                # masks, but must not become foreground/background supervision.
+                target["sam_instance_valid"] = torch.tensor(instance_valid, dtype=torch.bool)
             target["sam_quality"] = torch.tensor(
                 [self.sam_mask_quality.get(int(image_id), 0.0)], dtype=torch.float32
             )

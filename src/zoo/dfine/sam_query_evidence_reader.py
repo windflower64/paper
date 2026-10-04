@@ -331,6 +331,7 @@ def _region_distributions(
     occupancy: torch.Tensor,
     min_region_mass: float = 0.25,
     eps: float = 1e-4,
+    ignored: torch.Tensor | None = None,
 ):
     """Return normalized inside/transition/near-background distributions."""
     u = occupancy.float().clamp(0.0, 1.0)
@@ -347,11 +348,18 @@ def _region_distributions(
         ),
         dim=1,
     )
+    support = None
+    if ignored is not None:
+        support = (~ignored.to(device=u.device, dtype=torch.bool)).reshape_as(u).float()
+        regions = regions * support
     masses = regions.sum(dim=(-2, -1))
     valid = (masses >= float(min_region_mass)).all(dim=1)
     distributions = (regions + eps) / (
         masses[:, :, None, None] + eps * regions.shape[-2] * regions.shape[-1]
     )
+    if support is not None:
+        smoothed = (regions + eps) * support
+        distributions = smoothed / smoothed.sum(dim=(-2, -1), keepdim=True).clamp_min(eps)
     return distributions.flatten(2), valid, masses.flatten(1)
 
 
@@ -434,8 +442,16 @@ def sqer_shape_loss(
         if source_mask is None or source_mask.numel() == 0 or len(source_mask) != len(boxes):
             skipped_reasons["teacher_rejected"] += 1
             continue
+        instance_valid = target.get("sam_instance_valid")
+        if instance_valid is not None:
+            instance_valid = torch.as_tensor(instance_valid, dtype=torch.bool, device=device)
+            if instance_valid.shape != (len(boxes),):
+                raise RuntimeError("SAM instance validity must match detection boxes")
 
         for query_index, target_index in zip(src_idx.tolist(), tgt_idx.tolist()):
+            if instance_valid is not None and not bool(instance_valid[target_index]):
+                skipped_reasons["teacher_rejected"] += 1
+                continue
             box = boxes[target_index].to(device=device, dtype=torch.float32).reshape(1, 1, 4)
             area_px = box[0, 0, 2] * box[0, 0, 3] * 512.0 * 640.0
             is_small = bool(area_px < 1024.0)
@@ -465,11 +481,18 @@ def sqer_shape_loss(
                 box_mask[None, None], grid, mode="bilinear", padding_mode="zeros",
                 align_corners=False,
             )[0, 0]
+            ignored = None
+            if instance_valid is not None and not bool(instance_valid.all()):
+                # A nearby rejected instance is unknown, never a background
+                # label for the valid candidate's three attention targets.
+                rejected_boxes = boxes[~instance_valid].to(device=device, dtype=torch.float32)[None]
+                rejected_field = _box_occupancy(rejected_boxes, int(mask.shape[-2]), int(mask.shape[-1])).amax(1, keepdim=True)
+                ignored = F.grid_sample(rejected_field, grid, mode="bilinear", padding_mode="zeros", align_corners=False)[0, 0] > 0
             sam_dist, sam_valid, sam_mass = _region_distributions(
-                sam_occupancy, min_region_mass=min_region_mass,
+                sam_occupancy, min_region_mass=min_region_mass, ignored=ignored,
             )
             box_dist, box_valid, box_mass = _region_distributions(
-                box_occupancy, min_region_mass=min_region_mass,
+                box_occupancy, min_region_mass=min_region_mass, ignored=ignored,
             )
             if not bool(sam_valid[0]) or not bool(box_valid[0]):
                 skipped_reasons["region_mass"] += 1

@@ -1,0 +1,27 @@
+{
+  "arm": "R2_SAM",
+  "epochs": 30,
+  "batch_size": 16,
+  "shape_weight": 0.05,
+  "base_sha": "d7fc60568887e12ba66fbe5b474d09be5cfcc5dd4fe14bc102556b5e5b5aa952",
+  "init_sha": "aed402d01d55c396eb8320e315b80f2bb7a5674d8a5798aeb8614ea36405add1",
+  "seed": 0,
+  "lr": 0.0001,
+  "radius": 0.45,
+  "topk": 64,
+  "roi_size": 32,
+  "frozen_baseline": true,
+  "baseline_contains_old_SAM": true,
+  "new_shape_teacher_only_difference": true,
+  "precision": "float32",
+  "module": "SBR2",
+  "local_encoder_trainable": true,
+  "local_encoder_init": "exact copy of frozen SQER2 S4/S8 projection and fusion",
+  "feature_backbone_frozen": true,
+  "source_hashes": {
+    "E:\\two_paper\\D-FINE\\tools\\train_sbr2.py": "49c2032952717a82e2c798b69ed1a1d451858d6667cbdc1f4dc788fa08eee1ef",
+    "E:\\two_paper\\D-FINE\\tools\\train_sbr1.py": "f2cd1acab1cf10907e16f20ef12c854ea3e32406b9f379af7c9ad4658bacdecb",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_boundary_refiner_v2.py": "0c33fb2f247ba0cefd4c04ed5f7019f79d02e790f2c246d2653d8d34dff65aa0",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_boundary_refiner.py": "870edf0cc02988c16166c13eb27302f65d290d8c35218a4f03637c621b094bf1"
+  }
+}

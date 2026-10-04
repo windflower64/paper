@@ -1,0 +1,5 @@
+{
+  "epochs": 30,
+  "best_ap": 0.5517113170513526,
+  "source_immutable": true
+}

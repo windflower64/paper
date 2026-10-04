@@ -1,0 +1,9 @@
+﻿{
+    "time":  "2026-10-04T12:39:28.3373531+08:00",
+    "queue_pid":  20648,
+    "arm":  "R2_SAM",
+    "stderr":  "E:\\two_paper\\outputs\\SBR2_20261004\\R2_SAM.20261004_123928.stderr.log",
+    "state":  "stopped_by_user",
+    "stdout":  "E:\\two_paper\\outputs\\SBR2_20261004\\R2_SAM.20261004_123928.stdout.log",
+    "child_pid":  22820
+}
