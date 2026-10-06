@@ -55,7 +55,7 @@ class SAMSideSearch(nn.Module):
         offset=self.offsets.reshape(1,1,1,self.bins,1).expand(b,k,4,-1,-1)
         feature=torch.cat((center[...,:64],inside[...,:64],inside[...,:64]-outside[...,:64],
                            inside[...,64:],center[...,64:],outside[...,64:],offset,side_code),-1)
-        scores=self.score(feature).squeeze(-1)
+        scores=self.score_candidates(feature, grid)
         probability=scores.softmax(-1)
         delta=((probability-1/self.bins)*self.offsets).sum(-1)*valid[...,None]
         scale=torch.stack((w,h,w,h),-1)
@@ -64,6 +64,9 @@ class SAMSideSearch(nn.Module):
         zero=delta.eq(0).all(-1,keepdim=True)
         residual=torch.where(zero,residual-residual.detach(),residual)
         return {'boxes':boxes+residual,'scores':scores,'delta':delta,'scale':scale,'valid':valid}
+
+    def score_candidates(self, feature, grid):
+        return self.score(feature).squeeze(-1)
 
     def forward(self,s4,s8,base_logits,boxes,image_hw):
         memory=self.encode(s4,s8); shape_logits=self.shape_head(memory)

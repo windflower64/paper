@@ -1,0 +1,48 @@
+{
+  "arm": "ORIGINAL",
+  "epochs": 20,
+  "batch_size": 16,
+  "precision": "FP32",
+  "base_sha": "d7fc60568887e12ba66fbe5b474d09be5cfcc5dd4fe14bc102556b5e5b5aa952",
+  "refiner_init_sha": "5484d0431c94114e3aba414e11efbf25f2edeff4cc06db2f858923342fad5e02",
+  "updated": [
+    "RGB backbone",
+    "RGB encoder",
+    "decoder",
+    "SBR3",
+    "M"
+  ],
+  "frozen": [
+    "IR backbone",
+    "IR encoder",
+    "BN running statistics"
+  ],
+  "sgc_weight": 10,
+  "refiner_sam_weight": 1,
+  "ema": false,
+  "seed": 0,
+  "source_hash": "7cb5aa0e57e985b7ca3fa14eeab0c3fc9a386bee13494ee06d5c7355dc8d27ed",
+  "dependency_hashes": {
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\dfine.py": "6d790b2a4465cccaa2be9d5e410e44146cb8b38f7496cbdb4c6aa0e3d60ddae0",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_multiscale_group.py": "14033f3dbabce4e23cc8ff768861464b7968a021b3b1ff02f0262856d3920794",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_side_search.py": "14db2ac3f2e52603ff581c68cf06f942ead0434ab21b5fa4fce700d8834cb0c1"
+  },
+  "note": "matched fine-tuning, not scratch; no old SQER readout",
+  "module": "M_P32",
+  "sgc_scales": [
+    8
+  ],
+  "sbr_scales": [
+    4,
+    8
+  ],
+  "ir_p32_enabled": false,
+  "rgb_write_levels": [
+    "P16"
+  ],
+  "experiment_hashes": {
+    "E:\\two_paper\\D-FINE\\tools\\train_m_p32.py": "cc34da67d360b4d50f37a0f49698d7e7af0df184b5416375312aa0d458be5d11",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\thermal_p32_extension.py": "0eeb2728dc0816e16aa0a721b2389eb28b6de1977ffaac75113724d1415a7f4d",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\target_evidence_thermal_fusion.py": "7d56292fd264654e22ccd931b3ed31a14d143ca00005a58156f2f1052a22f4f4"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "arm": "S8",
+  "epochs": 20,
+  "batch_size": 16,
+  "precision": "FP32",
+  "base_sha": "d7fc60568887e12ba66fbe5b474d09be5cfcc5dd4fe14bc102556b5e5b5aa952",
+  "refiner_init_sha": "5484d0431c94114e3aba414e11efbf25f2edeff4cc06db2f858923342fad5e02",
+  "updated": [
+    "RGB backbone",
+    "RGB encoder",
+    "decoder",
+    "SBR3"
+  ],
+  "frozen": [
+    "IR backbone",
+    "IR encoder",
+    "M parameters",
+    "BN running statistics"
+  ],
+  "sgc_weight": 10,
+  "refiner_sam_weight": 1,
+  "ema": false,
+  "seed": 0,
+  "source_hash": "508f80dd11882d3d4438a42505e1a6d8c734088067f9b3da3becf315a99df022",
+  "dependency_hashes": {
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\dfine.py": "6d790b2a4465cccaa2be9d5e410e44146cb8b38f7496cbdb4c6aa0e3d60ddae0",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_multiscale_group.py": "14033f3dbabce4e23cc8ff768861464b7968a021b3b1ff02f0262856d3920794",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_side_search.py": "1fd0c351bf2446caaab8367ae8518bf991d736dad2d858ae0d744165d17fbb0b"
+  },
+  "note": "matched fine-tuning, not scratch; no old SQER readout"
+}

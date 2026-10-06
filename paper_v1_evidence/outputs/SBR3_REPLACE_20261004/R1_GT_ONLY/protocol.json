@@ -1,0 +1,27 @@
+{
+  "arm": "R1_GT_ONLY",
+  "epochs": 30,
+  "batch_size": 16,
+  "shape_weight": 0.0,
+  "base_sha": "d7fc60568887e12ba66fbe5b474d09be5cfcc5dd4fe14bc102556b5e5b5aa952",
+  "init_sha": "7045a02c8c8578a180966ba956759a808cbaab1c1447cb234c96efd8c1c64f26",
+  "seed": 0,
+  "lr": 0.0001,
+  "radius": 0.45,
+  "topk": 64,
+  "roi_size": null,
+  "frozen_baseline": true,
+  "baseline_contains_old_SAM": true,
+  "new_shape_teacher_only_difference": true,
+  "module": "SBR3_REPLACE",
+  "sqer_readout_removed": true,
+  "initialization": "historical trained base; copies of S4/S8 projection only, not scratch",
+  "precision": "float32",
+  "epoch_random_seed_base": 20000,
+  "teacher_in_forward": false,
+  "source_hashes": {
+    "E:\\two_paper\\D-FINE\\tools\\train_sbr3_replace.py": "a7f7c90bf1c4ae3f967c9ab96ad97b8f4dbd557b2e60271bb5c1522adecec4dd",
+    "E:\\two_paper\\D-FINE\\tools\\train_sbr1.py": "229f27c35cdd580ed96497e28f007036f39df93d79a4dee08747d56734160531",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_side_search.py": "1fd0c351bf2446caaab8367ae8518bf991d736dad2d858ae0d744165d17fbb0b"
+  }
+}

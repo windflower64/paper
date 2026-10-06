@@ -1,0 +1,42 @@
+{
+  "arm": "CONTEXT",
+  "epochs": 20,
+  "batch_size": 16,
+  "precision": "FP32",
+  "base_sha": "d7fc60568887e12ba66fbe5b474d09be5cfcc5dd4fe14bc102556b5e5b5aa952",
+  "refiner_init_sha": "5484d0431c94114e3aba414e11efbf25f2edeff4cc06db2f858923342fad5e02",
+  "updated": [
+    "RGB backbone",
+    "RGB encoder",
+    "decoder",
+    "SBR3"
+  ],
+  "frozen": [
+    "IR backbone",
+    "IR encoder",
+    "M parameters",
+    "BN running statistics"
+  ],
+  "sgc_weight": 10,
+  "refiner_sam_weight": 1,
+  "ema": false,
+  "seed": 0,
+  "source_hash": "7cb5aa0e57e985b7ca3fa14eeab0c3fc9a386bee13494ee06d5c7355dc8d27ed",
+  "dependency_hashes": {
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\dfine.py": "6d790b2a4465cccaa2be9d5e410e44146cb8b38f7496cbdb4c6aa0e3d60ddae0",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_multiscale_group.py": "14033f3dbabce4e23cc8ff768861464b7968a021b3b1ff02f0262856d3920794",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_side_search.py": "14db2ac3f2e52603ff581c68cf06f942ead0434ab21b5fa4fce700d8834cb0c1"
+  },
+  "note": "matched fine-tuning, not scratch; no old SQER readout",
+  "sgc_scales": [
+    8
+  ],
+  "module": "SBR3_CONTEXT",
+  "context_enabled": true,
+  "context_width": 32,
+  "initial_context_score_zero": true,
+  "experiment_source_hashes": {
+    "E:\\two_paper\\D-FINE\\tools\\train_sbr3_context.py": "04f349baf0944e6b15417e2d285710b079669d7f4527e9e1880a01cf0be7216c",
+    "E:\\two_paper\\D-FINE\\src\\zoo\\dfine\\sam_side_search_multiscale.py": "ed15977945a5b9559faf2b34fbc51d1053aeeddcefc8c4b5988375fb9da84084"
+  }
+}

@@ -184,7 +184,8 @@ class TargetEvidenceThermalFusion(nn.Module):
             1,
             linear16.unsqueeze(-1).expand(-1, -1, s16_flat.shape[-1]),
         )
-        object_tokens = self.token_norm(token_s8 + token_s16)
+        extra_object, extra_background = self._extra_scale_tokens(probability, x8, y8)
+        object_tokens = self.token_norm(token_s8 + token_s16 + extra_object)
 
         background_weights = (1.0 - probability).flatten(2)
         background_s8 = torch.bmm(
@@ -195,8 +196,11 @@ class TargetEvidenceThermalFusion(nn.Module):
         background_s16 = torch.bmm(
             background_weights16, s16_flat
         ) / background_weights16.sum(dim=-1, keepdim=True).clamp_min(1.0)
-        background_token = self.background_norm(background_s8 + background_s16)
+        background_token = self.background_norm(background_s8 + background_s16 + extra_background)
         return object_tokens, scores, background_token, probability
+
+    def _extra_scale_tokens(self, probability, x8, y8):
+        return 0., 0.
 
     def forward(
         self,

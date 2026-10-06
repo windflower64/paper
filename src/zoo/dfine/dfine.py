@@ -948,6 +948,7 @@ class DFINE(nn.Module):
         sgc_decay_start=-1,
         sgc_decay_end=-1,
         sgc_s4_rescue='none',
+        sgc_multiscale=False,
         sbra_enabled=False,
         sbra_width=64,
         sbra_supervision='sam',
@@ -1088,6 +1089,9 @@ class DFINE(nn.Module):
         if sgc_s4_rescue not in ('none', 'sam', 'box'):
             raise ValueError(sgc_s4_rescue)
         self.sgc_s4_rescue = str(sgc_s4_rescue)
+        self.sgc_multiscale = bool(sgc_multiscale)
+        if self.sgc_multiscale and (not self.sgc_enabled or sgc_supervision != 'sam' or self.sgc_s4_rescue != 'none'):
+            raise ValueError('Multiscale grouping requires SAM SGC and disables legacy S4 rescue')
         if self.sgc_s4_rescue != 'none' and (not self.sgc_enabled or sgc_supervision != 'sam'):
             raise ValueError('S4 fallback requires unchanged S8 SAM supervision')
         self.sgc_aux_weight = float(sgc_aux_weight)
@@ -1385,7 +1389,7 @@ class DFINE(nn.Module):
         self.backbone.sqer_s4_source = None
         self.backbone.sgc_capture_s4 = bool(
             self.training and self.sgc_enabled and targets is not None
-            and self.sgc_s4_rescue != 'none' and self._sgc_supervision_scale() > 0
+            and (self.sgc_s4_rescue != 'none' or self.sgc_multiscale) and self._sgc_supervision_scale() > 0
         )
         thermal_feature = None
         thermal_features = None
@@ -1555,6 +1559,14 @@ class DFINE(nn.Module):
                 * sgc_scale
                 * group_loss(hrqs_source, targets, self.sgc_supervision)
             )
+            if self.sgc_multiscale:
+                from .sam_multiscale_group import multiscale_group_loss
+                if self.backbone.sgc_s4_source is None or len(x) != 2:
+                    raise RuntimeError('Multiscale SGC expects S4 capture and backbone S16/S32 outputs')
+                grouped, self.sgc_multiscale_stats = multiscale_group_loss(
+                    {4: self.backbone.sgc_s4_source, 8: hrqs_source, 16: x[0]},
+                    targets, {4: 1., 8: 1., 16: 1.})
+                sgc_loss = self.sgc_aux_weight * sgc_scale * grouped
             if self.sgc_s4_rescue != 'none':
                 extra, _ = rescue_loss(
                     self.backbone.sgc_s4_source, hrqs_source, targets, self.sgc_s4_rescue
